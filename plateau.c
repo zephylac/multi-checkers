@@ -10,3 +10,13 @@ typedef struct {char nom[20]; int pions_pris; int prions_perdus;int nb_coups}t_s
 
 t_case plateau[N][N];
 
+void init(t_case plateau[N][N])
+  void afficher(t_case plateau[N][N]) 
+  int jouerTour() 
+  void deplacerPion()
+  void deplacerDame() 
+  void prendrePiece() 
+  void creerDame() 
+  void finPartie()
+  int partieFini() 
+ int peutPrendre()
