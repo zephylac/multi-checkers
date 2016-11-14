@@ -116,3 +116,5 @@ game.c / game.h
 win / loss condition
  other gamerules
 main.c
+
+[gitter](https://gitter.im/multi-checkers/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
