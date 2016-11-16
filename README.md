@@ -81,16 +81,27 @@ Un enum permettant de savoir à quelle type de pièce nous faisons face.
 Un enum permettant de savoir l'équipe d'un joueur et donc de connaître le statut en 2 joueur 
 	typedef enum t_equipe(equipe_1 = 1 , equipe_2) ;
 
+Un enum regroupant les lettres servant à L'affichage.
+	typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
+
 Une structure regroupant tous les types énumérés précédent, cela nous permet de pouvoir représenter une case 
 	typedef struct t_case(t_joueur joueur ; t_piece piece ; t_equipe equipe ;) ;
 
-
+Une structure gerant la position des cases et pieces
+	typedef struct {int x; int y}t_coordonnees;
+	
+Une structure contenant les infos du contenu de chaque case
+	typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe} t_contenu;
+	
+Une structure case, établie à partir des coordonnées et du contenue. Elle compose le plateau
+	typedef struct {t_coordonnees coordonnees; t_contenu contenu} t_case;
+	
+Une structure Stats, permettant le retour des statistiques en fin de partie
+	typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup} t_stats;
+	
+	t_contenu plateau[N][N] ;
 	#define N 17
-	t_case plateau[N][N] ;
-
- typedef struct t_stats(char[20] nom ; int pion_pris ; int pion_perdu ; int nb_coup ;) ;
-
-
+	
 2 –  Fonctions
 
 void init(t_case plateau[N][N]) est la fonction initialisant le plateau
@@ -102,7 +113,7 @@ void prendrePiece() fonction permettant la prise de pieces
 void creerDame() génére une dame à partir d'un pion lorsque necessaire
 void finPartie() contient les conditions de fin de partie et les applique
 
-int ArrivBord() delivre vrai si la piece de la case choisie
+int ArrivBord(t_case arrive) delivre vrai si la piece de la case choisie remplit les conditions pour devenir une dame
 int DeplacePoss() fonction determinant si la piece choisie peut se deplacer ou non
 int partieFini() renvoie vrai si une condition de fin de partie l'est
 int peutPrendre() renvoie vrai si une piece peut etre prise par la piece selectionnée
@@ -115,7 +126,7 @@ jouerTour:
 	-prendrepiece
 	-DeplacePoss
 	-deplacerDame
-	-deplacerPion contenant creerDame
+	-deplacerPion contenant ArrivBord et CreerDame
 	-afficher
 	-finPartie contenant partiefini
 
