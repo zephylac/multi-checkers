@@ -27,7 +27,7 @@ void initplateau(){
 				if((i<4)&&(j%2 == 1)&&(i%2 == 0)){
                    			plateau[i][j].joueur = joueur1;
                    			plateau[i][j].piece = pion;
-                  			 plateau[i][j].equipe = 1;
+                  			plateau[i][j].equipe = 1;
 				}
 				if((i<4)&&(j%2 == 0)&&(i%2 == 1)){
 					plateau[i][j].joueur = joueur1;
@@ -35,34 +35,34 @@ void initplateau(){
 					plateau[i][j].equipe = 1;
 				}
 				if((j<4)&&(j%2 == 1)&&(i%2 == 0)){
-                   plateau[i][j].joueur = joueur2;
-                   plateau[i][j].piece = pion;
-                   plateau[i][j].equipe = 2;
+                   			plateau[i][j].joueur = joueur2;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 2;
 				}
 				if((j<4)&&(j%2 == 0)&&(i%2 == 1)){
-                   plateau[i][j].joueur = joueur2;
-                   plateau[i][j].piece = pion;
-                   plateau[i][j].equipe = 2;
+                   			plateau[i][j].joueur = joueur2;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 2;
 				}
 				if((i>12)&&(j%2 == 1)&&(i%2 == 0)){
-                   plateau[i][j].joueur = joueur3;
-                   plateau[i][j].piece = pion;
-                   plateau[i][j].equipe = 1;
+                   			plateau[i][j].joueur = joueur3;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 1;
 				}
 				if((i>12)&&(j%2 == 0)&&(i%2 == 1)){
-                   plateau[i][j].joueur = joueur3;
-                   plateau[i][j].piece = pion;
-                   plateau[i][j].equipe = 1;
+					plateau[i][j].joueur = joueur3;
+					plateau[i][j].piece = pion;
+					plateau[i][j].equipe = 1;
 				}
 				if((j>12)&&(j%2 == 1)&&(i%2 == 0)){
-                   plateau[i][j].joueur = joueur4;
-                   plateau[i][j].piece = pion;
-                   plateau[i][j].equipe = 2;
+     	              			plateau[i][j].joueur = joueur4;
+      	             			plateau[i][j].piece = pion;
+       		            		plateau[i][j].equipe = 2;
 				}
 				if((j>12)&&(j%2 == 0)&&(i%2 == 1)){
-                   plateau[i][j].joueur = joueur4;
-                   plateau[i][j].piece = pion;
-                   plateau[i][j].equipe = 2;
+                   			plateau[i][j].joueur = joueur4;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 2;
 				}
 			}
 		}
