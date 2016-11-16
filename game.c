@@ -18,7 +18,7 @@ void initplateau(){
 	for(i = 0; i < N; i++){
 		for(j = 0; j < N; j++){
 			if((i<4&&j<4)||(i>12&&j<4)||(i<4&&j>12)||(i>12&&j>12)){
-			/* si la case est comprise dans un des coins, elle est invalide */
+			/* si la case est dans un des coins, elle est invalide */
 				plateau[i][j].joueur = invalide;
 				plateau[i][j].piece = vide;
 				plateau[i][j].equipe = 0;
