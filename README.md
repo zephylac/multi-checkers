@@ -72,7 +72,7 @@ IV – La conception
 1 -  Structure de données
 
 
-Un enum permettant de savoir quelle joueur est concerné :
+Un enum permettant de savoir quel joueur est concerné :
 	typedef enum t_joueur(vide, joueur_1, joueur_2, joueur_3, joueur_4, invalide);
 
 Un enum permettant de savoir à quelle type de pièce nous faisons face.
@@ -93,28 +93,42 @@ Une structure regroupant tous les types énumérés précédent, cela nous perme
 
 2 –  Fonctions
 
-void init(t_case plateau[N][N])
-void afficher(t_case plateau[N][N])
-int jouerTour()
-void deplacerPion()
-void deplacerDame()
-void prendrePiece()
-void creerDame()
-void finPartie()
+void init(t_case plateau[N][N]) est la fonction initialisant le plateau
+void afficher(t_case plateau[N][N]) gére l'affichage du plateau
+void jouerTour() fonction prenant en charge le déroulement d'un tour
+void deplacerPion() fonction permettant le deplacement des pions
+void deplacerDame() fonction permettant le deplacement des dames
+void prendrePiece() fonction permettant la prise de pieces 
+void creerDame() génére une dame à partir d'un pion lorsque necessaire
+void finPartie() contient les conditions de fin de partie et les applique
 
-int partieFini()
-int peutPrendre()
+int ArrivBord() delivre vrai si la piece de la case choisie
+int DeplacePoss() fonction determinant si la piece choisie peut se deplacer ou non
+int partieFini() renvoie vrai si une condition de fin de partie l'est
+int peutPrendre() renvoie vrai si une piece peut etre prise par la piece selectionnée
+
+schéma des fonctions:
+init
+afficher
+jouerTour: 
+	-peutPrendre
+	-prendrepiece
+	-DeplacePoss
+	-deplacerDame
+	-deplacerPion contenant creerDame
+	-afficher
+	-finPartie contenant partiefini
 
 3 -  Structure de fichiers
 
 plateau.c / plateau.h
-plateau's management
-pion's movement
+	-plateau's management
+	-pion's movement
 joueur.c / joueur.h
-player's interaction
-game.c / game.h
+	-player's interaction
+	-game.c / game.h
 win / loss condition
- other gamerules
+other game rules
 main.c
 
 [gitter](https://gitter.im/multi-checkers/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
