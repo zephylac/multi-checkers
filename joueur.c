@@ -47,7 +47,7 @@ void jouerTour(t_joueur joueur){
   int debut_tour;
   int colonne;
   int ligne;
-  int i = i;
+  int i = 0;
   int choix;
   t_case cellule;
   
@@ -57,14 +57,16 @@ void jouerTour(t_joueur joueur){
     printf("Veuillez choisir la case où se trouve votre pion");
     scanf("Entrer les coordonnées %c%i",&colonne,&ligne); 
     switch(choix) {
-      while(!pilevide){
-        depiler(coupforce,&cellule);
+    	en_tete();
+	while(!hors_liste){
+        valeur_elt(coupforce,&cellule);
         case i:
           printf("%i) Déplacer le pion se trouvant aux coordonnées ",i);
           afficherLettre(colonne);
           printf(" %i",ligne);
           break; //break out of the switch
           i++;
+	  suivant();
       }
     }
   //traitement du choix   
