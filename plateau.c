@@ -19,7 +19,12 @@ void ChangeJoueur(int l, int c,t_contenu plateau[Z][Z],t_joueur nouv){
 int litJoueur(int l,int c){
     return(plateau[l][c].joueur);
 }
-
+int deplacePoss(t_case case){
+  int coup_dispo,l,c;
+  l=case.coordonnees.y;
+  c=case.coordonnees.x;
+  
+}
 void init(t_contenu plateau[Z][Z]){
   int l,c;
   for(l=0,c=0;l<Z;l++){
@@ -52,6 +57,7 @@ void afficher(t_contenu plateau[Z][Z]){
   printf("\n"); 
   }
 }  
+
   //int coupForce(t_joueur joueur,t_liste* ls_coup_f /* type t_case*/); // retourne 1 si coup forcé ou 0 si pas coup forcé
   //int coupDispo(t_coordonnees,t_joueur/*eviter deplacer pion adverse*/,t_liste* ls_coup_d);
   //int jouerTour() ;
