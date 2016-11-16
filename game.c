@@ -93,6 +93,25 @@ void afficher(){
 
 }
 
+int verifierdefaite(){
+/* fonction qui sera appelée à chaque tour et retourne le numero du joueur perdant. s'il n'y en a pas, retourne 0 */
+    int i, j;
+    int a = 1, b = 2, c = 3, d = 4;
+    for(i = 0; i < N; i++){
+        for(j = 0; i < N; j++){
+            if(plateau[i][j].joueur == joueur1) a = 0;
+            if(plateau[i][j].joueur == joueur2) b = 0;
+            if(plateau[i][j].joueur == joueur3) c = 0;
+            if(plateau[i][j].joueur == joueur4) d = 0;
+        }
+    }
+    if(a) return a; // Si le joueur a n'a plus de pions, a vaudra toujours 1 et donc la fonction retournera 1
+    if(b) return b;
+    if(c) return c;
+    if(d) return d;
+    return 0;       // arrivée ici, si la fonction n'a toujours rien retourné, c'est que personne n'a encore perdu, donc on retourne 0
+}
+
 void init(){
 /* Initialise la partie */
 	initplateau();
