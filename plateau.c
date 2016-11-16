@@ -36,21 +36,24 @@ void init(t_contenu plateau[Z][Z]){
                
 
 void afficher(t_contenu plateau[Z][Z]){
+  system("clear");
   int l,c,joueur;
   for(l=0,c=0;l<Z;l++){
     for(c=0;c<Z;c++){ // parcours une seule fois la matrice
       joueur=litJoueur(l,c);
-      printf("\n");
       if(joueur==5) printf("   ");
+      else if(joueur==0) printf(" . ");
       else if(joueur==4) printf(" 4 ");
       else if(joueur==3) printf(" 3 ");
       else if(joueur==2) printf(" 2 ");
       else if(joueur==1) printf(" 1 "); 
-    }
+      
+    }  
+  printf("\n"); 
   }
 }  
-  //int coupForce(t_joueur joueur,t_liste ls_coup_f /* type t_case*/); // retourne 1 si coup forcé ou 0 si pas coup forcé
-  //int coupDispo(t_coordonnees,t_joueur/*eviter deplacer pion adverse*/,t_liste ls_coup_d);
+  //int coupForce(t_joueur joueur,t_liste* ls_coup_f /* type t_case*/); // retourne 1 si coup forcé ou 0 si pas coup forcé
+  //int coupDispo(t_coordonnees,t_joueur/*eviter deplacer pion adverse*/,t_liste* ls_coup_d);
   //int jouerTour() ;
   //void deplacerPion();
   //void deplacerDame() ;
