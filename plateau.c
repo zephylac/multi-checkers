@@ -20,19 +20,21 @@ int litJoueur(int l,int c){
     return(plateau[l][c].joueur);
 }
        
-void DeplaAjout(t_joueur joueur,int l, int c,t_liste* ls_coup_d){
+void DeplaAjout(int l, int c,t_liste* ls_coup_d){
    t_case cell_dispo;
    cell_dispo.coordonnees.x=c;
    cell_dispo.coordonnees.y=l;
+   cell_dispo.joueur=vide;
+   if(plateau[l][c].joueur==1 || plateau[l][c].joueur==3 ) cell_dispo.equipe=1;
+   if(plateau[l][c].joueur==2 || plateau[l][c].joueur==4 ) cell_dispo.equipe=2;
    ajout_droit(ls_coup_d,cell_dispo);
 } 
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
-  int l,c;
+  int l,c,coup_dispo;
   l=coor.y;
   c=coor.c;
-  if(j==0 || j==5) return(0); // cas si case selectionnée n'appartient à aucun joueur
   
-   // cas des deplacements pour joueur en cours
+   // cas des deplacements pour Pion du joueur 
     if(l+c>16 && (c<=l)){ // si la reference est le triangle de depart du joueur
       if(litJoueur(l-1,c-1)==0){ 
          DeplaAjout(j,l,c,ls_coup_d);
@@ -64,6 +66,15 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
    }
   return coup_dispo;
 }
+   
+int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
+  int l,c,coup_dispo,fin;
+  l=coor.y;
+  c=coor.c;
+  
+   // cas des deplacements pour Dame du joueur 
+  for (c=c+1,l=l+1;plateau[l][c].joueur==0;l++,c++){
+    DeplaAjout(j,l,c,ls_coup_d);
            
 /*____________________________________________________________________________________________________________________________*/
 int coupDispo(t_coordonnees coor,t_joueur j/*eviter deplacer pion adverse*/,t_liste* ls_coup_d);
