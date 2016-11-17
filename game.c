@@ -6,10 +6,12 @@
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
 typedef enum {pvide, pion, dame}t_piece;
 typedef enum {equipe1 = 1, equipe2}t_equipe;
-typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe} t_case;
-typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup} t_stats;
+typedef struct {int x; int y;}t_coordonnees;
+typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe;} t_contenu;
+typedef struct {t_coordonnees coordonnees; t_contenu contenu;} t_case;
+typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup;} t_stats;
 
-t_case plateau[N][N] ;
+t_contenu plateau[N][N];
 
 void initplateau(){
 /* Initialise le plateau en plaçant les pions*/
@@ -118,7 +120,7 @@ int deppossible(t_joueur joueur){
 	int i, j;
 	for(i = 0; i < N; i++){
         	for(j = 0; i < N; j++){
-			if((plateau[i][j].joueur == joueur)&&DeplacePoss(i, j) return 1;
+			if((plateau[i][j].joueur == joueur)&&(coupDispo(i, j)) return 1;
 		}
 	}
 	return 0;	
@@ -143,14 +145,21 @@ int partieFini(int joueur){
 	
 }
 			   
-void finPartie(int joueur, int){
+void finPartie(int joueur){
 /* prend en paramètre le numéro du joueur ayant perdu la partie, et met fin à la partie */
-		
+	t_joueur j;
+	switch(joueur){
+		case 1: j = joueur1; break;
+		case 2:	j = joueur2; break;
+		case 3: j = joueur3; break;
+		case 4: j = joueur4; break;
+		default: j = vide; break;		
+	}
+	printf("le joueur%i a perdu: ", joueur);	// affiche le joueur ayant perdu et la raison de sa défaite
+	if(verifierdefaite(joueur)) printf("le joueur n'a plus de pions");
+	else if((j != vide)&&(!deppossible(j)) printf("le joueur ne peut plus se déplacer");
 }
 
-void finPartie(){
-		
-}
 
 void init(){
 /* Initialise la partie */
