@@ -20,30 +20,61 @@ int litJoueur(int l,int c){
     return(plateau[l][c].joueur);
 }
        
-void DeplaEmpile(t_joueur joueur,int l, int c,t_liste* ls_coup_d){
+void DeplaAjout(t_joueur joueur,int l, int c,t_liste* ls_coup_d){
    t_case cell_dispo;
    cell_dispo.coordonnees.x=c;
    cell_dispo.coordonnees.y=l;
-   en_tete(*ls_coup_d);
-   ajout_droit(*ls_coup_d,cell_dispo);
+   ajout_droit(ls_coup_d,cell_dispo);
 } 
-int coupDispo(t_coordonnees coor,t_joueur j/*eviter deplacer pion adverse*/,t_liste* ls_coup_d);
-   int coup_dispo,c;
-   l=coor.y;
-   c=coor.c;
-   if(l==8 && c==8){
-    if(litJoueur(l-1,c-1)==0){
-      DeplaEile(j,(l-1),(c-1),ls_coup_d);
-      coup_dispo=1;
+int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
+  int l,c;
+  l=coor.y;
+  c=coor.c;
+  if(j==0 || j==5) return(0); // cas si case selectionnée n'appartient à aucun joueur
+  
+   // cas des deplacements pour joueur en cours
+    if(l+c>16 && (c<=l)){ // si la reference est le triangle de depart du joueur
+      if(litJoueur(l-1,c-1)==0){ 
+         DeplaAjout(j,l,c,ls_coup_d);
+         coup_dispo=1;
+       }
+       if(litjoueur(l-1,c+1)==0){
+         DeplaAjout(j,l,c,ls_coup_d);
+         coup_dispo=1;
+       } 
     }
-    if(litjoueur(l-1,c+1)==0){
-      
-       
-       
-       
-       
-       
-
+    else if(l+c<16 && (c<=l){//si la reference est le triangle de gauche
+       if(litJoueur(l-1,c-1)==0){
+         DeplaAjout(j,l,c,ls_coup_d);
+         coup_dispo=1;
+       }
+       if(litJoueur(l+1,c-1)==0){
+         DeplaAjout(j,l,c,ls_coup_d);
+         coup_dispo=1;
+       }
+   else if(l+c>16 &&(c>=l){//si la reference est le triangle de droite
+      if(litJoueur(l+1,c+1)==0){
+         DeplaAjout(j,l,c,ls_coup_d);
+         coup_dispo=1;
+       }
+     if(litJoueur(l-1,c+1)==0){
+         DeplaAjout(j,l,c,ls_coup_d);
+         coup_dispo=1;
+       }
+   }
+  return coup_dispo;
+}
+           
+/*____________________________________________________________________________________________________________________________*/
+int coupDispo(t_coordonnees coor,t_joueur j/*eviter deplacer pion adverse*/,t_liste* ls_coup_d);
+  int coup_dispo,l,c;
+  l=coor.y;
+  c=coor.c;
+  vider_liste(ls_coup_d);// on vide la liste 
+  en_tete(ls_coup_d); // on se place en_tete de liste
+  if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,ls_coup_d); // si la piece est un pion, calcul de ses deplacements
+  if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,ls_coup_d);
+}
 void init(t_contenu plateau[Z][Z]){
   int l,c;
   for(l=0,c=0;l<Z;l++){
