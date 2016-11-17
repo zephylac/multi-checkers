@@ -120,6 +120,44 @@ int verifierdefaite(){
     return 0;       // arrivée ici, si la fonction n'a toujours rien retourné, c'est que personne n'a encore perdu, donc on retourne 0
 }
 
+
+int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+	t_case nouv;	//nouvel élément à insérer dans la liste
+	t_coordonnees nouvcoord;
+	en_tete(ls_coup_d);
+	int i = coord.y;
+	int j = coord.x;
+	if(plateau[i][j].piece == pion){
+		if(((plateau[i-1][j-1].joueur != joueur)&&(plateau[i-1][j-1].joueur != invalide))&&plateau[i-2][j-2].joueur == vide)){
+			nouvcoord.x = j-2;
+			nouvcoord.y = i-2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);			
+		}
+		if(((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide))&&plateau[i-2][j+2].joueur == vide)){
+			nouvcoord.x = j-2;
+			nouvcoord.y = i+2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);			
+		}
+		if(((plateau[i+1][j-1].joueur != joueur)&&(plateau[i+1][j-1].joueur != invalide))&&plateau[i+2][j-2].joueur == vide)){
+			nouvcoord.x = j-2;
+			nouvcoord.y = i+2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);			
+		}
+		if(((plateau[i+1][j+1].joueur != joueur)&&(plateau[i+1][j+1].joueur != invalide))&&plateau[i+2][j+2].joueur == vide)){
+			nouvcoord.x = j+2;
+			nouvcoord.y = i+2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);			
+		}
+	}
+	if(plateau.piece == dame){
+			
+	}
+}
+
 int deppossible(t_joueur joueur){
 /* Vérifie si le joueur entré en paramètre peut déplacer au moins une pièce, s'il ne peut pas, il perd la partie */
 /* retourne 1 si le joueur peut jouer, 0 s'il est bloqué */
