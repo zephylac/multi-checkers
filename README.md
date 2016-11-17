@@ -137,9 +137,9 @@ plateau.c / plateau.h
 	-pion's movement
 joueur.c / joueur.h
 	-player's interaction
-	-game.c / game.h
-win / loss condition
-other game rules
+game.c / game.h
+	-win / loss condition
+	-other game rules
 main.c
 
 [gitter](https://gitter.im/multi-checkers/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
