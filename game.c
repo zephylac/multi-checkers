@@ -94,7 +94,7 @@ void afficher(){
 }
 
 int verifierdefaite(){
-/* fonction qui sera appelée à chaque tour et retourne le numero du joueur perdant. s'il n'y en a pas, retourne 0 */
+/* fonction qui sera appelée à chaque tour et retourne le numero du joueur n'ayant plus de pion. si tout le monde a encore au moins un pion, retourne 0 */
     int i, j;
     int a = 1, b = 2, c = 3, d = 4;
     for(i = 0; i < N; i++){
@@ -110,6 +110,46 @@ int verifierdefaite(){
     if(c) return c;
     if(d) return d;
     return 0;       // arrivée ici, si la fonction n'a toujours rien retourné, c'est que personne n'a encore perdu, donc on retourne 0
+}
+
+int deppossible(t_joueur joueur){
+/* Vérifie si le joueur entré en paramètre peut déplacer au moins une pièce, s'il ne peut pas, il perd la partie */
+/* retourne 1 si le joueur peut jouer, 0 s'il est bloqué */
+	int i, j;
+	for(i = 0; i < N; i++){
+        	for(j = 0; i < N; j++){
+			if((plateau[i][j].joueur == joueur)&&DeplacePoss(i, j) return 1;
+		}
+	}
+	return 0;	
+}
+
+int partieFini(int joueur){
+/* le paramètre joueur est le numéro du joueur dont c'est le tour de jouer */
+/* retourne le numéro du joueur ayant perdu la partie, s'il y en a un, retourne 0 sinon.*/
+	t_joueur testdep;
+	switch(joueur){
+		case 1: testdep = joueur1; break;
+		case 2:	testdep = joueur2; break;
+		case 3: testdep = joueur3; break;
+		case 4: testdep = joueur4; break;
+		default: testdep = vide; break;
+	}
+	if(testdep != vide){
+		if(!depposible(testdep)) return joueur;	
+	}
+	return verifierdefaite();
+	
+	
+}
+			   
+void finPartie(int joueur, int){
+/* prend en paramètre le numéro du joueur ayant perdu la partie, et met fin à la partie */
+		
+}
+
+void finPartie(){
+		
 }
 
 void init(){
