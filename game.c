@@ -11,6 +11,12 @@ typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe;} t_contenu;
 typedef struct {t_coordonnees coordonnees; t_contenu contenu;} t_case;
 typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup;} t_stats;
 
+t_stats statsj1;
+t_stats statsj2;
+t_stats statsj3;
+t_stats statsj4;
+
+
 t_contenu plateau[N][N];
 
 void initplateau(){
@@ -146,6 +152,13 @@ int partieFini(int joueur){
 	return verifierdefaite();
 	
 	
+}
+
+void afficherstats(){
+	printf("%s: %i pions pris, %i pions perdus", statsj1.nom, statsj1.pions_pris, statsj1.pions_perdus);
+	printf("%s: %i pions pris, %i pions perdus", statsj2.nom, statsj2.pions_pris, statsj2.pions_perdus);
+	printf("%s: %i pions pris, %i pions perdus", statsj3.nom, statsj3.pions_pris, statsj3.pions_perdus);
+	printf("%s: %i pions pris, %i pions perdus", statsj4.nom, statsj4.pions_pris, statsj4.pions_perdus);
 }
 			   
 void finPartie(int joueur){
