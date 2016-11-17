@@ -39,8 +39,41 @@ void afficherLettre (t_lettre lettre){
   }
 }
 
+/**
+*\fn void jouerTour(t_joueur joueur)
+*\brief Fonction qui exécute le tour d'un joueur entré en paramètre
+*/
+void choisir(t_liste * ls_coup, t_joueur joueur){
+	int choix;
+	t_case cellule;
+	t_coordonnees coord;
 
-		
+	printf("-----------Menu-----------");
+	en_tete(&ls_coup);
+	while(!hors_liste(&ls_coup)){
+		valeur_elt(&ls_coup,&cellule);
+		printf("%i) Déplacer le pion se trouvant aux coordonnées ",i);
+		afficherLettre(cellule.coordonnees.y);
+		printf(" %i",cellule.coordonnees.x);
+		i++;
+		suivant(&ls_coup);
+	}
+	
+	switch(choix){
+		case i:
+		en_tete(&ls_coup);
+		for(j = 0;j < i; j++){
+	  		suivant(&ls_coup);
+		}	
+		valeur_elt(&ls_coup,&cellule);
+		coord.x = cellule.coordonnees.x;
+		coord.y = cellule.coordonnees.y
+		deplacer(coord,joueur);
+
+		break; //break out of the switch
+		}
+	}
+}
 
 /**
 *\fn void jouerTour(t_joueur joueur)
@@ -77,37 +110,12 @@ void jouerTour(t_joueur joueur){
 			coord.y = colonne;
 		}
 
-		switch(choix) {
-    			en_tete(&ls_coup_d);
-			while(!hors_liste(&ls_coup_d)){
-		    		case i:
-				valeur_elt(&ls_coup_d,&cellule);
-	       			printf("%i) Déplacer le pion se trouvant aux coordonnées ",i);
-	       			afficherLettre(cellule.coordonnees.y);
-	       			printf(" %i",cellule.coordonnees.x);
-	       			break; //break out of the switch
-	       			i++;
-	  			suivant(&ls_coup_d);
-	      		}
-	    	}
-	  }
-	  else{
-		switch(choix) {
-    			en_tete(&ls_coup_f);
-			while(!hors_liste(&ls_coup_f)){
-		    		case i:
-				valeur_elt(&ls_coup_f,&cellule)
-	       			printf("%i) Déplacer le pion se trouvant aux coordonnées ",i);
-	       			afficherLettre(cellule.coordonnees.y);
-	       			printf(" %i",cellule.coordonnees.x);
-	       			break; //break out of the switch
-	       			i++;
-	  			suivant(&ls_coup_f);
-	      		}
-	    	}
-	  }
-	  while(coupDispo){
-
+	}	
+	choisir(&ls_coup_d,joueur)
+	while(peutPrendre(/****/)){
+		choisir(&ls_coup_d,joueur)
+	
+	}
 }
 
 /**
@@ -126,7 +134,3 @@ void deroulementPartie(){
 		}
 	}
 }
-
-void main(){
-	t_joueur j1 = 1;
-	debutTour(j1);
