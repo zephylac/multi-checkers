@@ -155,10 +155,10 @@ int partieFini(int joueur){
 }
 
 void afficherstats(){
-	printf("%s: %i pions pris, %i pions perdus", statsj1.nom, statsj1.pions_pris, statsj1.pions_perdus);
-	printf("%s: %i pions pris, %i pions perdus", statsj2.nom, statsj2.pions_pris, statsj2.pions_perdus);
-	printf("%s: %i pions pris, %i pions perdus", statsj3.nom, statsj3.pions_pris, statsj3.pions_perdus);
-	printf("%s: %i pions pris, %i pions perdus", statsj4.nom, statsj4.pions_pris, statsj4.pions_perdus);
+	printf("%s: %i pions pris, %i pions perdus\n", statsj1.nom, statsj1.pions_pris, statsj1.pions_perdus);
+	printf("%s: %i pions pris, %i pions perdus\n", statsj2.nom, statsj2.pions_pris, statsj2.pions_perdus);
+	printf("%s: %i pions pris, %i pions perdus\n", statsj3.nom, statsj3.pions_pris, statsj3.pions_perdus);
+	printf("%s: %i pions pris, %i pions perdus\n", statsj4.nom, statsj4.pions_pris, statsj4.pions_perdus);
 }
 			   
 void finPartie(int joueur){
