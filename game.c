@@ -4,15 +4,15 @@
 
 
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
-typedef enum {vide, pion, dame}t_piece;
+typedef enum {pvide, pion, dame}t_piece;
 typedef enum {equipe1 = 1, equipe2}t_equipe;
 typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe} t_case;
 typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup} t_stats;
 
-t_case plateau[N][N] ;
+t_case plateau[N][N] ;
 
 void initplateau(){
-/* Initialise le plateau */
+/* Initialise le plateau en plaçant les pions*/
 	int i, j;
 	/* i = lignes, j = colonnes */
 	for(i = 0; i < N; i++){
@@ -20,20 +20,101 @@ void initplateau(){
 			if((i<4&&j<4)||(i>12&&j<4)||(i<4&&j>12)||(i>12&&j>12)){
 			/* si la case est comprise dans un des coins, elle est invalide */
 				plateau[i][j].joueur = invalide;
-				plateau[i][j].piece = vide;
-				plateau[i][j].equipe = 0;				
+				plateau[i][j].piece = pvide;
+				plateau[i][j].equipe = 0;
 			}
 			else{
-				
+               			 if((i<4)&&(j%2 == 1)&&(i%2 == 0)){
+                   			plateau[i][j].joueur = joueur1;
+                   			plateau[i][j].piece = pion;
+                  			plateau[i][j].equipe = 1;
+				}
+				else if((i<4)&&(j%2 == 0)&&(i%2 == 1)){
+                   			plateau[i][j].joueur = joueur1;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 1;
+				}
+				else if((j<4)&&(j%2 == 1)&&(i%2 == 0)){
+                   			plateau[i][j].joueur = joueur2;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 2;
+				}
+				else if((j<4)&&(j%2 == 0)&&(i%2 == 1)){
+                   			plateau[i][j].joueur = joueur2;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 2;
+				}
+				else if((i>12)&&(j%2 == 1)&&(i%2 == 0)){
+                   			plateau[i][j].joueur = joueur3;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 1;
+				}
+				else if((i>12)&&(j%2 == 0)&&(i%2 == 1)){
+                   			plateau[i][j].joueur = joueur3;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 1;
+				}
+				else if((j>12)&&(j%2 == 1)&&(i%2 == 0)){
+                  			plateau[i][j].joueur = joueur4;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 2;
+				}
+				else if((j>12)&&(j%2 == 0)&&(i%2 == 1)){
+                   			plateau[i][j].joueur = joueur4;
+                   			plateau[i][j].piece = pion;
+                   			plateau[i][j].equipe = 2;
+				}
+				else {
+                    			plateau[i][j].joueur = vide;
+                    			plateau[i][j].piece = pvide;
+				}
 			}
+
 		}
-		
+
 	}
+}
+
+void afficher(){
+/* Affiche le plateau */
+    int i, j;
+    for(i = 0; i < N; i++){
+        for(j = 0; j < N; j++){
+            if(plateau[i][j].joueur == invalide) printf("   ");
+            else if(plateau[i][j].joueur == joueur1) printf("[1]");
+            else if(plateau[i][j].joueur == joueur2) printf("[2]");
+            else if(plateau[i][j].joueur == joueur3) printf("[3]");
+            else if(plateau[i][j].joueur == joueur4) printf("[4]");
+            else if(plateau[i][j].joueur == vide) printf("[ ]");
+            else printf("[]");
+        }
+        printf("\n");
+    }
+
+}
+
+int verifierdefaite(){
+/* fonction qui sera appelée à chaque tour et retourne le numero du joueur perdant. s'il n'y en a pas, retourne 0 */
+    int i, j;
+    int a = 1, b = 2, c = 3, d = 4;
+    for(i = 0; i < N; i++){
+        for(j = 0; i < N; j++){
+            if(plateau[i][j].joueur == joueur1) a = 0;
+            if(plateau[i][j].joueur == joueur2) b = 0;
+            if(plateau[i][j].joueur == joueur3) c = 0;
+            if(plateau[i][j].joueur == joueur4) d = 0;
+        }
+    }
+    if(a) return a; // Si le joueur a n'a plus de pions, a vaudra toujours 1 et donc la fonction retournera 1
+    if(b) return b;
+    if(c) return c;
+    if(d) return d;
+    return 0;       // arrivée ici, si la fonction n'a toujours rien retourné, c'est que personne n'a encore perdu, donc on retourne 0
 }
 
 void init(){
 /* Initialise la partie */
 	initplateau();
-	
+
 
 }
