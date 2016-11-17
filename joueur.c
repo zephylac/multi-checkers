@@ -13,10 +13,36 @@ typedef struct {t_coordonnees coordonnees; t_contenu contenu} t_case;
 typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup} t_stats;
 t_contenu plateau[Z][Z] ;
 
-/**
-*\fn void jouerTour(t_joueur joueur)
-*\brief Fonction qui exécute le tour d'un joueur entré en paramètre
-*/
+/*
+ *\fn int convertir(char carac){
+ *\brief fonction qui convertir un caractère en chiffre
+ */
+int convertir(char carac){                                                      
+		return (carac - '0');
+}
+
+
+/*
+ *\fn t_coordonnees traiteEntree(char c_colonne, int ligne)
+ *\brief fonction qui traite ce que l'utilisateur a entré
+ */
+t_coordonnees traiteEntree(char c_colonne, int ligne){
+	int colonne;
+	if(isdigit(c_colonne)){                                    
+		coord.x = 0;
+		coord.y = 0;
+	}
+	else{
+		colonne = convertir(c_colonne);
+		coord.x = ligne;
+		coord.y = colonne;
+	}
+	return coord;
+}
+/*
+ *\fn void jouerTour(t_joueur joueur)
+ *\brief Fonction qui exécute le tour d'un joueur entré en paramètre
+ */
 void afficherLettre (t_lettre lettre){
   switch(lettre){
     case A : printf("A");break;
@@ -75,7 +101,6 @@ t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur){
 	coord.y = cellule.coordonnees.y
 	//deplacer(coord,joueur);
 	return coord;
-	//break; //break out of the switch
 }
 
 
@@ -87,31 +112,22 @@ void jouerTour(t_joueur joueur){
 	//Déclaration dec s variables
 	char c_colonne;
     	int debut_tour;
-	int colonne;
 	int ligne;
-  	int i = 0;
 	int choix;
 	t_case cellule;
   	t_coordonnees = coord;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
 	debut_tour = coupForce(joueur,ls_coup_f);
+
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(debut_tour == 0){
     		printf("Veuillez choisir la case où se trouve votre pion");
     		scanf("Entrer les coordonnées %c%i",&c_colonne,&ligne); 
-		/* transfert char -> int
-		 */
-
-		coord.x = ligne;
-		coord.y = colonne;
+		coord = traiteEntree(c_colonne,ligne);
 		while(!coupDispo(coord,joueur,&ls_coup_d)){
 			printf("Veuillez choisir la case où se trouve votre pion");
     			scanf("Entrer les coordonnées %c%i",&c_colonne,&ligne); 
-			/* transfert char -> int
-			 */
-	
-			coord.x = ligne;
-			coord.y = colonne;
+			coord = traiteEntree(c_colonne,ligne);
 		}
 
 	}	
