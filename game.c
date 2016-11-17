@@ -122,39 +122,93 @@ int verifierdefaite(){
 
 
 int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
 	t_coordonnees nouvcoord;
 	en_tete(ls_coup_d);
 	int i = coord.y;
 	int j = coord.x;
+	int x = 0; y = 0;
 	if(plateau[i][j].piece == pion){
 		if(((plateau[i-1][j-1].joueur != joueur)&&(plateau[i-1][j-1].joueur != invalide))&&plateau[i-2][j-2].joueur == vide)){
 			nouvcoord.x = j-2;
 			nouvcoord.y = i-2;
 			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);			
+			ajout_gauche(ls_coup_d, nouv);	
+			prise = 1;
 		}
 		if(((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide))&&plateau[i-2][j+2].joueur == vide)){
 			nouvcoord.x = j-2;
 			nouvcoord.y = i+2;
 			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);			
+			ajout_gauche(ls_coup_d, nouv);
+			prise = 1;
 		}
 		if(((plateau[i+1][j-1].joueur != joueur)&&(plateau[i+1][j-1].joueur != invalide))&&plateau[i+2][j-2].joueur == vide)){
 			nouvcoord.x = j-2;
 			nouvcoord.y = i+2;
 			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);			
+			ajout_gauche(ls_coup_d, nouv);
+			prise = 1;
 		}
 		if(((plateau[i+1][j+1].joueur != joueur)&&(plateau[i+1][j+1].joueur != invalide))&&plateau[i+2][j+2].joueur == vide)){
 			nouvcoord.x = j+2;
 			nouvcoord.y = i+2;
 			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);			
+			ajout_gauche(ls_coup_d, nouv);
+			prise = 1;
 		}
 	}
 	if(plateau.piece == dame){
-			
+		while(x < 12 && y < 12){
+			x++;
+			y++;
+			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y+1][j+x+1].joueur == vide)){
+				nouvcoord.x = j+x+1;
+				nouvcoord.y = i+y+1;
+				nouv.coordonnees = nouvcoord;
+				ajout_gauche(ls_coup_d, nouv);
+				prise = 1;
+				break;
+			}
+		}
+		while(x > -12 && y > -12){
+			x--;
+			y--;
+			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y-1][j+x-1].joueur == vide)){
+				nouvcoord.x = j+x-1;
+				nouvcoord.y = i+y-1;
+				nouv.coordonnees = nouvcoord;
+				ajout_gauche(ls_coup_d, nouv);
+				prise = 1;
+				break;
+			}
+		}
+		while(x > -12 && y < 12){
+			x--;
+			y++;
+			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y+1][j+x-1].joueur == vide)){
+				nouvcoord.x = j+x-1;
+				nouvcoord.y = i+y+1;
+				nouv.coordonnees = nouvcoord;
+				ajout_gauche(ls_coup_d, nouv);
+				prise = 1;
+				break;
+			}
+		}
+		while(x < 12 && y > -12){
+			x++;
+			y--;
+			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y-1][j+x+1].joueur == vide)){
+				nouvcoord.x = j+x+1;
+				nouvcoord.y = i+y-1;
+				nouv.coordonnees = nouvcoord;
+				ajout_gauche(ls_coup_d, nouv);
+				prise = 1;
+				break;
+			}
+		}
+		
 	}
 }
 
