@@ -19,12 +19,31 @@ void ChangeJoueur(int l, int c,t_contenu plateau[Z][Z],t_joueur nouv){
 int litJoueur(int l,int c){
     return(plateau[l][c].joueur);
 }
-int deplacePoss(t_case case){
-  int coup_dispo,l,c;
-  l=case.coordonnees.y;
-  c=case.coordonnees.x;
-  
-}
+       
+void DeplaEmpile(t_joueur joueur,int l, int c,t_liste* ls_coup_d){
+   t_case cell_dispo;
+   cell_dispo.coordonnees.x=c;
+   cell_dispo.coordonnees.y=l;
+   en_tete(*ls_coup_d);
+   ajout_droit(*ls_coup_d,cell_dispo);
+} 
+int coupDispo(t_coordonnees coor,t_joueur j/*eviter deplacer pion adverse*/,t_liste* ls_coup_d);
+   int coup_dispo,c;
+   l=coor.y;
+   c=coor.c;
+   if(l==8 && c==8){
+    if(litJoueur(l-1,c-1)==0){
+      DeplaEile(j,(l-1),(c-1),ls_coup_d);
+      coup_dispo=1;
+    }
+    if(litjoueur(l-1,c+1)==0){
+      
+       
+       
+       
+       
+       
+
 void init(t_contenu plateau[Z][Z]){
   int l,c;
   for(l=0,c=0;l<Z;l++){
@@ -59,14 +78,13 @@ void afficher(t_contenu plateau[Z][Z]){
 }  
 
   //int coupForce(t_joueur joueur,t_liste* ls_coup_f /* type t_case*/); // retourne 1 si coup forcé ou 0 si pas coup forcé
-  //int coupDispo(t_coordonnees,t_joueur/*eviter deplacer pion adverse*/,t_liste* ls_coup_d);
+  //
   //int jouerTour() ;
   //void deplacerPion();
-  //void deplacerDame() ;
+  //void deplacerDame();
   //void prendrePiece(); 
  // void creerDame() ;
- // void finPartie();
-  //int partieFini();
+ // int peutAvancer();
  //int peutPrendre();*/
 
 int main(){
