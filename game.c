@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define N 17
 
-
+typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
 typedef enum {pvide, pion, dame}t_piece;
 typedef enum {equipe1 = 1, equipe2}t_equipe;
