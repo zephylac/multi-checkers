@@ -172,8 +172,9 @@ void finPartie(int joueur){
 		default: j = vide; break;		
 	}
 	printf("Le joueur%i a perdu: ", joueur);	// affiche le joueur ayant perdu et la raison de sa défaite
-	if(verifierdefaite(joueur)) printf("le joueur n'a plus de pions");
-	else if((j != vide)&&(!deppossible(j)) printf("le joueur ne peut plus se déplacer");
+	if(verifierdefaite(joueur)) printf("le joueur n'a plus de pions\n");
+	else if((j != vide)&&(!deppossible(j)) printf("le joueur ne peut plus se déplacer\n");
+	afficherstats();
 }
 
 
