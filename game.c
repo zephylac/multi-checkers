@@ -118,9 +118,12 @@ int deppossible(t_joueur joueur){
 /* Vérifie si le joueur entré en paramètre peut déplacer au moins une pièce, s'il ne peut pas, il perd la partie */
 /* retourne 1 si le joueur peut jouer, 0 s'il est bloqué */
 	int i, j;
+	t_coordonnees coord;
 	for(i = 0; i < N; i++){
         	for(j = 0; i < N; j++){
-			if((plateau[i][j].joueur == joueur)&&(coupDispo(i, j)) return 1;
+			coord.x = j;
+			coord.y = i;
+			if((plateau[i][j].joueur == joueur)&&(coupDispo(coord), joueur, liste) return 1;
 		}
 	}
 	return 0;	
