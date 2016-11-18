@@ -10,3 +10,4 @@ void modif_elt(t_liste * liste, t_case v);
 void oter_elt(t_liste * liste);
 void ajout_droit(t_liste * liste, t_case v);
 void ajout_gauche(t_liste * liste, t_case v);
+void vider_liste(t_liste * liste);
