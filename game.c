@@ -57,8 +57,8 @@ int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 			prise = 1;
 		}
 		if(((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide))&&plateau[i-2][j+2].joueur == vide)){
-			nouvcoord.x = j-2;
-			nouvcoord.y = i+2;
+			nouvcoord.x = j+2;
+			nouvcoord.y = i-2;
 			nouv.coordonnees = nouvcoord;
 			ajout_gauche(ls_coup_d, nouv);
 			prise = 1;
