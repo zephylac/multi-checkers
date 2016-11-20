@@ -135,11 +135,24 @@ void afficher(]){
       else if(joueur==2) printf(" 2 ");
       else if(joueur==1) printf(" 1 "); 
       
-    }  
+    } 
   printf("\n"); 
   }
 }  
-           
+
+int coupForce(t_joueur j,t_liste* ls_coup_f /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
+  int l,c,coup_For;
+  coup_For=0;
+  for(l=0;l<N;l++){
+    for(c=0;c<N;c++){
+      if(j==litJoueur(l,c)){
+        deplaAjout(l,c,ls_coup_f);
+        coup_For=1;
+      }
+    }
+  }
+  return coup_For;
+}
 /* fonction prenant en coordonnées le pion à jouer. 
 Retourne vrai si le joueur peut jouer le pion, et fournit une liste avec les deplacement possibles*/
 int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adverse*/,t_liste* ls_coup_d);
