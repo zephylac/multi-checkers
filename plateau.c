@@ -18,7 +18,7 @@ typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup;} t_
 t_contenu plateau[Z][Z] ;
 
 //fonction permettant de changer la valeur joueur d'une case
-void ChangeJoueur(int l, int c,t_contenu plateau[Z][Z],t_joueur nouv){
+void ChangeJoueur(int l, int c,t_joueur nouv){
   plateau[l][c].joueur=nouv;
 }
 //fonction qui renvoie la valeur joueur de la case aux coordonnées saisies
@@ -121,22 +121,22 @@ int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adv
   return coup_dispo; //renvoi vrai si la piece est jouable
 }
            
-void init(t_contenu plateau[Z][Z]){
+void init(){
   int l,c;
   for(l=0,c=0;l<Z;l++){
     for(c=0;c<Z;c++){ // parcours une seule fois la matrice
-      if((c<4 && (l<4 || l>=Z-4))||(c>=Z-4 && (l<4 || l>=Z-4))) ChangeJoueur(l,c,plateau,invalide); // case dans les coins sont invalides
-      else if((l+c)%2==0) ChangeJoueur(l,c,plateau,vide);//indique que la case est vide
-      else if(c>=4 && c<Z-4 && l>=Z-5 && (l+c)%2==1) ChangeJoueur(l,c,plateau,joueur1);//place les pions du joueur 1
-      else if(c>=Z-5 && l>=4 && l<Z-4 && (l+c)%2==1) ChangeJoueur(l,c,plateau,joueur2);//place les pions du joueur 2
-      else if(c>=4 && c<Z-4 && l<=4 && (l+c)%2==1) ChangeJoueur(l,c,plateau,joueur3);//place les pions du joueur 3
-      else if(c<=4 && l>=4 && l<Z-4 && (l+c)%2==1) ChangeJoueur(l,c,plateau,joueur4);//place les pions du joueur 4  
+      if((c<4 && (l<4 || l>=Z-4))||(c>=Z-4 && (l<4 || l>=Z-4))) ChangeJoueur(l,c,invalide); // case dans les coins sont invalides
+      else if((l+c)%2==0) ChangeJoueur(l,c,vide);//indique que la case est vide
+      else if(c>=4 && c<Z-4 && l>=Z-5 && (l+c)%2==1) ChangeJoueur(l,c,joueur1);//place les pions du joueur 1
+      else if(c>=Z-5 && l>=4 && l<Z-4 && (l+c)%2==1) ChangeJoueur(l,c,joueur2);//place les pions du joueur 2
+      else if(c>=4 && c<Z-4 && l<=4 && (l+c)%2==1) ChangeJoueur(l,c,joueur3);//place les pions du joueur 3
+      else if(c<=4 && l>=4 && l<Z-4 && (l+c)%2==1) ChangeJoueur(l,c,joueur4);//place les pions du joueur 4  
     }
   }
 }
                
 
-void afficher(t_contenu plateau[Z][Z]){
+void afficher(]){
   system("clear");
   int l,c,joueur;
   for(l=0,c=0;l<Z;l++){
@@ -165,6 +165,6 @@ void afficher(t_contenu plateau[Z][Z]){
  //int peutPrendre();*/
 
 int main(){
-  init(plateau);
-  afficher(plateau);
+  init();
+  afficher();
 }
