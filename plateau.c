@@ -106,21 +106,7 @@ int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
 /*____________________________________________________________________________________________________________________________*/
            
            
- /* fonction prenant en coordonnées le pion à jouer. 
-Retourne vrai si le joueur peut jouer le pion, et fournit une liste avec les deplacement possibles*/
-int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adverse*/,t_liste* ls_coup_d);
-  int coup_dispo,l,c;
-  l=coor.y;
-  c=coor.c;
-  vider_liste(ls_coup_d);// on vide la liste 
-  en_tete(ls_coup_d); // on se place en_tete de liste
-  if(plateau[l][c].joueur==j){ // verification que la piece choisie appartien au joueur 
-    if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,ls_coup_d); // si la piece est un pion, calcul de ses deplacements
-    if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,ls_coup_d); // si la piece est une dame, calcul de ses deplacements
-  }
-  return coup_dispo; //renvoi vrai si la piece est jouable
-}
-           
+            
 void init(){
   int l,c;
   for(l=0,c=0;l<Z;l++){
@@ -153,7 +139,24 @@ void afficher(]){
   printf("\n"); 
   }
 }  
+           
+/* fonction prenant en coordonnées le pion à jouer. 
+Retourne vrai si le joueur peut jouer le pion, et fournit une liste avec les deplacement possibles*/
+int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adverse*/,t_liste* ls_coup_d);
+  int coup_dispo,l,c;
+  l=coor.y;
+  c=coor.c;
+  vider_liste(ls_coup_d);// on vide la liste 
+  en_tete(ls_coup_d); // on se place en_tete de liste
+  if(plateau[l][c].joueur==j){ // verification que la piece choisie appartien au joueur 
+    if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,ls_coup_d); // si la piece est un pion, calcul de ses deplacements
+    if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,ls_coup_d); // si la piece est une dame, calcul de ses deplacements
+  }
+  return coup_dispo; //renvoi vrai si la piece est jouable
+}
 
+            
+            
   //int coupForce(t_joueur joueur,t_liste* ls_coup_f /* type t_case*/); // retourne 1 si coup forcé ou 0 si pas coup forcé
   //
   //int jouerTour() ;
