@@ -129,6 +129,7 @@ int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 		}
 		
 	}
+	return prise;
 }
 
 int deppossible(t_joueur joueur){
