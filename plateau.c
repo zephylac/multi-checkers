@@ -26,7 +26,7 @@ int litJoueur(int l,int c){
     return(plateau[l][c].joueur);
 }
 //Ajoute à la liste la case aux coordonnées l,c       
-void DeplaAjout(int l, int c,t_liste* ls_coup_d){
+void DeplaAjout(int l, int c,t_liste* ls_coup){
    t_case cell_dispo; // creation d'un case à empiler
   //assignation des infos de la cellule à celle qui va empiler
    cell_dispo.coordonnees.x=c;
@@ -35,8 +35,20 @@ void DeplaAjout(int l, int c,t_liste* ls_coup_d){
    cell_dispo.contenu.piece=plateau[l][c].piece;
    if(plateau[l][c].joueur==1 || plateau[l][c].joueur==3 ) cell_dispo.equipe=1;
    if(plateau[l][c].joueur==2 || plateau[l][c].joueur==4 ) cell_dispo.equipe=2;
-   ajout_droit(ls_coup_d,cell_dispo); // ajout dans la liste de la case
+   ajout_droit(ls_coup,cell_dispo); // ajout dans la liste de la case
 } 
+
+int isIn(t_liste liste,t_coor coor){
+  int c=coor.x;
+  int l=coor.y;
+  en_tete();
+  while(!hors_liste()){
+    if(plateau[l][c]==liste.contenu) return 1;//----------------------------------verifier syntaxe-----------------
+    suivant();
+  }
+  return 0;
+}
+
 //fonction servant à lister les emplacements ou un pion peut se deplacer
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo;
@@ -145,7 +157,7 @@ int coupForce(t_joueur j,t_liste* ls_coup_f /* type t_case*/){ // retourne 1 si 
   coup_For=0;
   for(l=0;l<N;l++){
     for(c=0;c<N;c++){
-      if(j==litJoueur(l,c)){
+      if(j==litJoueur(l,c) && peutPrendre() ){ //-----------------------a completer avec fonction willi--------------------
         deplaAjout(l,c,ls_coup_f);
         coup_For=1;
       }
@@ -183,10 +195,20 @@ void deplacerPiece(t_contenu dep,t_coor arriv){
   plateau[l][c].piece=0;
   plateau[l][c].equipe=0;
 }
-void prendrePiece(t_coor dep,t_coor arriv){
+void prendrePiece(t_coor dep,t_coor arriv,t_liste ls_coup_f){
   int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
   int c_dep=dep.x;int l_dep=dep.y;// preparation des coordonnées du depart
-  if(
+  int c_supp,l_supp;
+  if(isIn(ls_coup_f,arriv)){ // si c'etait bien une prise possible
+    c_supp=c_dep+(c_arr-c_dep)/2; // calcul des coordonnées du pion supprimé
+    l_supp=l_dep+(l_arr-l_dep)/2;
+    deplacerPiece(plateau[l_dep][c_dep],arriv); // deplacement du pion
+    // suppression du pion pris
+    plateau[l_supp][c_supp].joueur=0;
+    plateau[l_supp][c_supp].piece=0;
+    plateau[l_supp][c_supp].equipe=0;
+  }
+}
 //transforme le pion indiqué en dame, s'il remplis les conditions pour en devenir une
 void creerDame(t_coordonnees coor){
   int c=coor.x;
@@ -198,7 +220,6 @@ void creerDame(t_coordonnees coor){
             
            
   //int jouerTour();
-  //void prendrePiece(); 
  //int peutPrendre();
 
 int main(){
