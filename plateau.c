@@ -122,7 +122,7 @@ void init(){
 }
                
 
-void afficher(]){
+void afficher(){
   system("clear");
   int l,c,joueur;
   for(l=0,c=0;l<Z;l++){
@@ -183,8 +183,10 @@ void deplacerPiece(t_contenu dep,t_coor arriv){
   plateau[l][c].piece=0;
   plateau[l][c].equipe=0;
 }
-            
-            
+void prendrePiece(t_coor dep,t_coor arriv){
+  int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
+  int c_dep=dep.x;int l_dep=dep.y;// preparation des coordonnées du depart
+  if(
 //transforme le pion indiqué en dame, s'il remplis les conditions pour en devenir une
 void creerDame(t_coordonnees coor){
   int c=coor.x;
@@ -193,6 +195,8 @@ void creerDame(t_coordonnees coor){
     if(plateau[l][c].piece==1) plateau[l][c].piece=2; // elle devien une dame
   }
 }
+            
+           
   //int jouerTour();
   //void prendrePiece(); 
  //int peutPrendre();
