@@ -40,6 +40,102 @@ int verifierdefaite(){
 }
 
 
+int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+        int prise = 0;
+        t_case nouv;	//nouvel élément à insérer dans la liste
+        t_coordonnees nouvcoord;
+        int i = coord.y;
+        int j = coord.x;
+		if((plateau[i-1][j-1].joueur != joueur)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(plateau[i-2][j-2].joueur == vide)){
+			nouvcoord.x = j-2;
+			nouvcoord.y = i-2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);
+			prise = 1;
+		}
+		if((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(plateau[i-2][j+2].joueur == vide)){
+			nouvcoord.x = j+2;
+			nouvcoord.y = i-2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);
+			prise = 1;
+		}
+		if((plateau[i+1][j-1].joueur != joueur)&&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(plateau[i+2][j-2].joueur == vide)){
+			nouvcoord.x = j-2;
+			nouvcoord.y = i+2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);
+			prise = 1;
+		}
+		if((plateau[i+1][j+1].joueur != joueur)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(plateau[i+2][j+2].joueur == vide)){
+			nouvcoord.x = j+2;
+			nouvcoord.y = i+2;
+			nouv.coordonnees = nouvcoord;
+			ajout_gauche(ls_coup_d, nouv);
+			prise = 1;
+		}
+		return prise;
+
+}
+
+int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+        int prise = 0;
+        t_case nouv;	//nouvel élément à insérer dans la liste
+        t_coordonnees nouvcoord;
+        int i = coord.y;
+        int j = coord.x;
+        int x, y;
+        for(x = 0,y = 0; x < 12, y < 12; x++, y++){    // test des déplacements sud est
+            if(plateau[i+y][j+x].joueur == joueur && x != 0) break;
+            if((i+y+1 > 16)|| (i+y-1 < 0) || (j+x+1 > 16) || (j+x-1 < 0)) break;
+            if((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide)&&(plateau[i+y][j+x].joueur != vide)&&(plateau[i+y+1][j+x+1].joueur == vide)){
+                nouvcoord.x = j+x+1;
+                nouvcoord.y = i+y+1;
+                nouv.coordonnees = nouvcoord;
+                ajout_gauche(ls_coup_d, nouv);
+                prise = 1;
+                break;
+            }
+		}
+		for(x = 0, y = 0; x > -12, y > -12; x--, y--){  // test des déplacements nord ouest
+            if(plateau[i+y][j+x].joueur == joueur && x != 0) break;
+            if((i+y+1 > 16)|| (i+y-1 < 0) || (j+x+1 > 16) || (j+x-1 < 0)) break;
+            if((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide)&&(plateau[i+y][j+x].joueur != vide)&&(plateau[i+y-1][j+x-1].joueur == vide)){
+                nouvcoord.x = j+x-1;
+                nouvcoord.y = i+y-1;
+                nouv.coordonnees = nouvcoord;
+                ajout_gauche(ls_coup_d, nouv);
+                prise = 1;
+                break;
+            }
+		}
+		for(x = 0, y = 0; x > -12, y < 12; x--, y++){   // test des déplacements sud ouest
+            if(plateau[i+y][j+x].joueur == joueur && x != 0) break;
+            if((i+y+1 > 16)|| (i+y-1 < 0) || (j+x+1 > 16) || (j+x-1 < 0)) break;
+            if((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide)&&(plateau[i+y][j+x].joueur != vide)&&(plateau[i+y+1][j+x-1].joueur == vide)){
+                nouvcoord.x = j+x-1;
+                nouvcoord.y = i+y+1;
+                nouv.coordonnees = nouvcoord;
+                ajout_gauche(ls_coup_d, nouv);
+                prise = 1;
+                break;
+            }
+		}
+		for(x = 0, y = 0; x < 12, y > -12; x++, y--){   // test des déplacements nord est
+            if(plateau[i+y][j+x].joueur == joueur && x != 0) break;
+            if((i+y > 16)|| (i+y < 0) || (j+x > 16) || (j+x < 0)) break;
+            if((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide)&&(plateau[i+y][j+x].joueur != vide)&&(plateau[i+y-1][j+x+1].joueur == vide)){
+                nouvcoord.x = j+x+1;
+                nouvcoord.y = i+y-1;
+                nouv.coordonnees = nouvcoord;
+                ajout_gauche(ls_coup_d, nouv);
+                prise = 1;
+                break;
+            }
+		}
+		return prise;
+}
+
 int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
@@ -47,87 +143,13 @@ int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 	en_tete(ls_coup_d);
 	int i = coord.y;
 	int j = coord.x;
-	int x = 0; y = 0;
+	int x = 0;
+	int y = 0;
 	if(plateau[i][j].piece == pion){
-		if(((plateau[i-1][j-1].joueur != joueur)&&(plateau[i-1][j-1].joueur != invalide))&&plateau[i-2][j-2].joueur == vide)){
-			nouvcoord.x = j-2;
-			nouvcoord.y = i-2;
-			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);	
-			prise = 1;
-		}
-		if(((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide))&&plateau[i-2][j+2].joueur == vide)){
-			nouvcoord.x = j+2;
-			nouvcoord.y = i-2;
-			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);
-			prise = 1;
-		}
-		if(((plateau[i+1][j-1].joueur != joueur)&&(plateau[i+1][j-1].joueur != invalide))&&plateau[i+2][j-2].joueur == vide)){
-			nouvcoord.x = j-2;
-			nouvcoord.y = i+2;
-			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);
-			prise = 1;
-		}
-		if(((plateau[i+1][j+1].joueur != joueur)&&(plateau[i+1][j+1].joueur != invalide))&&plateau[i+2][j+2].joueur == vide)){
-			nouvcoord.x = j+2;
-			nouvcoord.y = i+2;
-			nouv.coordonnees = nouvcoord;
-			ajout_gauche(ls_coup_d, nouv);
-			prise = 1;
-		}
+        prise = peutPrendrepion(coord, joueur, ls_coup_d);
 	}
-	if(plateau.piece == dame){
-		while(x < 12 && y < 12){
-			x++;
-			y++;
-			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y+1][j+x+1].joueur == vide)){
-				nouvcoord.x = j+x+1;
-				nouvcoord.y = i+y+1;
-				nouv.coordonnees = nouvcoord;
-				ajout_gauche(ls_coup_d, nouv);
-				prise = 1;
-				break;
-			}
-		}
-		while(x > -12 && y > -12){
-			x--;
-			y--;
-			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y-1][j+x-1].joueur == vide)){
-				nouvcoord.x = j+x-1;
-				nouvcoord.y = i+y-1;
-				nouv.coordonnees = nouvcoord;
-				ajout_gauche(ls_coup_d, nouv);
-				prise = 1;
-				break;
-			}
-		}
-		while(x > -12 && y < 12){
-			x--;
-			y++;
-			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y+1][j+x-1].joueur == vide)){
-				nouvcoord.x = j+x-1;
-				nouvcoord.y = i+y+1;
-				nouv.coordonnees = nouvcoord;
-				ajout_gauche(ls_coup_d, nouv);
-				prise = 1;
-				break;
-			}
-		}
-		while(x < 12 && y > -12){
-			x++;
-			y--;
-			if(((plateau[i+y][j+x].joueur != joueur)&&(plateau[i+y][j+x].joueur != invalide))&&plateau[i+y-1][j+x+1].joueur == vide)){
-				nouvcoord.x = j+x+1;
-				nouvcoord.y = i+y-1;
-				nouv.coordonnees = nouvcoord;
-				ajout_gauche(ls_coup_d, nouv);
-				prise = 1;
-				break;
-			}
-		}
-		
+	if(plateau[i][j].piece == dame){
+        prise = peutPrendredame(coord, joueur, ls_coup_d);
 	}
 	return prise;
 }
