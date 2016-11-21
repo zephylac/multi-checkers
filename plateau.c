@@ -8,7 +8,7 @@
 
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
 typedef enum {sans, pion, dame}t_piece;
-typedef enum {equipe1 = 1, equipe2}t_equipe;
+typedef enum {aucune, equipe1, equipe2}t_equipe;
 typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
 
 typedef struct {int x; int y;}t_coordonnees;
@@ -168,17 +168,34 @@ int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adv
   return coup_dispo; //renvoi vrai si la piece est jouable
 }
 
+// deplace une piece de son point de depart à son point d'arrivée, que ce soit un pion ou une dame
+void deplacerPiece(t_contenu dep,t_coor arriv){
+  int c=arriv.x;
+  int l=arriv.y;
+  //place la piece à son point d'arrivée
+  /*plateau[l][c]=dep.contenu_________________________________verifier si syntaxe correcte_____________________________________*/
+  plateau[l][c].joueur=dep.joueur;
+  plateau[l][c].piece=dep.piece;
+  plateau[l][c].equipe=dep.equipe;
+  
+  //la retire de son point de depart
+  plateau[l][c].joueur=0;
+  plateau[l][c].piece=0;
+  plateau[l][c].equipe=0;
+}
             
             
-  //int coupForce(t_joueur joueur,t_liste* ls_coup_f /* type t_case*/); // retourne 1 si coup forcé ou 0 si pas coup forcé
-  //
-  //int jouerTour() ;
-  //void deplacerPion();
-  //void deplacerDame();
+//transforme le pion indiqué en dame, s'il remplis les conditions pour en devenir une
+void creerDame(t_coordonnees coor){
+  int c=coor.x;
+  int l=coor.y;
+  if(c==0 || c==16){ // si la piece est a l'un des extremité adverse
+    if(plateau[l][c].piece==1) plateau[l][c].piece=2; // elle devien une dame
+  }
+}
+  //int jouerTour();
   //void prendrePiece(); 
- // void creerDame() ;
- // int peutAvancer();
- //int peutPrendre();*/
+ //int peutPrendre();
 
 int main(){
   init();
