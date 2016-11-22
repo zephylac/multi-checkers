@@ -3,8 +3,7 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include "liste_ptr.h"
-#include "plateau.h"
-#include "game.h"
+#include "jeu.h"
 #include "joueur.h"
 #define Z 17
 
