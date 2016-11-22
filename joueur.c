@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "plateau.h"
 #define Z 17
 
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
