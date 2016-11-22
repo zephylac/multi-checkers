@@ -136,7 +136,7 @@ void jouerTour(t_joueur joueur){
 		coord_dep = choisir(&ls_coup_f,joueur);
 		while(peutPrendre(coord_dep,joueur, &ls_coup_f)){
 			coord_arr = choisir(&ls_coup_f,joueur);
-			prendrePiece(coord_dep, coord_arr, &ls_coup_f);
+			prendrePiece(coord_dep, coord_arr);
 			coord_dep = coord_arr;
 		}
 	}
