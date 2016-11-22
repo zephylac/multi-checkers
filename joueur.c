@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "include/plateau.h"
+#include "include/jeu.h"
 #define Z 17
 
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
@@ -118,6 +119,7 @@ void jouerTour(t_joueur joueur){
   	t_coordonnees = coord_dep;
 	t_coordonnees = coord_arr;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
+        afficher();
 	coup_force = coupForce(joueur,ls_coup_f);
 
 	/* Si le joueur n'a pas de coup obligatoire */
@@ -136,6 +138,7 @@ void jouerTour(t_joueur joueur){
 	else{
 		coord_dep = choisir(&ls_coup_f,joueur);
 		while(peutPrendre(coord_dep,joueur, &ls_coup_f)){
+			afficher();
 			coord_arr = choisir(&ls_coup_f,joueur);
 			prendrePiece(coord_dep, coord_arr);
 			coord_dep = coord_arr;
@@ -153,6 +156,7 @@ void deroulementPartie(){
 	int i=1;
 	while(!finPartie()){
 		jouerTour(i);
+		tourner();
 		i++;
 		if(i == 5){
 			i = 1;
