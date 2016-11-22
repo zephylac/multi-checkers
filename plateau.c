@@ -38,17 +38,6 @@ void DeplaAjout(int l, int c,t_liste* ls_coup){
    ajout_droit(ls_coup,cell_dispo); // ajout dans la liste de la case
 } 
 
-int isIn(t_liste liste,t_coor coor){
-  int c=coor.x;
-  int l=coor.y;
-  en_tete();
-  while(!hors_liste()){
-    if(plateau[l][c]==liste.contenu) return 1;//----------------------------------verifier syntaxe-----------------
-    suivant();
-  }
-  return 0;
-}
-
 //fonction servant à lister les emplacements ou un pion peut se deplacer
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo;
