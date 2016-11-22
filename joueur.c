@@ -4,7 +4,7 @@
 
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
 typedef enum {sans, pion, dame}t_piece;
-typedef enum {equipe1 = 1, equipe2}t_equipe;
+typedef enum {aucune, equipe1, equipe2}t_equipe;
 typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
 
 typedef struct {int x; int y}t_coordonnees;
