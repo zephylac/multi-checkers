@@ -2,6 +2,7 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
+#include "liste_ptr.h"
 #include "plateau.h"
 #include "game.h"
 #include "joueur.h"
@@ -42,6 +43,7 @@ void DeplaAjout(int l, int c,t_liste* ls_coup){
 //fonction servant à lister les emplacements ou un pion peut se deplacer
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo;
+  vider_liste(ls_coup_d);
   l=coor.y;
   c=coor.c;
   
@@ -81,6 +83,7 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
 
 int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo,fin;
+  vider_liste(ls_coup_d);
   l=coor.y;
   c=coor.c;
   
@@ -144,6 +147,7 @@ void afficher(){
 
 int coupForce(t_joueur j,t_liste* ls_coup_f /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
   int l,c,coup_For;
+  vider_liste(ls_coup_f);
   coup_For=0;
   for(l=0;l<N;l++){
     for(c=0;c<N;c++){
