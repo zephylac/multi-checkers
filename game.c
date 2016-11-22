@@ -137,6 +137,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 }
 
 int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+	viderliste(ls_coup_d);
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
 	t_coordonnees nouvcoord;
@@ -211,13 +212,20 @@ void finPartie(int joueur){
 	afficherstats();
 }
 
-void reinitstats(t_joueur joueur){
+void reinitstatsjoueur(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1 = {NULL; 0; 0; 0;};
 		case joueur2: statsj2 = {NULL; 0; 0; 0;};
 		case joueur3: statsj3 = {NULL; 0; 0; 0;};
 		case joueur4: statsj4 = {NULL; 0; 0; 0;};		
 	}
+}
+		
+void reinitstats(){
+	reinitstatsjoueur(joueur1);
+	reinitstatsjoueur(joueur2);
+	reinitstatsjoueur(joueur3);
+	reinitstatsjoueur(joueur4);
 }
 		
 void statpionpris(t_joueur joueur){
@@ -250,8 +258,5 @@ void statdep(t_joueur joueur){
 void init(){
 /* Initialise la partie */
 	initplateau();
-	reinitstats(joueur1);
-	reinitstats(joueur2);
-	reinitstats(joueur3);
-	reinitstats(joueur4);
+	reinitstats();
 }
