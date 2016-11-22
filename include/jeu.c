@@ -23,7 +23,7 @@ t_stats statsj4;
 t_contenu plateau[N][N];
 
 
-int verifierdefaite(){
+int verifierDefaite(){
 /* fonction qui sera appelée à chaque tour et retourne le numero du joueur n'ayant plus de pion. si tout le monde a encore au moins un pion, retourne 0 */
     int i, j;
     int a = 1, b = 2, c = 3, d = 4;
@@ -161,7 +161,7 @@ int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 	return prise;
 }
 
-int deppossible(t_joueur joueur){
+int depPossible(t_joueur joueur){
 /* Vérifie si le joueur entré en paramètre peut déplacer au moins une pièce, s'il ne peut pas, il perd la partie */
 /* retourne 1 si le joueur peut jouer, 0 s'il est bloqué */
 	int i, j;
@@ -195,7 +195,7 @@ int partieFinie(int joueur){
 	
 }
 
-void afficherstats(){
+void afficherStats(){
 	printf("%s: %i pions pris, %i pions perdus\n", statsj1.nom, statsj1.pions_pris, statsj1.pions_perdus);
 	printf("%s: %i pions pris, %i pions perdus\n", statsj2.nom, statsj2.pions_pris, statsj2.pions_perdus);
 	printf("%s: %i pions pris, %i pions perdus\n", statsj3.nom, statsj3.pions_pris, statsj3.pions_perdus);
@@ -218,7 +218,7 @@ void finPartie(int joueur){
 	afficherstats();
 }
 
-void reinitstatsjoueur(t_joueur joueur){
+void reinitStatsjoueur(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1 = {NULL; 0; 0; 0;};
 		case joueur2: statsj2 = {NULL; 0; 0; 0;};
@@ -227,14 +227,14 @@ void reinitstatsjoueur(t_joueur joueur){
 	}
 }
 		
-void reinitstats(){
+void reinitStats(){
 	reinitstatsjoueur(joueur1);
 	reinitstatsjoueur(joueur2);
 	reinitstatsjoueur(joueur3);
 	reinitstatsjoueur(joueur4);
 }
 		
-void statpionpris(t_joueur joueur){
+void statPionpris(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.pions_pris++; break;
 		case joueur2: statsj2.pions_pris++; break;
@@ -243,7 +243,7 @@ void statpionpris(t_joueur joueur){
 	}
 }
 
-void statpionperdu(t_joueur joueur){
+void statPionperdu(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.pions_perdus++; break;
 		case joueur2: statsj2.pions_perdus++; break;
@@ -252,7 +252,7 @@ void statpionperdu(t_joueur joueur){
 	}
 }
 		
-void statdep(t_joueur joueur){
+void statDep(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.nb_coup++; break;
 		case joueur2: statsj2.nb_coup++; break;
