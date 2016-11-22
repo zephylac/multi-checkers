@@ -2,6 +2,7 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
+#include "liste_ptr.h"
 #include "plateau.h"
 #include "game.h"
 #include "joueur.h"
@@ -42,6 +43,7 @@ void DeplaAjout(int l, int c,t_liste* ls_coup){
 //fonction servant à lister les emplacements ou un pion peut se deplacer
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo;
+  vider_liste(ls_coup_d);
   l=coor.y;
   c=coor.c;
   
@@ -81,6 +83,7 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
 
 int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo,fin;
+  vider_liste(ls_coup_d);
   l=coor.y;
   c=coor.c;
   
@@ -144,6 +147,7 @@ void afficher(){
 
 int coupForce(t_joueur j,t_liste* ls_coup_f /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
   int l,c,coup_For;
+  vider_liste(ls_coup_f);
   coup_For=0;
   for(l=0;l<N;l++){
     for(c=0;c<N;c++){
@@ -214,7 +218,7 @@ void creerDame(t_coordonnees coor){
   }
 }
 
-void switchCoord(t_contenu plateau[Z][Z], int x, int y){
+void switchCoord( int x, int y){
   t_contenu inter;
   inter = plateau[x][y];
   plateau[x][y] = plateau[y][Z-1-x];
@@ -223,31 +227,26 @@ void switchCoord(t_contenu plateau[Z][Z], int x, int y){
   plateau[Z-1-y][x] = inter;
 }
 
-void tourner(t_contenu plateau[Z][Z]){
+void tourner(){
   int i,j;
   for(i = 4; i < 13 ; i++){
     for(j = 13; j < Z; j++){
-      switchCoord(plateau, i, j);
+      switchCoord( i, j);
     }
   }
   j = 12;
   for( i = 5; i < 12; i++){
-    switchCoord(plateau, i, j);
+    switchCoord( i, j);
   }
   j = 11;
   for(i = 6; i < 11; i++){
-    switchCoord(plateau, i, j);
+    switchCoord( i, j);
   }
   j = 10;
   for(i = 7; i < 10; i++){
-    switchCoord(plateau, i , j);
+    switchCoord( i , j);
   }
   i = 8;
   j = 9;
-  switchCoord(plateau, i, j);
-}
-
-int main(){
-  init();
-  afficher();
+  switchCoord( i, j);
 }
