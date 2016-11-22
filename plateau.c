@@ -157,7 +157,7 @@ int coupForce(t_joueur j,t_liste* ls_coup_f /* type t_case*/){ // retourne 1 si 
   coup_For=0;
   for(l=0;l<N;l++){
     for(c=0;c<N;c++){
-      if(j==litJoueur(l,c) && peutPrendre() ){ //-----------------------a completer avec fonction willi--------------------
+      if(j==litJoueur(l,c) && peutPrendre(coor,joueur,ls_coup_f) ){ //-----------------------a completer avec fonction willi--------------------
         deplaAjout(l,c,ls_coup_f);
         coup_For=1;
       }
@@ -181,33 +181,37 @@ int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adv
 }
 
 // deplace une piece de son point de depart à son point d'arrivée, que ce soit un pion ou une dame
-void deplacerPiece(t_contenu dep,t_coor arriv){
-  int c=arriv.x;
-  int l=arriv.y;
+void deplacerPiece(t_coordonnees dep,t_coordonnees arriv){
+  int c_dep=dep.x;
+  int l_dep=dep.y;
+  int l_arriv= arriv.y;
+  int c_arriv= arriv.x;
   //place la piece à son point d'arrivée
-  /*plateau[l][c]=dep.contenu_________________________________verifier si syntaxe correcte_____________________________________*/
-  plateau[l][c].joueur=dep.joueur;
-  plateau[l][c].piece=dep.piece;
-  plateau[l][c].equipe=dep.equipe;
+  plateau[l_arriv][c_arriv]=plateau[l_dep][c_dep];
   
   //la retire de son point de depart
-  plateau[l][c].joueur=0;
-  plateau[l][c].piece=0;
-  plateau[l][c].equipe=0;
+  plateau[l_dep][c_dep]=0;
 }
-void prendrePiece(t_coor dep,t_coor arriv,t_liste ls_coup_f){
+void prendrePiece(t_coor dep,t_coor arriv){
   int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
   int c_dep=dep.x;int l_dep=dep.y;// preparation des coordonnées du depart
   int c_supp,l_supp;
-  if(isIn(ls_coup_f,arriv)){ // si c'etait bien une prise possible
-    c_supp=c_dep+(c_arr-c_dep)/2; // calcul des coordonnées du pion supprimé
+  if(plateau[l_dep][c_dep].piece==1){ // cas si la piece jouée est un pion
+    c_supp=c_dep+(c_arr-c_dep)/2; // calcul des coordonnées de la piece supprimée
     l_supp=l_dep+(l_arr-l_dep)/2;
-    deplacerPiece(plateau[l_dep][c_dep],arriv); // deplacement du pion
-    // suppression du pion pris
-    plateau[l_supp][c_supp].joueur=0;
-    plateau[l_supp][c_supp].piece=0;
-    plateau[l_supp][c_supp].equipe=0;
   }
+  else if(plateau[l_dep][c_dep].piece==2){
+    while(plateau[l_dep][c_dep].joueur==0){ // Traitement des differentes diagonales
+      if(l_arr>l_dep) l_dep++;
+      else if(l_arr<l_dep) l_dep--;
+      if(c_arr>c_dep) c_dep++;
+      else if(c_arr<c_dep) l_dep--;
+    }
+    c_supp=c_dep;// calcul des coordonnées de la piecesupprimé
+    l_supp=l_dep;
+  deplacerPiece(dep,arriv); // deplacement de la piece
+  // suppression du pion pris
+  plateau[l_supp][c_supp]=0;
 }
 //transforme le pion indiqué en dame, s'il remplis les conditions pour en devenir une
 void creerDame(t_coordonnees coor){
@@ -250,9 +254,6 @@ void tourner(t_contenu plateau[Z][Z]){
   j = 9;
   switchCoord(plateau, i, j);
 }
-  switch 
-  //int jouerTour();
- //int peutPrendre();
 
 int main(){
   init();
