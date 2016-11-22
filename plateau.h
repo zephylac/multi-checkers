@@ -1,5 +1,5 @@
-#ifndef H_GL_PILE
-#define H_GL_PILE
+#ifndef H_GL_PLATEAU
+#define H_GL_PLATEAU
 
 void ChangeJoueur(int l, int c,t_joueur nouv)
 int litJoueur(int l,int c)
