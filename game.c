@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "liste_ptr.h"
+#include "plateau.h"
+#include "joueur.h"
 #define N 17
 
 typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
