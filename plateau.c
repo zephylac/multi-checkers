@@ -214,7 +214,7 @@ void creerDame(t_coordonnees coor){
   }
 }
 
-void switchCoord(t_contenu plateau[Z][Z], int x, int y){
+void switchCoord( int x, int y){
   t_contenu inter;
   inter = plateau[x][y];
   plateau[x][y] = plateau[y][Z-1-x];
@@ -223,26 +223,26 @@ void switchCoord(t_contenu plateau[Z][Z], int x, int y){
   plateau[Z-1-y][x] = inter;
 }
 
-void tourner(t_contenu plateau[Z][Z]){
+void tourner(){
   int i,j;
   for(i = 4; i < 13 ; i++){
     for(j = 13; j < Z; j++){
-      switchCoord(plateau, i, j);
+      switchCoord( i, j);
     }
   }
   j = 12;
   for( i = 5; i < 12; i++){
-    switchCoord(plateau, i, j);
+    switchCoord( i, j);
   }
   j = 11;
   for(i = 6; i < 11; i++){
-    switchCoord(plateau, i, j);
+    switchCoord( i, j);
   }
   j = 10;
   for(i = 7; i < 10; i++){
-    switchCoord(plateau, i , j);
+    switchCoord( i , j);
   }
   i = 8;
   j = 9;
-  switchCoord(plateau, i, j);
+  switchCoord( i, j);
 }
