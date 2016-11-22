@@ -169,7 +169,7 @@ int deppossible(t_joueur joueur){
 	return 0;	
 }
 
-int partieFini(int joueur){
+int partieFinie(int joueur){
 /* le paramètre joueur est le numéro du joueur dont c'est le tour de jouer */
 /* retourne le numéro du joueur ayant perdu la partie, s'il y en a un, retourne 0 sinon.*/
 	t_joueur testdep;
@@ -211,10 +211,38 @@ void finPartie(int joueur){
 	afficherstats();
 }
 
+void reinitstats(t_joueur joueur){
+	switch(joueur){
+		case joueur1: statsj1 = {NULL; 0; 0; 0;};
+		case joueur2: statsj2 = {NULL; 0; 0; 0;};
+		case joueur3: statsj3 = {NULL; 0; 0; 0;};
+		case joueur4: statsj4 = {NULL; 0; 0; 0;};		
+	}
+}
+		
+void pionpris(t_joueur joueur){
+	switch(joueur){
+		case joueur1: statsj1.pions_pris++; break;
+		case joueur2: statsj2.pions_pris++; break;
+		case joueur3: statsj3.pions_pris++; break;
+		case joueur4: statsj4.pions_pris++; break;
+	}
+}
 
+void pionperdu(t_joueur joueur){
+	switch(joueur){
+		case joueur1: statsj1.pions_perdus++; break;
+		case joueur2: statsj2.pions_perdus++; break;
+		case joueur3: statsj3.pions_perdus++; break;
+		case joueur4: statsj4.pions_perdus++; break;
+	}
+}
+		
 void init(){
 /* Initialise la partie */
 	initplateau();
-
-
+	reinitstats(joueur1);
+	reinitstats(joueur2);
+	reinitstats(joueur3);
+	reinitstats(joueur4);
 }
