@@ -99,7 +99,6 @@ t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur){
 	valeur_elt(&ls_coup,&cellule);
 	coord.x = cellule.coordonnees.x;
 	coord.y = cellule.coordonnees.y
-	//deplacer(coord,joueur);
 	return coord;
 }
 
@@ -111,30 +110,35 @@ t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur){
 void jouerTour(t_joueur joueur){
 	//Déclaration dec s variables
 	char c_colonne;
-    	int debut_tour;
+    	int coup_force;
 	int ligne;
 	int choix;
 	t_case cellule;
-  	t_coordonnees = coord;
+  	t_coordonnees = coord_dep;
+	t_coordonnees = coord_arr;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
-	debut_tour = coupForce(joueur,ls_coup_f);
+	coup_force = coupForce(joueur,ls_coup_f);
 
 	/* Si le joueur n'a pas de coup obligatoire */
-	if(debut_tour == 0){
+	if(coup_force == 0){
     		printf("Veuillez choisir la case où se trouve votre pion");
     		scanf("Entrer les coordonnées %c%i",&c_colonne,&ligne); 
-		coord = traiteEntree(c_colonne,ligne);
-		while(!coupDispo(coord,joueur,&ls_coup_d)){
+		coord_dep = traiteEntree(c_colonne,ligne);
+		while(!coupDispo(coord_dep,joueur,&ls_coup_d)){
 			printf("Veuillez choisir la case où se trouve votre pion");
     			scanf("Entrer les coordonnées %c%i",&c_colonne,&ligne); 
-			coord = traiteEntree(c_colonne,ligne);
+			coord_dep = traiteEntree(c_colonne,ligne);
 		}
-
-	}	
-	coord = choisir(&ls_coup_d,joueur)
-	while(peutPrendre(coord,joueur)){
-		coord = choisir(&ls_coup_d,joueur)
-	
+		coord_arr = choisir(&ls_coup_d,joueur);
+		deplacerPiece(coord_dep,coord_arr);
+	}
+	else{
+		coord_dep = choisir(&ls_coup_f,joueur);
+		while(peutPrendre(coord_dep,joueur, &ls_coup_f)){
+			coord_arr = choisir(&ls_coup_f,joueur);
+			prendrePiece(coord_dep, coord_arr, &ls_coup_f);
+			coord_dep = coord_arr;
+		}
 	}
 }
 
