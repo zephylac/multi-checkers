@@ -220,7 +220,7 @@ void reinitstats(t_joueur joueur){
 	}
 }
 		
-void pionpris(t_joueur joueur){
+void statpionpris(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.pions_pris++; break;
 		case joueur2: statsj2.pions_pris++; break;
@@ -229,13 +229,22 @@ void pionpris(t_joueur joueur){
 	}
 }
 
-void pionperdu(t_joueur joueur){
+void statpionperdu(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.pions_perdus++; break;
 		case joueur2: statsj2.pions_perdus++; break;
 		case joueur3: statsj3.pions_perdus++; break;
 		case joueur4: statsj4.pions_perdus++; break;
 	}
+}
+		
+void statdep(t_joueur joueur){
+	switch(joueur){
+		case joueur1: statsj1.nb_coup++; break;
+		case joueur2: statsj2.nb_coup++; break;
+		case joueur3: statsj3.nb_coup++; break;
+		case joueur4: statsj4.nb_coup++; break;
+	}	
 }
 		
 void init(){
