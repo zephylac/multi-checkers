@@ -246,8 +246,3 @@ void tourner(t_contenu plateau[Z][Z]){
   j = 9;
   switchCoord(plateau, i, j);
 }
-
-int main(){
-  init();
-  afficher();
-}
