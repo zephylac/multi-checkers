@@ -180,6 +180,8 @@ void deplacerPiece(t_coordonnees dep,t_coordonnees arriv){
   
   //la retire de son point de depart
   plateau[l_dep][c_dep]=0;
+ //verifie si elle devient une dame
+  creerDame(arriv);
 }
 void prendrePiece(t_coor dep,t_coor arriv){
   int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
