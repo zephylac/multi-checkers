@@ -1,9 +1,10 @@
-
-
-
+// realisé par BRINON Baptiste 
 
 #include <stdio.h> 
 #include <stdlib.h>
+#include "plateau.h"
+#include "game.h"
+#include "joueur.h"
 #define Z 17
 
 typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
