@@ -1,19 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
+#include "include/struct.h"
 #include "include/plateau.h"
 #include "include/jeu.h"
-#define Z 17
-
-typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
-typedef enum {sans, pion, dame}t_piece;
-typedef enum {aucune, equipe1, equipe2}t_equipe;
-typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
-
-typedef struct {int x; int y}t_coordonnees;
-typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe} t_contenu;
-typedef struct {t_coordonnees coordonnees; t_contenu contenu} t_case;
-typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup} t_stats;
-t_contenu plateau[Z][Z] ;
+#include "include/liste_ptr.h"
 
 /*
  *\fn int convertir(char carac){
@@ -30,6 +22,7 @@ int convertir(char carac){
  */
 t_coordonnees traiteEntree(char c_colonne, int ligne){
 	int colonne;
+	t_coordonnees coord;
 	if(isdigit(c_colonne)){                                    
 		coord.x = 0;
 		coord.y = 0;
@@ -71,7 +64,7 @@ void afficherLettre (t_lettre lettre){
 *\fn t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur)
 *\brief Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
 */
-t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur){
+t_coordonnees choisir(t_liste ls_coup, t_joueur joueur){
 	int choix,i = 0;
 	t_case cellule;
 	t_coordonnees coord;
@@ -90,17 +83,14 @@ t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur){
 		printf("Votre choix : ");
 		scanf("%i",&choix);
 	}
-	while(choix < 0 || choix > i){
-		printf("Votre choix : ");
-		scanf("%i",&choix);
-	}
+	while(choix < 0 || choix > i);
 	en_tete(&ls_coup);
-	for(j = 0;j < choix; j++){
+	for(i = 0; i < choix; i++){
 		suivant(&ls_coup);
 	}	
 	valeur_elt(&ls_coup,&cellule);
 	coord.x = cellule.coordonnees.x;
-	coord.y = cellule.coordonnees.y
+	coord.y = cellule.coordonnees.y;
 	return coord;
 }
 
@@ -116,11 +106,11 @@ void jouerTour(t_joueur joueur){
 	int ligne;
 	int choix;
 	t_case cellule;
-  	t_coordonnees = coord_dep;
-	t_coordonnees = coord_arr;
+  	t_coordonnees coord_dep;
+	t_coordonnees coord_arr;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
         afficher();
-	coup_force = coupForce(joueur,ls_coup_f);
+	coup_force = coupForce(joueur,&ls_coup_f);
 
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(coup_force == 0){
@@ -132,14 +122,14 @@ void jouerTour(t_joueur joueur){
     			scanf("Entrer les coordonnées %c%i",&c_colonne,&ligne); 
 			coord_dep = traiteEntree(c_colonne,ligne);
 		}
-		coord_arr = choisir(&ls_coup_d,joueur);
+		coord_arr = choisir(ls_coup_d,joueur);
 		deplacerPiece(coord_dep,coord_arr);
 	}
 	else{
-		coord_dep = choisir(&ls_coup_f,joueur);
+		coord_dep = choisir(ls_coup_f,joueur);
 		while(peutPrendre(coord_dep,joueur, &ls_coup_f)){
 			afficher();
-			coord_arr = choisir(&ls_coup_f,joueur);
+			coord_arr = choisir(ls_coup_f,joueur);
 			prendrePiece(coord_dep, coord_arr);
 			coord_dep = coord_arr;
 		}
@@ -154,7 +144,7 @@ void jouerTour(t_joueur joueur){
 void deroulementPartie(){
 	//Déclaration des variables
 	int i=1;
-	while(!finPartie()){
+	while(!partieFinie(i)){
 		jouerTour(i);
 		tourner();
 		i++;
@@ -162,4 +152,5 @@ void deroulementPartie(){
 			i = 1;
 		}
 	}
+	finPartie(partieFinie(i));
 }

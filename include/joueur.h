@@ -1,5 +1,7 @@
-#ifndef H_GL_joueur
-#define H_GL_joueur
+#ifndef H_GL_JOUEUR
+#define H_GL_JOUEUR
+#include "struct.h"
+
 int convertir(char carac); 
 t_coordonnees traiteEntree(char c_colonne, int ligne);
 void afficherLettre (t_lettre lettre);

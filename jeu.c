@@ -1,27 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "liste_ptr.h"
-#include "plateau.h"
-#include "joueur.h"
-#define N 17
-
-typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
-typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;
-typedef enum {pvide, pion, dame}t_piece;
-typedef enum {equipe1 = 1, equipe2}t_equipe;
-typedef struct {int x; int y;}t_coordonnees;
-typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe;} t_contenu;
-typedef struct {t_coordonnees coordonnees; t_contenu contenu;} t_case;
-typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup;} t_stats;
-
-t_stats statsj1;
-t_stats statsj2;
-t_stats statsj3;
-t_stats statsj4;
-
-
-t_contenu plateau[N][N];
-
+#include "include/liste_ptr.h"
+#include "include/struct.h"
+#include "include/plateau.h"
+#include "include/joueur.h"
 
 int verifierDefaite(){
 /* fonction qui sera appelée à chaque tour et retourne le numero du joueur n'ayant plus de pion. si tout le monde a encore au moins un pion, retourne 0 */
@@ -142,7 +124,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 	return prise;
 }
 
-int PeutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 	viderliste(ls_coup_d);
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
@@ -218,7 +200,7 @@ void finPartie(int joueur){
 	afficherstats();
 }
 
-void reinitStatsjoueur(t_joueur joueur){
+void reinitStatsJoueur(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1 = {NULL; 0; 0; 0;};
 		case joueur2: statsj2 = {NULL; 0; 0; 0;};
@@ -228,10 +210,10 @@ void reinitStatsjoueur(t_joueur joueur){
 }
 		
 void reinitStats(){
-	reinitstatsjoueur(joueur1);
-	reinitstatsjoueur(joueur2);
-	reinitstatsjoueur(joueur3);
-	reinitstatsjoueur(joueur4);
+	reinitStatsJoueur(joueur1);
+	reinitStatsJoueur(joueur2);
+	reinitStatsJoueur(joueur3);
+	reinitStatsJoueur(joueur4);
 }
 		
 void statPionpris(t_joueur joueur){
@@ -259,10 +241,4 @@ void statDep(t_joueur joueur){
 		case joueur3: statsj3.nb_coup++; break;
 		case joueur4: statsj4.nb_coup++; break;
 	}	
-}
-		
-void init(){
-/* Initialise la partie */
-	initplateau();
-	reinitstats();
 }

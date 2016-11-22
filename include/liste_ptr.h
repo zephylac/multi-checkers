@@ -1,5 +1,7 @@
 #ifndef H_GL_liste
 #define H_GL_liste
+#include "struct.h"
+
 void init_liste(t_liste * liste);
 int liste_vide(t_liste * liste);
 int hors_liste(t_liste * liste);
