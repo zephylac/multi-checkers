@@ -1,17 +1,5 @@
 #include <stdlib.h>
-
-typedef enum {vide, joueur1, joueur2, joueur3, joueur4, invalide}t_joueur;      
-typedef enum {vide, pion, dame}t_piece;                                         
-typedef enum {equipe1 = 1, equipe2}t_equipe;                                    
-typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;                       
-                                                                                 
-typedef struct {int x; int y;}t_coordonnees;                                     
-typedef struct {t_joueur joueur; t_piece piece; t_equipe equipe;} t_contenu;     
-typedef struct {t_coordonnees coordonnees; t_contenu contenu;} t_case;           
-typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup;} t_stats;
-
-typedef struct element{t_case valeur; struct element * pred; struct element * succ;}t_element;
-typedef struct {t_element * drapeau;t_element * ec;}t_liste;
+#include "include/struct.h"
 
 void init_liste(t_liste * liste ){
 	liste -> drapeau = malloc(sizeof(t_element));

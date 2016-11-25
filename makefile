@@ -1,12 +1,14 @@
 CFLAGS = -g -Wextra 
 
 inc = include/
-proto = $(inc)joueur.h $(inc)jeu.h $(inc)plateau.h
-fichiers = multi-dames.o joueur.o jeu.o plateau.o 
+proto = $(inc)joueur.h $(inc)jeu.h $(inc)plateau.h $(inc)liste_ptr.h
+fichiers = multi-dames.o joueur.o jeu.o plateau.o liste_ptr.o
 
 all : ${fichiers}
 	gcc -o exe ${fichiers} -g -Wextra
-#Main
+liste_ptr.o : liste_ptr.c $(inc)liste_ptr.h
+	gcc -c liste_ptr.c ${CFLAGS}
+
 multi-dames.o : multi-dames.c ${proto} 
 	gcc -c multi-dames.c ${CFLAGS}  
 

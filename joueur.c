@@ -61,16 +61,16 @@ void afficherLettre (t_lettre lettre){
 }
 
 /**
-*\fn t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur)
+*\fn t_coordonnees choisir(t_liste * ls_coup)
 *\brief Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
 */
-t_coordonnees choisir(t_liste ls_coup, t_joueur joueur){
+t_coordonnees choisir(t_liste ls_coup,t_joueur joueur){
 	int choix,i = 0;
 	t_case cellule;
 	t_coordonnees coord;
 	
 	do{
-		printf("-----------Menu-----------");
+		printf("-----------Joueur %i-----------",joueur);
 		en_tete(&ls_coup);
 		while(!hors_liste(&ls_coup)){
 			valeur_elt(&ls_coup,&cellule);

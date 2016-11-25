@@ -3,7 +3,8 @@
 #include "include/plateau.h"
 #include "include/joueur.h"
 
-void main(){
+int main(){
 	init();
 	deroulementPartie();
+return 1;
 }
