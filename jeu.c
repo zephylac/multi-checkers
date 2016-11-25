@@ -31,6 +31,7 @@ int verifierDefaite(){
 }
 
 void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste){
+/* Fonction ajoutant à une liste de t_case les valeurs correspondantes */
 	t_case nouv;
 	switch(joueur){
 		case joueur1: nouv.contenu.joueur = joueur1; nouv.contenu.equipe = equipe1; break;
@@ -45,6 +46,7 @@ void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* li
 }
 
 int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+/* Fonction ajoutant à une liste toutes les coordonnées où le pion aux coordonnées en paramètre peut arriver après avoir pris un autre pion et renvoie 1 */
         int prise = 0;
         t_coordonnees nouvcoord;
         int i = coord.y;
@@ -216,10 +218,10 @@ void finPartie(int joueur){
 
 void reinitStatsJoueur(t_joueur joueur){
 	switch(joueur){
-		case joueur1: statsj1.nom = NULL; statsj1.pions_pris = 0; statsj1.pions_perdus 0; statsj1.nb_coup = 0; break;
-		case joueur2: statsj1.nom = NULL; statsj2.pions_pris = 0; statsj2.pions_perdus 0; statsj2.nb_coup = 0; break;
-		case joueur3: statsj1.nom = NULL; statsj3.pions_pris = 0; statsj3.pions_perdus 0; statsj3.nb_coup = 0; break;
-		case joueur4: statsj1.nom = NULL; statsj4.pions_pris = 0; statsj4.pions_perdus 0; statsj4.nb_coup = 0; break;
+		case joueur1: statsj1.nom = NULL; statsj1.pions_pris = 0; statsj1.pions_perdus = 0; statsj1.nb_coup = 0; break;
+		case joueur2: statsj1.nom = NULL; statsj2.pions_pris = 0; statsj2.pions_perdus = 0; statsj2.nb_coup = 0; break;
+		case joueur3: statsj1.nom = NULL; statsj3.pions_pris = 0; statsj3.pions_perdus = 0; statsj3.nb_coup = 0; break;
+		case joueur4: statsj1.nom = NULL; statsj4.pions_pris = 0; statsj4.pions_perdus = 0; statsj4.nb_coup = 0; break;
 		default: printf("erreur switch reinitStatsJoueur");
 	}
 }
