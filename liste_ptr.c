@@ -56,9 +56,10 @@ void oter_elt(t_liste * liste){
 		t_element * inter;
 		inter = malloc(sizeof(t_element));
 		inter = liste -> ec;
-		inter -> succ -> pred = inter -> pred;
-		inter -> pred -> succ = inter -> succ;
-		liste -> ec = inter -> pred;
+		suivant(liste);
+		liste -> ec -> pred = inter -> pred;
+		precedent(liste);
+		liste -> ec -> succ = inter -> succ;
 		free(inter);
 	}
 }
