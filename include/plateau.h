@@ -1,4 +1,4 @@
-;#ifndef H_GL_PLATEAU
+#ifndef H_GL_PLATEAU
 #define H_GL_PLATEAU
 #include "struct.h"
 
