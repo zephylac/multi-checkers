@@ -16,7 +16,7 @@ int verifierDefaite(){
     int i, j;
     int a = 1, b = 2, c = 3, d = 4;
     for(i = 0; i < Z; i++){
-        for(j = 0; i < Z; j++){
+        for(j = 0; j < Z; j++){
             if(plateau[i][j].joueur == joueur1) a = 0;
             if(plateau[i][j].joueur == joueur2) b = 0;
             if(plateau[i][j].joueur == joueur3) c = 0;
