@@ -8,7 +8,7 @@ void DeplaAjout(int l, int c,t_liste* ls_coup);
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d);  
 int dispoDame(t_coordonnees coor,t_liste *ls_coup_d);
 void creerDame(t_coordonnees coor);  
-void viderContenu(t_contenu contenu)  
+void viderContenu(t_contenu contenu);  
 void init();  
 void afficher();
 int coupForce(t_joueur j,t_liste* ls_coup_f);  
