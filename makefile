@@ -23,3 +23,4 @@ joueur.o : joueur.c $(inc)joueur.h
 
 clean :
 	rm -rf *.o
+	rm exe
