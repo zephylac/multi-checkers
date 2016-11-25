@@ -216,10 +216,10 @@ void finPartie(int joueur){
 
 void reinitStatsJoueur(t_joueur joueur){
 	switch(joueur){
-		case joueur1: /*statsj1 = {"joueur1", 0, 0, 0,};*/ break;
-		case joueur2: /*statsj2 = {"joueur2", 0, 0, 0,};*/ break;
-		case joueur3: /*statsj3 = {"joueur3", 0, 0, 0,};*/ break;
-		case joueur4: /*statsj4 = {"joueur4", 0, 0, 0,};*/ break;
+		case joueur1: statsj1.nom = NULL; statsj1.pions_pris = 0; statsj1.pions_perdus 0; statsj1.nb_coup = 0; break;
+		case joueur2: statsj1.nom = NULL; statsj2.pions_pris = 0; statsj2.pions_perdus 0; statsj2.nb_coup = 0; break;
+		case joueur3: statsj1.nom = NULL; statsj3.pions_pris = 0; statsj3.pions_perdus 0; statsj3.nb_coup = 0; break;
+		case joueur4: statsj1.nom = NULL; statsj4.pions_pris = 0; statsj4.pions_perdus 0; statsj4.nb_coup = 0; break;
 		default: printf("erreur switch reinitStatsJoueur");
 	}
 }
