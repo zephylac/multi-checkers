@@ -30,13 +30,14 @@ int verifierDefaite(){
     return 0;       // arrivée ici, si la fonction n'a toujours rien retourné, c'est que personne n'a encore perdu, donc on retourne 0
 }
 
-void ajoutliste(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste){
+void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste){
 	t_case nouv;
 	switch(joueur){
 		case joueur1: nouv.contenu.joueur = joueur1; nouv.contenu.equipe = equipe1; break;
 		case joueur2: nouv.contenu.joueur = joueur2; nouv.contenu.equipe = equipe2; break;
 		case joueur3: nouv.contenu.joueur = joueur3; nouv.contenu.equipe = equipe1; break;
 		case joueur4: nouv.contenu.joueur = joueur4; nouv.contenu.equipe = equipe2; break;
+		default: printf("erreur switch ajoutListe");
 	}
 	nouv.contenu.piece = piece;
 	nouv.coordonnees = coord;
@@ -51,25 +52,25 @@ int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 		if((plateau[i-1][j-1].joueur != joueur)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(plateau[i-2][j-2].joueur == vide)){
 			nouvcoord.x = j-2;
 			nouvcoord.y = i-2;
-			ajoutliste(nouvcoord, joueur, pion, ls_coup_d);
+			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
 			prise = 1;
 		}
 		if((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(plateau[i-2][j+2].joueur == vide)){
 			nouvcoord.x = j+2;
 			nouvcoord.y = i-2;
-			ajoutliste(nouvcoord, joueur, pion, ls_coup_d);
+			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
 			prise = 1;
 		}
 		if((plateau[i+1][j-1].joueur != joueur)&&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(plateau[i+2][j-2].joueur == vide)){
 			nouvcoord.x = j-2;
 			nouvcoord.y = i+2;
-			ajoutliste(nouvcoord, joueur, pion, ls_coup_d);
+			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
 			prise = 1;
 		}
 		if((plateau[i+1][j+1].joueur != joueur)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(plateau[i+2][j+2].joueur == vide)){
 			nouvcoord.x = j+2;
 			nouvcoord.y = i+2;
-			ajoutliste(nouvcoord, joueur, pion, ls_coup_d);
+			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
 			prise = 1;
 		}
 		return prise;
@@ -86,7 +87,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
         	if(plateau[i][j].joueur == vide && prise == 1){
         		nouvcoord.x = j;
         		nouvcoord.y = i;
-        		ajoutliste(nouvcoord, joueur, dame, ls_coup_d);
+        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -99,7 +100,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
         	if(plateau[i][j].joueur == vide && prise == 1){
         		nouvcoord.x = j;
         		nouvcoord.y = i;
-        		ajoutliste(nouvcoord, joueur, dame, ls_coup_d);
+        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -112,7 +113,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
         	if(plateau[i][j].joueur == vide && prise == 1){
         		nouvcoord.x = j;
         		nouvcoord.y = i;
-        		ajoutliste(nouvcoord, joueur, dame, ls_coup_d);
+        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -125,7 +126,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
         	if(plateau[i][j].joueur == vide && prise == 1){
         		nouvcoord.x = j;
         		nouvcoord.y = i;
-        		ajoutliste(nouvcoord, joueur, dame, ls_coup_d);
+        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -138,7 +139,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 }
 
 int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
-	viderliste(ls_coup_d);
+	vider_Liste(ls_coup_d);
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
 	t_coordonnees nouvcoord;
@@ -185,7 +186,7 @@ int partieFinie(int joueur){
 	if(testdep != vide){
 		if(!depPossible(testdep)) return joueur;	
 	}
-	return verifierdefaite();
+	return verifierDefaite();
 	
 	
 }
@@ -208,18 +209,19 @@ void finPartie(int joueur){
 		default: j = vide; break;		
 	}
 	printf("Le joueur%i a perdu: ", joueur);	// affiche le joueur ayant perdu et la raison de sa défaite
-	if(verifierdefaite(joueur)) printf("le joueur n'a plus de pions\n");
+	if(verifierDefaite()) printf("le joueur n'a plus de pions\n");
 	else if(j != vide && !depPossible(j)) printf("le joueur ne peut plus se déplacer\n");
-	afficherstats();
+	afficherStats();
 }
 
-void reinitStatsJoueur(t_joueur joueur){/*
+void reinitStatsJoueur(t_joueur joueur){
 	switch(joueur){
-		case joueur1: statsj1 = {"joueur1", 0, 0, 0,}; break;
-		case joueur2: statsj2 = {"joueur2", 0, 0, 0,}; break;
-		case joueur3: statsj3 = {"joueur3", 0, 0, 0,}; break;
-		case joueur4: statsj4 = {"joueur4", 0, 0, 0,}; break;
-	}*/
+		case joueur1: /*statsj1 = {"joueur1", 0, 0, 0,};*/ break;
+		case joueur2: /*statsj2 = {"joueur2", 0, 0, 0,};*/ break;
+		case joueur3: /*statsj3 = {"joueur3", 0, 0, 0,};*/ break;
+		case joueur4: /*statsj4 = {"joueur4", 0, 0, 0,};*/ break;
+		default: printf("erreur switch reinitStatsJoueur");
+	}
 }
 		
 void reinitStats(){
@@ -235,6 +237,7 @@ void statPionpris(t_joueur joueur){
 		case joueur2: statsj2.pions_pris++; break;
 		case joueur3: statsj3.pions_pris++; break;
 		case joueur4: statsj4.pions_pris++; break;
+		default: printf("erreur switch statPionpris");
 	}
 }
 
@@ -244,6 +247,7 @@ void statPionperdu(t_joueur joueur){
 		case joueur2: statsj2.pions_perdus++; break;
 		case joueur3: statsj3.pions_perdus++; break;
 		case joueur4: statsj4.pions_perdus++; break;
+		default: printf("erreur switch statPionperdu");
 	}
 }
 		
@@ -253,5 +257,6 @@ void statDep(t_joueur joueur){
 		case joueur2: statsj2.nb_coup++; break;
 		case joueur3: statsj3.nb_coup++; break;
 		case joueur4: statsj4.nb_coup++; break;
+		default: printf("erreur switch statDep");
 	}	
 }
