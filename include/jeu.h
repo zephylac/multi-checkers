@@ -3,8 +3,8 @@
 #include "struct.h"
 
 int hors_plateau(int i, int j);
-int verifierdefaite();
-void ajoutliste(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste);
+int verifierDefaite();
+void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste);
 int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
 int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
 int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
