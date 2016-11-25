@@ -1,0 +1,4 @@
+#Ignore the .o files
+*.o
+#Ignore the executable
+exe
