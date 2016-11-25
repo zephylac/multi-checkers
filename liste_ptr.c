@@ -100,3 +100,11 @@ void ajout_gauche(t_liste * liste, t_case v){
 		liste -> ec = new;
 	}
 }
+
+void  vider_liste(t_liste * liste){
+	en_queue(liste);
+	while(!liste_vide(liste)){
+		oter_elt(liste);
+	}
+}
+
