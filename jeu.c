@@ -6,7 +6,7 @@
 #include "include/joueur.h"
 
 int hors_plateau(int i, int j){
-	if(i > 16 || j > 16 || j < 0 || i < 0) return 1;
+	if(i > Z-1 || j > Z-1 || j < 0 || i < 0) return 1;
 	if(plateau[i][j].joueur == invalide) return 1;
 	return 0;
 }
@@ -15,8 +15,8 @@ int verifierDefaite(){
 /* fonction qui sera appelée à chaque tour et retourne le numero du joueur n'ayant plus de pion. si tout le monde a encore au moins un pion, retourne 0 */
     int i, j;
     int a = 1, b = 2, c = 3, d = 4;
-    for(i = 0; i < N; i++){
-        for(j = 0; i < N; j++){
+    for(i = 0; i < Z; i++){
+        for(j = 0; i < Z; j++){
             if(plateau[i][j].joueur == joueur1) a = 0;
             if(plateau[i][j].joueur == joueur2) b = 0;
             if(plateau[i][j].joueur == joueur3) c = 0;
@@ -162,8 +162,8 @@ int depPossible(t_joueur joueur){
 /* retourne 1 si le joueur peut jouer, 0 s'il est bloqué */
 	int i, j;
 	t_coordonnees coord;
-	for(i = 0; i < N; i++){
-        	for(j = 0; i < N; j++){
+	for(i = 0; i < Z; i++){
+        	for(j = 0; i < Z; j++){
 			coord.x = j;
 			coord.y = i;
 			if(plateau[i][j].joueur == joueur && coupDispo(coord, joueur, &ls_coup_d)) return 1;
