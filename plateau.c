@@ -155,12 +155,13 @@ void afficher(){
 int coupForce(t_joueur j,t_liste *ls_coup_f /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
   int l,c,coup_For;
   t_coordonnees cell_pos;
-  cell_pos.x=c;
-  cell_pos.y=l;
+  
   vider_liste(ls_coup_f);
   coup_For=0;
   for(l=0;l<Z;l++){
     for(c=0;c<Z;c++){
+      cell_pos.x=c;
+      cell_pos.y=l;
       if(j==litJoueur(l,c) && peutPrendre(cell_pos,j,ls_coup_f) ){ //-----------------------a completer avec fonction willi--------------------
         DeplaAjout(l,c,*ls_coup_f);
         coup_For=1;
