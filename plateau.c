@@ -226,11 +226,11 @@ void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
 void switchCoord(int x, int y){
   t_contenu inter;
   inter = plateau[x][y];
-  plateau[x][y] = plateau[y][Z-1-x];
-  plateau[y][Z-1-x] = plateau[Z-1-x][Z-1-y];
-  plateau[Z-1-x][Z-1-y] = plateau[Z-1-y][x];
-  plateau[Z-1-y][x] = inter;
-}
+  plateau[x][y] = plateau[Z-1-y][x];
+  plateau[Z-1-y][x] = plateau[Z-1-x][Z-1-y];
+  plateau[Z-1-x][Z-1-y] = plateau[y][Z-1-x];
+  plateau[y][Z-1-x] = inter;
+  }
 
 void tourner(){
   int i,j;
