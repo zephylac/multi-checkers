@@ -11,7 +11,7 @@ void ChangeJoueur(int l, int c,t_joueur nouv){
   plateau[l][c].joueur=nouv;
 }
 //fonction qui renvoie la valeur joueur de la case aux coordonnées saisies
-int litJoueur(int l,int c){
+t_joueur litJoueur(int l,int c){
     return(plateau[l][c].joueur);
 }
 //Ajoute à la liste la case aux coordonnées l,c       
