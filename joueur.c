@@ -12,7 +12,8 @@
  *\brief fonction qui convertir un caractère en chiffre
  */
 int convertir(char carac){                                                      
-		return (carac - '0');
+		return((carac - 'A'));
+
 }
 
 
@@ -114,12 +115,16 @@ void jouerTour(t_joueur joueur){
 
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(coup_force == 0){
-    		printf("Veuillez choisir la case où se trouve votre pion");
-    		scanf("Entrer les coordonnées %c%i",&c_colonne,&ligne); 
+    		printf("Veuillez choisir la case où se trouve votre pion\n");
+    		printf("Entrer les coordonnées (ex:A1) : ");
+		scanf("%c%i",&c_colonne,&ligne); 
 		coord_dep = traiteEntree(c_colonne,ligne);
+			printf("%i %i", coord_dep.x, coord_dep.y);
+
 		while(!coupDispo(coord_dep,joueur,&ls_coup_d)){
-			printf("Veuillez choisir la case où se trouve votre pion");
-    			scanf("Entrer les coordonnées %c%i",&c_colonne,&ligne); 
+			printf("Veuillez choisir la case où se trouve votre pion\n");
+    			printf("Entrer les coordonnées (ex:A1) : ");
+			scanf("%c%i",&c_colonne,&ligne); 
 			coord_dep = traiteEntree(c_colonne,ligne);
 		}
 		coord_arr = choisir(ls_coup_d,joueur);
