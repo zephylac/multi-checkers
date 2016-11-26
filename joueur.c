@@ -39,25 +39,25 @@ t_coordonnees traiteEntree(char c_colonne, int ligne){
  *\fn void jouerTour(t_joueur joueur)
  *\brief Fonction qui exécute le tour d'un joueur entré en paramètre
  */
-void afficherLettre (t_lettre lettre){
+void afficherLettre (int lettre){
   switch(lettre){
-    case A : printf("A");break;
-    case B : printf("B");break;
-    case C : printf("C");break;
-    case D : printf("D");break;
-    case E : printf("E");break;
-    case F : printf("F");break;
-    case G : printf("G");break;
-    case H : printf("H");break;      
-    case I : printf("I");break;
-    case J : printf("J");break;      
-    case K : printf("K");break;
-    case L : printf("L");break;      
-    case M : printf("M");break;
-    case N : printf("N");break;      
-    case O : printf("O");break;
-    case P : printf("P");break;
-    case Q : printf("Q");break;
+    case 0 : printf("A");break;
+    case 1 : printf("B");break;
+    case 2 : printf("C");break;
+    case 3 : printf("D");break;
+    case 4 : printf("E");break;
+    case 5 : printf("F");break;
+    case 6 : printf("G");break;
+    case 7 : printf("H");break;      
+    case 8 : printf("I");break;
+    case 9 : printf("J");break;      
+    case 10 : printf("K");break;
+    case 11 : printf("L");break;      
+    case 12 : printf("M");break;
+    case 13 : printf("N");break;      
+    case 14 : printf("O");break;
+    case 15 : printf("P");break;
+    case 16 : printf("Q");break;
   }
 }
 
