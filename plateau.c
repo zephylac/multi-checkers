@@ -136,8 +136,22 @@ void init(){
 
 void afficher(){
   system("clear");
-  int l,c,joueur;
+  char carac = 'A';
+  int i=0,l,c,joueur;
+  printf("  ");
   for(l=0,c=0;l<Z;l++){
+	  printf(" %c ",carac);
+	  carac++;
+  }
+  printf("\n");
+  for(l=0,c=0;l<Z;l++){
+    if(i <10){
+      printf("%i |",i);
+    }
+    else{
+      printf("%i|",i);
+    }
+    i++;
     for(c=0;c<Z;c++){ // parcours une seule fois la matrice
       joueur=litJoueur(l,c);
       if(joueur==5) printf("   ");
@@ -255,3 +269,4 @@ void tourner(){
   j = 9;
   switchCoord( i, j);
 }
+
