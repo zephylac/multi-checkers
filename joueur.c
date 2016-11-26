@@ -65,31 +65,31 @@ void afficherLettre (t_lettre lettre){
 *\fn t_coordonnees choisir(t_liste * ls_coup)
 *\brief Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
 */
-t_coordonnees choisir(t_liste ls_coup,t_joueur joueur){
+t_coordonnees choisir(t_liste* ls_coup,t_joueur joueur){
 	int choix,i = 0;
 	t_case cellule;
 	t_coordonnees coord;
 	
 	do{
-		printf("-----------Joueur %i-----------",joueur);
-		en_tete(&ls_coup);
-		while(!hors_liste(&ls_coup)){
-			valeur_elt(&ls_coup,&cellule);
+		printf("-----------Joueur %i-----------\n",joueur);
+		en_tete(ls_coup);
+		while(!hors_liste(ls_coup)){
+			valeur_elt(ls_coup,&cellule);
 			printf("%i) Déplacer le pion se trouvant aux coordonnées ",i);
 			afficherLettre(cellule.coordonnees.y);
-			printf(" %i",cellule.coordonnees.x);
+			printf(" %i\n",cellule.coordonnees.x);
 			i++;
-			suivant(&ls_coup);
+			suivant(ls_coup);
 		}
 		printf("Votre choix : ");
 		scanf("%i",&choix);
 	}
 	while(choix < 0 || choix > i);
-	en_tete(&ls_coup);
+	en_tete(ls_coup);
 	for(i = 0; i < choix; i++){
-		suivant(&ls_coup);
+		suivant(ls_coup);
 	}	
-	valeur_elt(&ls_coup,&cellule);
+	valeur_elt(ls_coup,&cellule);
 	coord.x = cellule.coordonnees.x;
 	coord.y = cellule.coordonnees.y;
 	return coord;
@@ -119,7 +119,6 @@ void jouerTour(t_joueur joueur){
     		printf("Entrer les coordonnées (ex:A1) : ");
 		scanf("%c%i",&c_colonne,&ligne); 
 		coord_dep = traiteEntree(c_colonne,ligne);
-			printf("%i %i", coord_dep.x, coord_dep.y);
 
 		while(!coupDispo(coord_dep,joueur,&ls_coup_d)){
 			printf("Veuillez choisir la case où se trouve votre pion\n");
@@ -127,14 +126,14 @@ void jouerTour(t_joueur joueur){
 			scanf("%c%i",&c_colonne,&ligne); 
 			coord_dep = traiteEntree(c_colonne,ligne);
 		}
-		coord_arr = choisir(ls_coup_d,joueur);
+		coord_arr = choisir(&ls_coup_d,joueur);
 		deplacerPiece(coord_dep,coord_arr);
 	}
 	else{
-		coord_dep = choisir(ls_coup_f,joueur);
+		coord_dep = choisir(&ls_coup_f,joueur);
 		while(peutPrendre(coord_dep,joueur, &ls_coup_f)){
 			afficher();
-			coord_arr = choisir(ls_coup_f,joueur);
+			coord_arr = choisir(&ls_coup_f,joueur);
 			prendrePiece(coord_dep, coord_arr);
 			coord_dep = coord_arr;
 		}
