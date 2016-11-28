@@ -74,7 +74,7 @@ t_coordonnees choisir(t_liste* ls_coup,t_joueur joueur){
 		en_tete(ls_coup);
 		while(!hors_liste(ls_coup)){
 			valeur_elt(ls_coup,&cellule);
-			printf("%i] Déplacer le pion se trouvant aux coordonnées ",i);
+			printf("%i) Déplacer le pion se trouvant aux coordonnées ",i);
 			afficherLettre(cellule.coordonnees.x);
 			printf(" %i\n",cellule.coordonnees.y);
 			i++;
@@ -114,8 +114,7 @@ void jouerTour(t_joueur joueur){
 
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(coup_force == 0){
-    		printf("-----------Joueur %i-----------\n",joueur);
-		printf("Veuillez choisir la case où se trouve votre pion\n");
+    		printf("Veuillez choisir la case où se trouve votre pion\n");
     		printf("Entrer les coordonnées (ex:A1) : ");
 		scanf("%c%i",&c_colonne,&ligne); 
 		coord_dep = traiteEntree(c_colonne,ligne);
