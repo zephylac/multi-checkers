@@ -8,14 +8,13 @@
 #include "include/liste_ptr.h"
 
 /*
- *\fn int convertir(char carac){
+ *\fn int carac_valeur(char carac)
  *\brief fonction qui convertir un caractère en chiffre
  */
-int convertir(char carac){                                                      
-		return((carac - 'A'));
-
+int carac_valeur(char carac){
+	if(carac >= 'a' && carac <= 'z') return carac - 'a';
+	else if ( carac >= 'A' && carac <= 'Z') return carac - 'A';
 }
-
 
 /*
  *\fn t_coordonnees traiteEntree(char c_colonne, int ligne)
@@ -29,7 +28,7 @@ t_coordonnees traiteEntree(char c_colonne, int ligne){
 		coord.y = 0;
 	}
 	else{
-		colonne = convertir(c_colonne);
+		colonne = carac_valeur(c_colonne);
 		coord.x = ligne;
 		coord.y = colonne;
 	}
