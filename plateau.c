@@ -28,7 +28,7 @@ void DeplaAjout(int l, int c,t_liste ls_coup){
 } 
 
 //fonction servant à lister les emplacements ou un pion peut se deplacer
-int dispoPion(t_coordonnees coor,t_liste ls_coup_d){
+int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo;
   vider_liste(&ls_coup_d);
   l=coor.y;
@@ -68,7 +68,7 @@ int dispoPion(t_coordonnees coor,t_liste ls_coup_d){
   return coup_dispo; //fin de la fonction, delivre vrai si coup dispo
 }
 
-int dispoDame(t_coordonnees coor,t_liste ls_coup_d){
+int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo,fin;
   vider_liste(&ls_coup_d);
   l=coor.y;
@@ -193,8 +193,8 @@ int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adv
   vider_liste(ls_coup_d);// on vide la liste 
   en_tete(ls_coup_d); // on se place en_tete de liste
   if(plateau[l][c].joueur==j){ // verification que la piece choisie appartien au joueur 
-    if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,*ls_coup_d); // si la piece est un pion, calcul de ses deplacements
-    if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,*ls_coup_d); // si la piece est une dame, calcul de ses deplacements
+    if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,ls_coup_d); // si la piece est un pion, calcul de ses deplacements
+    if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,ls_coup_d); // si la piece est une dame, calcul de ses deplacements
   }
   return coup_dispo; //renvoi vrai si la piece est jouable
 }
