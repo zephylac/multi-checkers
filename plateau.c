@@ -162,7 +162,7 @@ void afficher(){
   system("clear");
   char carac = 'A';
   int i=0,l,c,joueur;
-  printf("  ");
+  printf("   ");
   for(l=0,c=0;l<Z;l++){
 	  printf(" %c ",carac);
 	  carac++;
