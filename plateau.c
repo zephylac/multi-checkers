@@ -125,10 +125,10 @@ void init(){
     for(c=0;c<Z;c++){ // parcours une seule fois la matrice
       if((c<4 && (l<4 || l>=Z-4))||(c>=Z-4 && (l<4 || l>=Z-4))) ChangeJoueur(l,c,invalide); // case dans les coins sont invalides
       else if((l+c)%2==0) ChangeJoueur(l,c,vide);//indique que la case est vide
-      else if((c>=4 && c<Z-4 ) && l>=Z-4 && (l+c)%2==1) InitCase(l,c,joueur1);//place les pions du joueur 1
-      else if(c>=Z-4 && (l>=4 && l<Z-4) && (l+c)%2==1) InitCase(l,c,joueur2);//place les pions du joueur 2
-      else if((c>=4 && c<Z-4) && l<=3 && (l+c)%2==1) InitCase(l,c,joueur3);//place les pions du joueur 3
-      else if(c<=3 &&(l>=4 && l<Z-4)&& (l+c)%2==1) InitCase(l,c,joueur4);//place les pions du joueur 4  
+      else if((c>=4 && c<Z-4 ) && l>=Z-5 && (l+c)%2==1) InitCase(l,c,joueur1);//place les pions du joueur 1
+      else if(c>=Z-5 && (l>=4 && l<Z-4) && (l+c)%2==1) InitCase(l,c,joueur2);//place les pions du joueur 2
+      else if((c>=4 && c<Z-4) && l<=4 && (l+c)%2==1) InitCase(l,c,joueur3);//place les pions du joueur 3
+      else if(c<=4 &&(l>=4 && l<Z-4) && (l+c)%2==1) InitCase(l,c,joueur4);//place les pions du joueur 4  
     }
   }
 }
