@@ -36,31 +36,31 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
    // cas des deplacements pour Pion du joueur 
     if(l+c>16 && (c<=l)){ // si la reference est le triangle de depart du joueur
       if(litJoueur(l-1,c-1)==0){ 
-         DeplaAjout(l,c,ls_coup_d); // ajout de la case dans la liste des coups dispo
+         DeplaAjout(l-1,c-1,ls_coup_d); // ajout de la case dans la liste des coups dispo
          coup_dispo=1; // donne 1 a la valeur des coup_dispos, designant la piece comme jouable
        }
        if(litJoueur(l-1,c+1)==0){ // même schema que la boucle precedante
-         DeplaAjout(l,c,ls_coup_d);
+         DeplaAjout(l-1,c+1,ls_coup_d);
          coup_dispo=1;
        } 
     }
     else if(l+c<16 && (c<=l)){//si la reference est le triangle de gauche
        if(litJoueur(l-1,c-1)==0){
-         DeplaAjout(l,c,ls_coup_d); 
+         DeplaAjout(l-1,c-1,ls_coup_d); 
          coup_dispo=1;
        }
        if(litJoueur(l+1,c-1)==0){
-         DeplaAjout(l,c,ls_coup_d);
+         DeplaAjout(l+1,c-1,ls_coup_d);
          coup_dispo=1;
        }
     }
     else if(l+c>16 &&(c>=l)){//si la reference est le triangle de droite
       if(litJoueur(l+1,c+1)==0){
-         DeplaAjout(l,c,ls_coup_d);
+         DeplaAjout(l+1,c+1,ls_coup_d);
          coup_dispo=1;
        }
      if(litJoueur(l-1,c+1)==0){
-         DeplaAjout(l,c,ls_coup_d);
+         DeplaAjout(l-1,c+1,ls_coup_d);
          coup_dispo=1;
        }
    }
