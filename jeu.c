@@ -142,7 +142,6 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 }
 
 int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
-	vider_liste(ls_coup_d);
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
 	t_coordonnees nouvcoord;
