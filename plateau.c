@@ -15,7 +15,7 @@ t_joueur litJoueur(int l,int c){
     return(plateau[l][c].joueur);
 }
 //Ajoute à la liste la case aux coordonnées l,c       
-void DeplaAjout(int l, int c,t_liste ls_coup){
+void DeplaAjout(int l, int c,t_liste *ls_coup){
    t_case cell_dispo; // creation d'un case à empiler
   //assignation des infos de la cellule à celle qui va empiler
    cell_dispo.coordonnees.x=c;
@@ -24,16 +24,16 @@ void DeplaAjout(int l, int c,t_liste ls_coup){
    cell_dispo.contenu.piece=plateau[l][c].piece;
    if(plateau[l][c].joueur==1 || plateau[l][c].joueur==3 ) cell_dispo.contenu.equipe=1;
    if(plateau[l][c].joueur==2 || plateau[l][c].joueur==4 ) cell_dispo.contenu.equipe=2;
-   ajout_droit(&ls_coup,cell_dispo); // ajout dans la liste de la case
+   ajout_droit(ls_coup,cell_dispo); // ajout dans la liste de la case
 } 
 
 //fonction servant à lister les emplacements ou un pion peut se deplacer
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo;
-  vider_liste(&ls_coup_d);
   l=coor.y;
   c=coor.x;
-  
+  coup_dispo=0;
+
    // cas des deplacements pour Pion du joueur 
     if(l+c>16 && (c<=l)){ // si la reference est le triangle de depart du joueur
       if(litJoueur(l-1,c-1)==0){ 
@@ -70,10 +70,10 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
 
 int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
   int l,c,coup_dispo,fin;
-  vider_liste(&ls_coup_d);
   l=coor.y;
   c=coor.x;
-  
+  coup_dispo=0;
+
    // cas des deplacements pour Dame du joueur 
   for(c=c+1,l=l+1;plateau[l][c].joueur==0;l++,c++){ // Traitement des differentes diagonales
     DeplaAjout(l,c,ls_coup_d);// Ajout des cases vides de la diagonale jusqu'a la rencontre d'une piece
@@ -177,7 +177,7 @@ int coupForce(t_joueur j,t_liste *ls_coup_f /* type t_case*/){ // retourne 1 si 
       cell_pos.x=c;
       cell_pos.y=l;
       if(j==litJoueur(l,c) && peutPrendre(cell_pos,j,ls_coup_f) ){ //-----------------------a completer avec fonction willi--------------------
-        DeplaAjout(l,c,*ls_coup_f);
+        DeplaAjout(l,c,ls_coup_f);
         coup_For=1;
       }
     }
