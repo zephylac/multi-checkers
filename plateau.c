@@ -173,7 +173,7 @@ int coupForce(t_joueur j,t_liste *ls_coup_f /* type t_case*/){ // retourne 1 si 
       cell_pos.x=c;
       cell_pos.y=l;
       if(j==litJoueur(l,c) && peutPrendre(cell_pos,j,ls_coup_f) ){ //-----------------------a completer avec fonction willi--------------------
-        DeplaAjout(l,c,ls_coup_f);
+        //DeplaAjout(l,c,ls_coup_f);
         coup_For=1;
       }
     }
@@ -224,9 +224,9 @@ void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
       if(c_arr>c_dep) c_dep++;
       else if(c_arr<c_dep) l_dep--;
     }
-  }
     c_supp=c_dep;// calcul des coordonnées de la piecesupprimé
     l_supp=l_dep;
+  }
   deplacerPiece(dep,arriv); // deplacement de la piece
   // suppression du pion pris
   viderContenu(&plateau[l_supp][c_supp]);
