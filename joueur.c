@@ -70,7 +70,7 @@ t_coordonnees choisir(t_liste* ls_coup,t_joueur joueur){
 	t_coordonnees coord;
 	
 	do{
-		printf("-----------Joueur %i-----------\n",joueur);
+		printf("\n-----------Joueur %i-----------\n",joueur);
 		en_tete(ls_coup);
 		while(!hors_liste(ls_coup)){
 			valeur_elt(ls_coup,&cellule);
@@ -110,7 +110,7 @@ void jouerTour(t_joueur joueur){
 	t_coordonnees coord_arr;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
         afficher();
-	coup_force = coupForce(joueur,&ls_coup_f);
+	coup_force = coupForce(joueur,&ls_coup_d);
 
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(coup_force == 0){
@@ -129,12 +129,14 @@ void jouerTour(t_joueur joueur){
 		deplacerPiece(coord_dep,coord_arr);
 	}
 	else{
-		coord_dep = choisir(&ls_coup_f,joueur);
+		coord_dep = choisir(&ls_coup_d,joueur);
+		vider_liste(&ls_coup_f);
 		while(peutPrendre(coord_dep,joueur, &ls_coup_f)){
 			afficher();
 			coord_arr = choisir(&ls_coup_f,joueur);
 			prendrePiece(coord_dep, coord_arr);
 			coord_dep = coord_arr;
+			vider_liste(&ls_coup_f);
 		}
 	}
 }
