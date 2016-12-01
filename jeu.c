@@ -176,7 +176,7 @@ int depPossible(t_joueur joueur){
 	int i, j;
 	t_coordonnees coord;
 	for(i = 0; i < Z; i++){
-        	for(j = 0; i < Z; j++){
+        	for(j = 0; j < Z; j++){
 			coord.x = j;
 			coord.y = i;
 			if(plateau[i][j].joueur == joueur && coupDispo(coord, joueur, &ls_coup_dep)) return 1;
