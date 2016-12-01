@@ -219,6 +219,10 @@ void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
     l_supp=l_dep+(l_arr-l_dep)/2;
   }
   else if(plateau[l_dep][c_dep].piece==2){
+	if(l_arr>l_dep) l_dep++;
+      else if(l_arr<l_dep) l_dep--;
+      if(c_arr>c_dep) c_dep++;
+      else if(c_arr<c_dep) l_dep--;
     while(plateau[l_dep][c_dep].joueur==0){ // Traitement des differentes diagonales
       if(l_arr>l_dep) l_dep++;
       else if(l_arr<l_dep) l_dep--;
