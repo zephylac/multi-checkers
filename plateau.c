@@ -8,7 +8,7 @@
 
 //fonction permettant de changer la valeur joueur d'une case
 void ChangeJoueur(int l, int c,t_joueur nouv){
-  plateau[l][c].joueur=nouv;
+	plateau[l][c].joueur=nouv;
 }
 //fonction qui renvoie la valeur joueur de la case aux coordonnées saisies
 t_joueur litJoueur(int l,int c){
