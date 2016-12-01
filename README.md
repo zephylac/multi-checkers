@@ -129,6 +129,34 @@ void prendrePiece(t_coordonnees dep,t_coordonnees arriv); prends la piece situé
 void switchCoord( int x, int y); transforme deux int en un t_coordonnees
 void tourner(); fais tourner le plateau de 90°
 
+utilisées dans joueur.c:
+
+int convertir(char carac); convertis un caractère en entier
+t_coordonnees traiteEntree(char c_colonne, int ligne); fonction qui traite ce que l'utilisateur a entré
+void afficherLettre (t_lettre lettre); prends en entier le type enum lettre, et affiche la lettre correspondante
+t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur); Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
+void jouerTour(t_joueur joueur); Fonction qui exécute le tour d'un joueur entré en paramètre
+void deroulementPartie(void); Fonction qui s'occupe de la gestion des tours entre différents joueur
+
+utilisées dans jeu.c:
+
+
+int hors_plateau(int i, int j);
+int verifierDefaite();
+void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste);
+int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
+int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
+int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
+int depPossible(t_joueur joueur);
+int partieFinie(int joueur);
+void afficherStats();
+void finPartie(int joueur);
+void reinitStatsJoueur(t_joueur joueur);
+void reinitStats();
+void statPionpris(t_joueur joueur);
+void statPionperdu(t_joueur joueur);
+void statDep(t_joueur joueur);
+
 
 schéma des fonctions:
 
