@@ -153,11 +153,14 @@ void afficher(){
       joueur=litJoueur(l,c);
       if(joueur==5) printf("   ");
       else if(joueur==0) printf(" . ");
-      else if(joueur==4) printf(" 4 ");
-      else if(joueur==3) printf(" 3 ");
-      else if(joueur==2) printf(" 2 ");
-      else if(joueur==1) printf(" 1 "); 
-      
+      else if(joueur==4 && plateau[l][c].piece == pion) printf(" 4 ");
+      else if(joueur==4 && plateau[l][c].piece == dame) printf("[4]");
+      else if(joueur==3 && plateau[l][c].piece == pion) printf(" 3 ");
+      else if(joueur==3 && plateau[l][c].piece == dame) printf("[3]");
+      else if(joueur==2 && plateau[l][c].piece == pion) printf(" 2 ");
+      else if(joueur==2 && plateau[l][c].piece == dame) printf("[2]");
+      else if(joueur==1 && plateau[l][c].piece == pion) printf(" 1 ");
+      else if(joueur==1 && plateau[l][c].piece == dame) printf("[1]");
     } 
   printf("\n"); 
   }
