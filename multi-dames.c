@@ -4,8 +4,8 @@
 #include "include/joueur.h"
 #include "include/liste_ptr.h"
 int main(){
-	init_liste(&ls_coup_d);
-	init_liste(&ls_coup_f);
+	init_liste(&ls_coup_dep);
+	init_liste(&ls_coup_arr);
 	init();
 	deroulementPartie();
 return 1;
