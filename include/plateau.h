@@ -12,7 +12,7 @@ void viderContenu(t_contenu contenu);
 void InitCase(int l,int c,t_joueur j);
 void init();  
 void afficher();
-int coupForce(t_joueur j,t_liste* ls_coup_arr, t_liste* ls_coup_dep:);  
+int coupForce(t_joueur j,t_liste* ls_coup_arr, t_liste* ls_coup_dep);  
 int coupDispo(t_coordonnees coor,t_joueur j,t_liste* ls_coup_d);  
 void deplacerPiece(t_coordonnees dep,t_coordonnees arriv);
 void prendrePiece(t_coordonnees dep,t_coordonnees arriv);  
