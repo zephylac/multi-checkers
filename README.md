@@ -141,21 +141,21 @@ void deroulementPartie(void); Fonction qui s'occupe de la gestion des tours entr
 utilisées dans jeu.c:
 
 
-int hors_plateau(int i, int j);
-int verifierDefaite();
-void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste);
-int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
-int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
-int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
-int depPossible(t_joueur joueur);
-int partieFinie(int joueur);
-void afficherStats();
-void finPartie(int joueur);
-void reinitStatsJoueur(t_joueur joueur);
-void reinitStats();
-void statPionpris(t_joueur joueur);
-void statPionperdu(t_joueur joueur);
-void statDep(t_joueur joueur);
+int hors_plateau(int i, int j); fonction retournant 1 si les coordonnées en paramètre sont hors plateau (dans une case invalide ou non existante)
+int verifierDefaite(); fonction qui retourne le numéro du joueur perdant, s'il y en a un
+void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste); fonction ajoutant les valeurs en paramètre à la liste en paramètre
+int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep); fonction renvoyant 1 si le pion aux coordonnées passées en paramètre peut prendre un pion adjacent. ajoute ensuite dans la liste toutes les coordonnées d'arrivées possibles
+int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep); fonctionne comme peutPrendrepion, mais avec une dame
+int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep); fonction qui appelle les deux fonctions précédentes et renvoie 1 si la pièce aux coordonnées passées en paramètre peut prendre une autre piece
+int depPossible(t_joueur joueur); retourne 1 si le joueur en paramètre peut déplacer au moins une pièce, s'il ne peut pas, il perd la partie
+int partieFinie(int joueur); retourne le numéro du joueur ayant perdu, s'il y en a un
+void afficherStats(); affiche les statistiques pour tous les joueurs
+void finPartie(int joueur); affiche à l'écran que la partie est finie, en disant pourquoi, et affiche les stats de fin de partie
+void reinitStatsJoueur(t_joueur joueur); réinitialise les statistiques d'un joueur
+void reinitStats(); réinitialise les statistiques de tous les joueurs
+void statPionpris(t_joueur joueur); incrémente le nombre de pions pris par le joueur en paramètre
+void statPionperdu(t_joueur joueur); incrémente le nombre de pions perdus par le joueur en paramètre
+void statDep(t_joueur joueur); incrémente le nombre de déplacement effectués par le joueur en paramètre
 
 
 schéma des fonctions:
