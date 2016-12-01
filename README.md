@@ -76,16 +76,13 @@ Un enum permettant de savoir quel joueur est concerné :
 	typedef enum t_joueur(vide, joueur_1, joueur_2, joueur_3, joueur_4, invalide);
 
 Un enum permettant de savoir à quelle type de pièce nous faisons face.
-	typedef enum t_piece(vide , pion , dame) ;
+	typedef enum t_piece(sans , pion , dame) ;
 
 Un enum permettant de savoir l'équipe d'un joueur et donc de connaître le statut en 2 joueur 
-	typedef enum t_equipe(equipe_1 = 1 , equipe_2) ;
+	typedef enum t_equipe(aucune, equipe_1, equipe_2) ;
 
 Un enum regroupant les lettres servant à L'affichage.
 	typedef enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q}t_lettre;
-
-Une structure regroupant tous les types énumérés précédent, cela nous permet de pouvoir représenter une case 
-	typedef struct t_case(t_joueur joueur ; t_piece piece ; t_equipe equipe ;) ;
 
 Une structure gerant la position des cases et pieces
 	typedef struct {int x; int y}t_coordonnees;
@@ -99,36 +96,69 @@ Une structure case, établie à partir des coordonnées et du contenue. Elle com
 Une structure Stats, permettant le retour des statistiques en fin de partie
 	typedef struct {char nom[20]; int pions_pris; int pions_perdus; int nb_coup} t_stats;
 	
-	t_contenu plateau[N][N] ;
-	#define N 17
+Les Stats sont définies en variables globales, pouvant etre reutilisées partout	
+	t_stats statsj2;
+	t_stats statsj3;
+	t_stats statsj4;
+
+Definition du plateau, sur lequel sera basé le programme
+	t_contenu plateau[Z][Z];
+
+Definition de deux listes, l'une repertoriant les coups disponibles, l'autre les coups forcés 
+	t_liste ls_coup_d;
+	t_liste ls_coup_f;
 	
 2 –  Fonctions
 
-void init(t_case plateau[N][N]) est la fonction initialisant le plateau
-void afficher(t_case plateau[N][N]) gére l'affichage du plateau
-void jouerTour() fonction prenant en charge le déroulement d'un tour
-void deplacerPion() fonction permettant le deplacement des pions
-void deplacerDame() fonction permettant le deplacement des dames
-void prendrePiece() fonction permettant la prise de pieces 
-void creerDame() génére une dame à partir d'un pion lorsque necessaire
-void finPartie() contient les conditions de fin de partie et les applique
+Utilisées dans plateau.c:
 
-int ArrivBord(t_case arrive) delivre vrai si la piece de la case choisie remplit les conditions pour devenir une dame
-int DeplacePoss() fonction determinant si la piece choisie peut se deplacer ou non
-int partieFini() renvoie vrai si une condition de fin de partie l'est
-int peutPrendre() renvoie vrai si une piece peut etre prise par la piece selectionnée
+void ChangeJoueur(int l, int c,t_joueur nouv); change la valeur de joueur à un emplacement donné
+int litJoueur(int l,int c); retourne la valeur de joueur à un emplacement donné
+void DeplaAjout(int l, int c,t_liste* ls_coup); Ajoute à la liste prise en parametre le déplacement vers les coordonnées données
+int dispoPion(t_coordonnees coor,t_liste *ls_coup_d); retourne 1 si au moin 1 pion peut jouer, et indique à quel endroit 
+int dispoDame(t_coordonnees coor,t_liste *ls_coup_d); retourne 1 si au moin 1 dame peut jouer, et indique à quel endroit
+void creerDame(t_coordonnees coor); verifie si une dame peut etre créée suite à un deplacement, et la créée si possible 
+void viderContenu(t_contenu contenu); Vide le contenu de la case selectionnée
+void InitCase(int l,int c,t_joueur j); initialise la case selectionnée
+void init(); initialise le plateau à l'aide de InitCase
+void afficher(); Affiche le damier 
+int coupForce(t_joueur j,t_liste* ls_coup_arr, t_liste* ls_coup_dep); retourne 1 si au moin un coup est obligatoire, et liste leur point de depart ainsi que leur point d'arrivée
+int coupDispo(t_coordonnees coor,t_joueur j,t_liste* ls_coup_d);  retourne 1 si au moin un coup est possible, et les liste    
+void deplacerPiece(t_coordonnees dep,t_coordonnees arriv); deplace la piece choisie à l'emplacement selectionné
+void prendrePiece(t_coordonnees dep,t_coordonnees arriv); prends la piece située entre l'arrivée et le depart 
+void switchCoord( int x, int y); transforme deux int en un t_coordonnees
+void tourner(); fais tourner le plateau de 90°
+
+utilisées dans joueur.c:
+
+int convertir(char carac); convertis un caractère en entier
+t_coordonnees traiteEntree(char c_colonne, int ligne); fonction qui traite ce que l'utilisateur a entré
+void afficherLettre (t_lettre lettre); prends en entier le type enum lettre, et affiche la lettre correspondante
+t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur); Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
+void jouerTour(t_joueur joueur); Fonction qui exécute le tour d'un joueur entré en paramètre
+void deroulementPartie(void); Fonction qui s'occupe de la gestion des tours entre différents joueur
+
+utilisées dans jeu.c:
+
+
+int hors_plateau(int i, int j);
+int verifierDefaite();
+void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste);
+int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
+int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
+int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
+int depPossible(t_joueur joueur);
+int partieFinie(int joueur);
+void afficherStats();
+void finPartie(int joueur);
+void reinitStatsJoueur(t_joueur joueur);
+void reinitStats();
+void statPionpris(t_joueur joueur);
+void statPionperdu(t_joueur joueur);
+void statDep(t_joueur joueur);
+
 
 schéma des fonctions:
-init
-afficher
-jouerTour: 
-	-peutPrendre
-	-prendrepiece
-	-DeplacePoss
-	-deplacerDame
-	-deplacerPion contenant ArrivBord et CreerDame
-	-afficher
-	-finPartie contenant partiefini
 
 3 -  Structure de fichiers
 
