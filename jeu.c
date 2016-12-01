@@ -46,51 +46,56 @@ void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* li
 	ajout_gauche(liste, nouv);
 }
 
-int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep){
 /* Fonction ajoutant à une liste toutes les coordonnées où le pion aux coordonnées en paramètre peut arriver après avoir pris un autre pion et renvoie 1 */
         int prise = 0;
-        t_coordonnees nouvcoord;
-        int i = coord.y;
-        int j = coord.x;
+        t_coordonnees coord_arr;
+        int i = coord_arr.y;
+        int j = coord_arr.x;
 		if((plateau[i-1][j-1].joueur != joueur)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(plateau[i-2][j-2].joueur == vide)){
-			nouvcoord.x = j-2;
-			nouvcoord.y = i-2;
-			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
+			coord_arr.x = j-2;
+			coord_arr.y = i-2;
+			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 			prise = 1;
 		}
 		if((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(plateau[i-2][j+2].joueur == vide)){
-			nouvcoord.x = j+2;
-			nouvcoord.y = i-2;
-			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
+			coord_arr.x = j+2;
+			coord_arr.y = i-2;
+			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);	
 			prise = 1;
 		}
 		if((plateau[i+1][j-1].joueur != joueur)&&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(plateau[i+2][j-2].joueur == vide)){
-			nouvcoord.x = j-2;
-			nouvcoord.y = i+2;
-			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
+			coord_arr.x = j-2;
+			coord_arr.y = i+2;
+			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 			prise = 1;
 		}
 		if((plateau[i+1][j+1].joueur != joueur)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(plateau[i+2][j+2].joueur == vide)){
-			nouvcoord.x = j+2;
-			nouvcoord.y = i+2;
-			ajoutListe(nouvcoord, joueur, pion, ls_coup_d);
+			coord_arr.x = j+2;
+			coord_arr.y = i+2;	
+			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 			prise = 1;
 		}
 		return prise;
 
 }
 
-int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+int peutPrendredame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep){
         int prise = 0;
-        t_coordonnees nouvcoord;
+        t_coordonnees coord_arr;
         int i;
         int j;
-        for(i = coord.y-1, j = coord.x+1; !hors_plateau(i,j); i--, j++){ // en haut à droite
+        for(i = coord_dep.y-1, j = coord_dep.x+1; !hors_plateau(i,j); i--, j++){ // en haut à droite
         	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
         	if(plateau[i][j].joueur == vide && prise == 1){
-        		nouvcoord.x = j;
-        		nouvcoord.y = i;
-        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
+        		coord_arr.x = j;
+        		coord_arr.y = i;
+        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -101,9 +106,11 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
         for(i = coord.y+1, j = coord.x-1; !hors_plateau(i,j); i++, j--){ // en bas à gauche
         	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
         	if(plateau[i][j].joueur == vide && prise == 1){
-        		nouvcoord.x = j;
-        		nouvcoord.y = i;
-        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
+        		coord_arr.x = j;
+        		coord_arr.y = i;
+        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -114,9 +121,11 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
         for(i = coord.y+1, j = coord.x+1; !hors_plateau(i,j); i++, j++){ // en bas à droite
         	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
         	if(plateau[i][j].joueur == vide && prise == 1){
-        		nouvcoord.x = j;
-        		nouvcoord.y = i;
-        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
+        		coord_arr.x = j;
+        		coord_arr.y = i;
+        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -127,9 +136,10 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
         for(i = coord.y-1, j = coord.x-1; !hors_plateau(i,j); i--, j--){ // en haut à gauche
         	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
         	if(plateau[i][j].joueur == vide && prise == 1){
-        		nouvcoord.x = j;
-        		nouvcoord.y = i;
-        		ajoutListe(nouvcoord, joueur, dame, ls_coup_d);
+        		coord_arr.x = j;
+        		coord_arr.y = i;
+        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
         	}
         	else if(prise == 1) break;
         	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
@@ -141,7 +151,7 @@ int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 	return prise;
 }
 
-int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
+int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep){
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
 	t_coordonnees nouvcoord;
@@ -151,10 +161,10 @@ int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d){
 	int x = 0;
 	int y = 0;
 	if(plateau[i][j].piece == pion){
-        	prise = peutPrendrepion(coord, joueur, ls_coup_d);
+        	prise = peutPrendrepion(coord, joueur, ls_coup_arr, ls_coup_dep);
 	}
 	if(plateau[i][j].piece == dame){
-        	prise = peutPrendredame(coord, joueur, ls_coup_d);
+        	prise = peutPrendredame(coord, joueur, ls_coup_arr, ls_coup_dep);
 	}
 	return prise;
 }

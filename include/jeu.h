@@ -5,9 +5,9 @@
 int hors_plateau(int i, int j);
 int verifierDefaite();
 void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* liste);
-int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
-int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
-int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_d);
+int peutPrendrepion(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep);
+int peutPrendredame(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep);
+int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep);
 int depPossible(t_joueur joueur);
 int partieFinie(int joueur);
 void afficherStats();
