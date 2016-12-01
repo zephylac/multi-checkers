@@ -38,45 +38,43 @@ t_coordonnees traiteEntree(char c_colonne, int ligne){
  *\fn void jouerTour(t_joueur joueur)
  *\brief Fonction qui exécute le tour d'un joueur entré en paramètre
  */
-void afficherLettre (int lettre){
+char afficherLettre (int lettre){
   switch(lettre){
-    case 0 : printf("A");break;
-    case 1 : printf("B");break;
-    case 2 : printf("C");break;
-    case 3 : printf("D");break;
-    case 4 : printf("E");break;
-    case 5 : printf("F");break;
-    case 6 : printf("G");break;
-    case 7 : printf("H");break;      
-    case 8 : printf("I");break;
-    case 9 : printf("J");break;      
-    case 10 : printf("K");break;
-    case 11 : printf("L");break;      
-    case 12 : printf("M");break;
-    case 13 : printf("N");break;      
-    case 14 : printf("O");break;
-    case 15 : printf("P");break;
-    case 16 : printf("Q");break;
+    case 0 : return "A";break;
+    case 1 : return "B";break;
+    case 2 : return "C";break;
+    case 3 : return "D";break;
+    case 4 : return "E";break;
+    case 5 : return "F";break;
+    case 6 : return "G";break;
+    case 7 : return "H";break;      
+    case 8 : return "I";break;
+    case 9 : return "J";break;      
+    case 10 : return "K";break;
+    case 11 : return "L";break;      
+    case 12 : return "M";break;
+    case 13 : return "N";break;      
+    case 14 : return "O";break;
+    case 15 : return "P";break;
+    case 16 : return "Q";break;
   }
 }
-
 /**
 *\fn t_coordonnees choisir(t_liste * ls_coup)
 *\brief Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
 */
-t_coordonnees choisir(t_liste* ls_coup,t_joueur joueur){
+t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 	int choix,i = 0;
 	t_case cellule;
 	t_coordonnees coord;
-	
+	char c1;
 	do{
 		printf("\n-----------Joueur %i-----------\n",joueur);
 		en_tete(ls_coup);
 		while(!hors_liste(ls_coup)){
 			valeur_elt(ls_coup,&cellule);
-			printf("%i) Déplacer le pion se trouvant aux coordonnées ",i);
-			afficherLettre(cellule.coordonnees.x);
-			printf(" %i\n",cellule.coordonnees.y);
+			c1 = afficherLettre(cellule.coordonnees.x);
+			printf("%i) Déplacer le pion se trouvant aux coordonnées %c%i\n",i,c1,cellule.coordonnees.y);
 			i++;
 			suivant(ls_coup);
 		}
@@ -84,14 +82,57 @@ t_coordonnees choisir(t_liste* ls_coup,t_joueur joueur){
 		scanf("%i",&choix);
 	}
 	while(choix < 0 || choix > i);
-	en_tete(ls_coup);
-	for(i = 0; i < choix; i++){
-		suivant(ls_coup);
-	}	
-	valeur_elt(ls_coup,&cellule);
-	coord.x = cellule.coordonnees.x;
-	coord.y = cellule.coordonnees.y;
+		en_tete(ls_coup);
+		for(i = 0; i < choix; i++){
+			suivant(ls_coup);
+		}	
+		valeur_elt(ls_coup,&cellule);
+		coord.x = cellule.coordonnees.x;
+		coord.y = cellule.coordonnees.y;
 	return coord;
+}
+/**
+*\fn t_coordonnees choisir(t_liste * ls_coup)
+*\brief Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
+*/
+t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur){
+	int choix,i = 0;
+	t_case dep;
+	t_case arr;
+	t_choix coup;
+	char c1,c2;
+	do{
+		printf("\n-----------Joueur %i-----------\n",joueur);
+		en_tete(ls_coup_dep);
+		en_tete(ls_coup_arr);
+		while(!hors_liste(ls_coup_dep)){
+			valeur_elt(ls_coup_dep,&dep);
+			valeur_elt(ls_coup_arr,&arr);
+			c1 = afficherLettre(dep.coordonnees.x);
+			c2 = afficherLettre(arr.coordonnees.x);
+			printf("%i) Déplacer la pièce %c%i aux coordonnées %c%i",i,c1,dep.y,c2,arr.y);
+			i++;
+			suivant(ls_coup_dep);
+			suivant(ls_coup_arr);
+		}
+		printf("Votre choix : ");
+		scanf("%i",&choix);
+	}
+	while(choix < 0 || choix > i);
+	en_tete(ls_coup_dep);
+	en_tete(ls_coup_arr);
+	for(i = 0; i < choix; i++){
+		suivant(ls_coup_arr);
+		suivant(ls_coup_dep);
+	}	
+	valeur_elt(ls_coup_dep,&dep);
+	valeur_elt(ls_coup_arr,&arr);
+	coup.dep.coordonnees.x = dep.coordonnees.x;
+	coup.dep.coordonnees.y = dep.coordonnees.y;
+	coup.arr.coordonnees.x = arr.coordonnees.x;
+	coup.arr.coordonnees.y = arr.coordonnees.y;
+
+	return coup;
 }
 
 
@@ -108,6 +149,7 @@ void jouerTour(t_joueur joueur){
 	t_case cellule;
   	t_coordonnees coord_dep;
 	t_coordonnees coord_arr;
+	t_choix coup;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
         afficher();
 	coup_force = coupForce(joueur,&ls_coup_arr, &ls_coup_dep);
@@ -125,18 +167,16 @@ void jouerTour(t_joueur joueur){
 			scanf("%c%i",&c_colonne,&ligne); 
 			coord_dep = traiteEntree(c_colonne,ligne);
 		}
-		coord_arr = choisir(&ls_coup_dep,joueur);
+		coord_arr = choisirDep(&ls_coup_dep,joueur);
 		deplacerPiece(coord_dep,coord_arr);
 	}
 	else{
-		coord_dep = choisir(&ls_coup_dep,joueur);
+		coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
 		vider_liste(&ls_coup_dep);
 		vider_liste(&ls_coup_arr);
 		while(peutPrendre(coord_dep,joueur, &ls_coup_arr, &ls_coup_dep)){
 			afficher();
-			coord_arr = choisir(&ls_coup_arr,joueur);
-			prendrePiece(coord_dep, coord_arr);
-			coord_dep = coord_arr;
+			prendrePiece(coup.dep, coup.arr);
 			vider_liste(&ls_coup_dep);
 			vider_liste(&ls_coup_arr);
 		}
