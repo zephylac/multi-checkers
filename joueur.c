@@ -110,7 +110,7 @@ void jouerTour(t_joueur joueur){
 	t_coordonnees coord_arr;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
         afficher();
-	coup_force = coupForce(joueur,&ls_coup_d);
+	coup_force = coupForce(joueur,&ls_coup_arr, &ls_coup_dep);
 
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(coup_force == 0){
@@ -119,24 +119,26 @@ void jouerTour(t_joueur joueur){
 		scanf("%c%i",&c_colonne,&ligne); 
 		coord_dep = traiteEntree(c_colonne,ligne);
 
-		while(!coupDispo(coord_dep,joueur,&ls_coup_d)){
+		while(!coupDispo(coord_dep,joueur,&ls_coup_dep)){
 			printf("Veuillez choisir la case où se trouve votre pion\n");
     			printf("Entrer les coordonnées (ex:A1) : ");
 			scanf("%c%i",&c_colonne,&ligne); 
 			coord_dep = traiteEntree(c_colonne,ligne);
 		}
-		coord_arr = choisir(&ls_coup_d,joueur);
+		coord_arr = choisir(&ls_coup_dep,joueur);
 		deplacerPiece(coord_dep,coord_arr);
 	}
 	else{
-		coord_dep = choisir(&ls_coup_d,joueur);
-		vider_liste(&ls_coup_f);
-		while(peutPrendre(coord_dep,joueur, &ls_coup_f)){
+		coord_dep = choisir(&ls_coup_dep,joueur);
+		vider_liste(&ls_coup_dep);
+		vider_liste(&ls_coup_arr);
+		while(peutPrendre(coord_dep,joueur, &ls_coup_arr, &ls_coup_dep)){
 			afficher();
-			coord_arr = choisir(&ls_coup_f,joueur);
+			coord_arr = choisir(&ls_coup_arr,joueur);
 			prendrePiece(coord_dep, coord_arr);
 			coord_dep = coord_arr;
-			vider_liste(&ls_coup_f);
+			vider_liste(&ls_coup_dep);
+			vider_liste(&ls_coup_arr);
 		}
 	}
 }
