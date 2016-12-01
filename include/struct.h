@@ -23,7 +23,7 @@ t_stats statsj4;
 
 
 t_contenu plateau[Z][Z];
-t_liste ls_coup_d;
-t_liste ls_coup_f;
+t_liste ls_coup_dep;
+t_liste ls_coup_arr;
 
 #endif
