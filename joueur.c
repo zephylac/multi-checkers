@@ -39,25 +39,27 @@ t_coordonnees traiteEntree(char c_colonne, int ligne){
  *\brief Fonction qui exécute le tour d'un joueur entré en paramètre
  */
 char afficherLettre (int lettre){
+  char c; 	
   switch(lettre){
-    case 0 : return "A";break;
-    case 1 : return "B";break;
-    case 2 : return "C";break;
-    case 3 : return "D";break;
-    case 4 : return "E";break;
-    case 5 : return "F";break;
-    case 6 : return "G";break;
-    case 7 : return "H";break;      
-    case 8 : return "I";break;
-    case 9 : return "J";break;      
-    case 10 : return "K";break;
-    case 11 : return "L";break;      
-    case 12 : return "M";break;
-    case 13 : return "N";break;      
-    case 14 : return "O";break;
-    case 15 : return "P";break;
-    case 16 : return "Q";break;
+    case 0 : c = 'A';break;
+    case 1 : c = 'B';break;
+    case 2 : c = 'C';break;
+    case 3 : c = 'D';break;
+    case 4 : c = 'E';break;
+    case 5 : c = 'F';break;
+    case 6 : c = 'G';break;
+    case 7 : c = 'H';break;      
+    case 8 : c = 'I';break;
+    case 9 : c = 'J';break;      
+    case 10 : c = 'K';break;
+    case 11 : c = 'L';break;      
+    case 12 : c = 'M';break;
+    case 13 : c = 'N';break;      
+    case 14 : c = 'O';break;
+    case 15 : c = 'P';break;
+    case 16 : c = 'Q';break;
   }
+  return c;
 }
 /**
 *\fn t_coordonnees choisir(t_liste * ls_coup)
@@ -110,7 +112,7 @@ t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueu
 			valeur_elt(ls_coup_arr,&arr);
 			c1 = afficherLettre(dep.coordonnees.x);
 			c2 = afficherLettre(arr.coordonnees.x);
-			printf("%i) Déplacer la pièce %c%i aux coordonnées %c%i",i,c1,dep.y,c2,arr.y);
+			printf("%i) Déplacer la pièce %c%i aux coordonnées %c%i\n",i,c1,dep.coordonnees.y,c2,arr.coordonnees.y);
 			i++;
 			suivant(ls_coup_dep);
 			suivant(ls_coup_arr);
@@ -127,10 +129,10 @@ t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueu
 	}	
 	valeur_elt(ls_coup_dep,&dep);
 	valeur_elt(ls_coup_arr,&arr);
-	coup.dep.coordonnees.x = dep.coordonnees.x;
-	coup.dep.coordonnees.y = dep.coordonnees.y;
-	coup.arr.coordonnees.x = arr.coordonnees.x;
-	coup.arr.coordonnees.y = arr.coordonnees.y;
+	coup.dep.x = dep.coordonnees.x;
+	coup.dep.y = dep.coordonnees.y;
+	coup.arr.x = arr.coordonnees.x;
+	coup.arr.y = arr.coordonnees.y;
 
 	return coup;
 }
@@ -174,7 +176,7 @@ void jouerTour(t_joueur joueur){
 		coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
 		vider_liste(&ls_coup_dep);
 		vider_liste(&ls_coup_arr);
-		while(peutPrendre(coord_dep,joueur, &ls_coup_arr, &ls_coup_dep)){
+		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep)){
 			afficher();
 			prendrePiece(coup.dep, coup.arr);
 			vider_liste(&ls_coup_dep);
