@@ -6,6 +6,7 @@
 #include "include/plateau.h"
 #include "include/jeu.h"
 #include "include/liste_ptr.h"
+#include "include/affichage.h"
 
 /*
  *\fn int carac_valeur(char carac)
