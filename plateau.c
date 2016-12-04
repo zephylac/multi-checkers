@@ -129,41 +129,87 @@ void init(){
     }
   }
 }
-               
+
+int LARG=80;
+int LARG_PLAT=53;
+
+void lignePleine(){
+	int nb_carac;
+	printf("+");
+	for(nb_carac=0;nb_carac<(LARG-2);nb_carac++){
+		printf("-");
+	}               
+	printf("+\n");
+}
+
+void ligneVide(){
+	int nb_carac;
+	printf("|");
+	for(nb_carac=0;nb_carac<(LARG-2);nb_carac++){
+		printf(" ");
+	}               
+	printf("|\n");
+}
 
 void afficher(){
-  system("clear");
-  char carac = 'A';
-  int i=0,l,c,joueur;
-  printf("  ");
-  for(l=0,c=0;l<Z;l++){
-	  printf("  %c",carac);
-	  carac++;
-  }
-  printf("\n");
-  for(l=0,c=0;l<Z;l++){
-    if(i <10){
-      printf("%i |",i);
-    }
-    else{
-      printf("%i|",i);
-    }
-    i++;
-    for(c=0;c<Z;c++){ // parcours une seule fois la matrice
-      joueur=litJoueur(l,c);
-      if(joueur==5) printf("   ");
-      else if(joueur==0) printf(" . ");
-      else if(joueur==4 && plateau[l][c].piece == pion) printf(" 4 ");
-      else if(joueur==4 && plateau[l][c].piece == dame) printf("[4]");
-      else if(joueur==3 && plateau[l][c].piece == pion) printf(" 3 ");
-      else if(joueur==3 && plateau[l][c].piece == dame) printf("[3]");
-      else if(joueur==2 && plateau[l][c].piece == pion) printf(" 2 ");
-      else if(joueur==2 && plateau[l][c].piece == dame) printf("[2]");
-      else if(joueur==1 && plateau[l][c].piece == pion) printf(" 1 ");
-      else if(joueur==1 && plateau[l][c].piece == dame) printf("[1]");
-    } 
-  printf("\n"); 
-  }
+	system("clear");
+	int taille;
+	char carac='A';
+	int i=0,l,c,joueur;
+	lignePleine();
+	ligneVide();
+	ligneVide();
+	printf("|   ");
+	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
+		printf(" ");
+	}
+	for(l=0,c=0;l<Z;l++){
+		printf(" %c ",carac);
+		carac++;
+	}
+	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
+		printf(" ");
+	}
+	printf("|");
+	printf("\n");
+	for(l=0,c=0;l<Z;l++){
+		if(i <10){
+			printf("|");
+			for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
+				printf(" ");
+			}
+			printf(" %i|",i);
+		}
+		else{
+			printf("|");
+			for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
+				printf(" ");
+			}
+			printf("%i|",i);
+		}
+		i++;
+		for(c=0;c<Z;c++){ // parcours une seule fois la matrice
+			joueur=litJoueur(l,c);
+			if(joueur==5) printf("   ");
+			else if(joueur==0) printf(" . ");
+			else if(joueur==4 && plateau[l][c].piece == pion) printf(" 4 ");
+			else if(joueur==4 && plateau[l][c].piece == dame) printf("[4]");
+			else if(joueur==3 && plateau[l][c].piece == pion) printf(" 3 ");
+			else if(joueur==3 && plateau[l][c].piece == dame) printf("[3]");
+			else if(joueur==2 && plateau[l][c].piece == pion) printf(" 2 ");
+			else if(joueur==2 && plateau[l][c].piece == dame) printf("[2]");
+			else if(joueur==1 && plateau[l][c].piece == pion) printf(" 1 ");
+			else if(joueur==1 && plateau[l][c].piece == dame) printf("[1]");
+		}
+		for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
+			printf(" ");
+		}
+		printf("|");
+		printf("\n"); 
+	}
+	ligneVide();
+	ligneVide();
+	lignePleine();
 }  
 
 int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
@@ -273,4 +319,3 @@ void tourner(){
   j = 9;
   switchCoord( i, j);
 }
-
