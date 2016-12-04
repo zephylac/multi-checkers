@@ -5,11 +5,19 @@
 #include "include/struct.h"
 #include "include/jeu.h"
 #include "include/joueur.h"
-
-//fonction permettant de changer la valeur joueur d'une case
+#include "include/affichage.h"
+/**
+* \fn void ChangeJoueur(int l, int c,t_joueur nouv)
+* \brief fonction permettant de changer la valeur "joueur" d'une cases
+* \param l entier contenant la ligne de la case
+* \param c entier contenant la colonne de la case
+* \param nouv variable de type t_joueur indiquant le joueur à insérer dans la case
+* \author BRINON Baptiste
+*/
 void ChangeJoueur(int l, int c,t_joueur nouv){
 	plateau[l][c].joueur=nouv;
 }
+
 //fonction qui renvoie la valeur joueur de la case aux coordonnées saisies
 t_joueur litJoueur(int l,int c){
     return(plateau[l][c].joueur);
@@ -130,85 +138,6 @@ void init(){
   }
 }
 
-int LARG=80;
-int LARG_PLAT=53;
-
-void lignePleine(){
-	int nb_carac;
-	printf("+");
-	for(nb_carac=0;nb_carac<(LARG-2);nb_carac++){
-		printf("-");
-	}               
-	printf("+\n");
-}
-
-void ligneVide(){
-	int nb_carac;
-	printf("|");
-	for(nb_carac=0;nb_carac<(LARG-2);nb_carac++){
-		printf(" ");
-	}               
-	printf("|\n");
-}
-void margeGauche(){
-	int taille;
-	printf("|");
-	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
-		printf(" ");
-	}
-}
-void margeDroite(){
-	int taille;
-	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
-		printf(" ");
-	}
-	printf("|");
-}
-void afficher(){
-	system("clear");
-	char carac='A';
-	int i=0,l,c,joueur;
-	lignePleine();
-	ligneVide();
-	ligneVide();
-	margeGauche();
-	printf("   "); // decallage dut à l'absence de marge chiffrée
-	for(l=0,c=0;l<Z;l++){
-		printf(" %c ",carac);
-		carac++;
-	}
-	margeDroite();
-	printf("\n");
-	for(l=0,c=0;l<Z;l++){
-		if(i <10){
-			margeGauche();
-			printf(" %i|",i);
-		}
-		else{
-			margeGauche();
-			printf("%i|",i);
-		}
-		i++;
-		for(c=0;c<Z;c++){ // parcours une seule fois la matrice
-			joueur=litJoueur(l,c);
-			if(joueur==5) printf("   ");
-			else if(joueur==0) printf(" . ");
-			else if(joueur==4 && plateau[l][c].piece == pion) printf(" 4 ");
-			else if(joueur==4 && plateau[l][c].piece == dame) printf("[4]");
-			else if(joueur==3 && plateau[l][c].piece == pion) printf(" 3 ");
-			else if(joueur==3 && plateau[l][c].piece == dame) printf("[3]");
-			else if(joueur==2 && plateau[l][c].piece == pion) printf(" 2 ");
-			else if(joueur==2 && plateau[l][c].piece == dame) printf("[2]");
-			else if(joueur==1 && plateau[l][c].piece == pion) printf(" 1 ");
-			else if(joueur==1 && plateau[l][c].piece == dame) printf("[1]");
-		}
-		margeDroite();
-		printf("\n"); 
-	}
-	ligneVide();
-	ligneVide();
-	lignePleine();
-}  
 
 int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
   int l,c,coup_For;
