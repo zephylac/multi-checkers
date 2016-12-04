@@ -5,6 +5,7 @@
 #include "include/struct.h"
 #include "include/plateau.h"
 #include "include/joueur.h"
+#include "include/affichage.h"
 
 int hors_plateau(int i, int j){
 	if(i > Z-1 || j > Z-1 || j < 0 || i < 0) return 1;
