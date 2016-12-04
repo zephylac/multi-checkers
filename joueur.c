@@ -10,7 +10,7 @@
 
 /*
  *\fn int carac_valeur(char carac)
- *\brief fonction qui convertir un caractère en chiffre
+ *\brief fonction qui permet de convertir un caractère en chiffre, qu'il soit majuscule ou minuscule
  */
 int carac_valeur(char carac){
 	if(carac >= 'a' && carac <= 'z') return carac - 'a';
@@ -19,7 +19,7 @@ int carac_valeur(char carac){
 
 /*
  *\fn t_coordonnees traiteEntree(char c_colonne, int ligne)
- *\brief fonction qui traite ce que l'utilisateur a entré
+ *\brief fonction qui prend en paramatre la colonne en lettre et la ligne en chiffre, puis qui la retourne sous le type "coordonnées" 
  */
 t_coordonnees traiteEntree(char c_colonne, int ligne){
 	int colonne;
@@ -36,8 +36,8 @@ t_coordonnees traiteEntree(char c_colonne, int ligne){
 	return coord;
 }
 /*
- *\fn void jouerTour(t_joueur joueur)
- *\brief Fonction qui exécute le tour d'un joueur entré en paramètre
+ *\fn char afficherLettre(int lettre)
+ *\brief fonction qui permet de convertir un chiffre en lettre, utile pour l'affichage
  */
 char afficherLettre (int lettre){
   char c; 	
@@ -63,8 +63,8 @@ char afficherLettre (int lettre){
   return c;
 }
 /**
-*\fn t_coordonnees choisir(t_liste * ls_coup)
-*\brief Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
+*\fn t_coordonnees choisirDep(t_liste * ls_coup, t_joueur joueur)
+*\brief Fonction qui affiche les choix possibles de déplacement d'un pion. Cette fonction n'est appelé seulement lorsqu'il n'y a pas de coup forcé
 */
 t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 	int choix,i = 0;
@@ -95,8 +95,8 @@ t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 	return coord;
 }
 /**
-*\fn t_coordonnees choisir(t_liste * ls_coup)
-*\brief Fonction qui affiche les choix possibles et demande à l'utilisateur de choisir un coup
+*\fn t_coordonnees choisirPrendre(t_liste * ls_coup_dep, t_liste * ls_coup_arr, t_joueur joueur)
+*\brief Fonction qui affiche les choix possibles lorsque le coup est forcé. On prend en paramètre les points de départ et d'arrivé car un pion peut avoir plusieurs points d'arrivées ainsi que l'on peut avoir plusieurs pions en coup forcé
 */
 t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur){
 	int choix,i = 0;
