@@ -150,41 +150,42 @@ void ligneVide(){
 	}               
 	printf("|\n");
 }
-
+void margeGauche(){
+	int taille;
+	printf("|");
+	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
+		printf(" ");
+	}
+}
+void margeDroite(){
+	int taille;
+	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
+		printf(" ");
+	}
+	printf("|");
+}
 void afficher(){
 	system("clear");
-	int taille;
 	char carac='A';
 	int i=0,l,c,joueur;
 	lignePleine();
 	ligneVide();
 	ligneVide();
-	printf("|   ");
-	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
-		printf(" ");
-	}
+	margeGauche();
+	printf("   "); // decallage dut à l'absence de marge chiffrée
 	for(l=0,c=0;l<Z;l++){
 		printf(" %c ",carac);
 		carac++;
 	}
-	for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
-		printf(" ");
-	}
-	printf("|");
+	margeDroite();
 	printf("\n");
 	for(l=0,c=0;l<Z;l++){
 		if(i <10){
-			printf("|");
-			for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
-				printf(" ");
-			}
+			margeGauche();
 			printf(" %i|",i);
 		}
 		else{
-			printf("|");
-			for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
-				printf(" ");
-			}
+			margeGauche();
 			printf("%i|",i);
 		}
 		i++;
@@ -201,10 +202,7 @@ void afficher(){
 			else if(joueur==1 && plateau[l][c].piece == pion) printf(" 1 ");
 			else if(joueur==1 && plateau[l][c].piece == dame) printf("[1]");
 		}
-		for(taille=0;taille<(LARG-LARG_PLAT-2)/2;taille++){
-			printf(" ");
-		}
-		printf("|");
+		margeDroite();
 		printf("\n"); 
 	}
 	ligneVide();
