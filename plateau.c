@@ -18,106 +18,158 @@ void ChangeJoueur(int l, int c,t_joueur nouv){
 	plateau[l][c].joueur=nouv;
 }
 
-//fonction qui renvoie la valeur joueur de la case aux coordonnées saisies
+/**
+* \fn t_joueur litJoueur(int l,int c)
+* \brief fonction qui renvoie la valeur joueur de la case aux coordonnées saisies
+* \param l entier contenant la ligne de la case
+* \param c entier contenant la colonne de la case
+* \author BRINON Baptiste
+*/
 t_joueur litJoueur(int l,int c){
-    return(plateau[l][c].joueur);
+	return(plateau[l][c].joueur);
 }
-//Ajoute à la liste la case aux coordonnées l,c       
+
+/**
+* \fn void DeplaAjout(int l, int c,t_liste *ls_coup)
+* \brief Ajoute à la liste donnée en parametre la case aux coordonnées l,c 
+* \param l entier contenant la ligne de la case
+* \param c entier contenant la colonne de la case
+* \param ls_coup pointeur vers la liste t_liste à incrementer
+* \author BRINON Baptiste
+*/      
 void DeplaAjout(int l, int c,t_liste *ls_coup){
-   t_case cell_dispo; // creation d'un case à empiler
-  //assignation des infos de la cellule à celle qui va empiler
-   cell_dispo.coordonnees.x=c;
-   cell_dispo.coordonnees.y=l;
-   cell_dispo.contenu.joueur=plateau[l][c].joueur;
-   cell_dispo.contenu.piece=plateau[l][c].piece;
-   if(plateau[l][c].joueur==1 || plateau[l][c].joueur==3 ) cell_dispo.contenu.equipe=1;
-   if(plateau[l][c].joueur==2 || plateau[l][c].joueur==4 ) cell_dispo.contenu.equipe=2;
-   ajout_droit(ls_coup,cell_dispo); // ajout dans la liste de la case
+	t_case cell_dispo; // creation d'un case à empiler
+	//attribution des valeurs de la case au nouvel element qui sera empilé
+	cell_dispo.coordonnees.x=c;
+	cell_dispo.coordonnees.y=l;
+	cell_dispo.contenu.joueur=plateau[l][c].joueur;
+	cell_dispo.contenu.piece=plateau[l][c].piece;
+	//calcul de l'equipe en fonction du joueur
+	if(plateau[l][c].joueur==1 || plateau[l][c].joueur==3 ) cell_dispo.contenu.equipe=1;
+	if(plateau[l][c].joueur==2 || plateau[l][c].joueur==4 ) cell_dispo.contenu.equipe=2;
+	ajout_droit(ls_coup,cell_dispo); // ajout dans la liste de la case
 } 
 
-//fonction servant à lister les emplacements ou un pion peut se deplacer
+/**
+* \fn int dispoPion(t_coordonnees coor,t_liste *ls_coup_d)
+* \brief fonction servant à lister les emplacements ou un pion peut se deplacer
+* \param coor type t_coordonnees contenant l'emplacement de la piece à tester
+* \param ls_coup_d pointeur vers la liste t_liste à remplir
+* \return entier designant s'il y a coup disponible ou non
+* \author BRINON Baptiste
+*/ 
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
-  int l,c,coup_dispo;
-  l=coor.y;
-  c=coor.x;
+	int l,c,coup_dispo;
+	l=coor.y;
+	c=coor.x;
   
-   // cas des deplacements pour Pion du joueur 
-    if(l+c>16 && (c<=l)){ // si la reference est le triangle de depart du joueur
-      if(litJoueur(l-1,c-1)==0){ 
-         DeplaAjout(l-1,c-1,ls_coup_d); // ajout de la case dans la liste des coups dispo
-         coup_dispo=1; // donne 1 a la valeur des coup_dispos, designant la piece comme jouable
-       }
-       if(litJoueur(l-1,c+1)==0){ // même schema que la boucle precedante
-         DeplaAjout(l-1,c+1,ls_coup_d);
-         coup_dispo=1;
-       } 
-    }
-    else if(l+c<16 && (c<=l)){//si la reference est le triangle de gauche
-       if(litJoueur(l-1,c-1)==0){
-         DeplaAjout(l-1,c-1,ls_coup_d); 
-         coup_dispo=1;
-       }
-       if(litJoueur(l+1,c-1)==0){
-         DeplaAjout(l+1,c-1,ls_coup_d);
-         coup_dispo=1;
-       }
-    }
-    else if(l+c>16 &&(c>=l)){//si la reference est le triangle de droite
-      if(litJoueur(l+1,c+1)==0){
-         DeplaAjout(l+1,c+1,ls_coup_d);
-         coup_dispo=1;
-       }
-     if(litJoueur(l-1,c+1)==0){
-         DeplaAjout(l-1,c+1,ls_coup_d);
-         coup_dispo=1;
-       }
-   }
-  return coup_dispo; //fin de la fonction, delivre vrai si coup dispo
+	// cas des deplacements pour Pion du joueur 
+	if(l+c>16 && (c<=l)){ // si la reference est le triangle de depart du joueur
+		if(litJoueur(l-1,c-1)==0){ 
+			DeplaAjout(l-1,c-1,ls_coup_d); // ajout de la case dans la liste des coups dispo
+			coup_dispo=1; // donne 1 a la valeur des coup_dispos, designant la piece comme jouable
+		}
+		if(litJoueur(l-1,c+1)==0){ // même schema que la boucle precedante
+			DeplaAjout(l-1,c+1,ls_coup_d);
+			coup_dispo=1;
+		} 
+	}
+	else if(l+c<16 && (c<=l)){//si la reference est le triangle de gauche
+		if(litJoueur(l-1,c-1)==0){
+			DeplaAjout(l-1,c-1,ls_coup_d); 
+			coup_dispo=1;
+		}
+		if(litJoueur(l+1,c-1)==0){
+			DeplaAjout(l+1,c-1,ls_coup_d);
+			coup_dispo=1;
+		}
+	}
+	else if(l+c>16 &&(c>=l)){//si la reference est le triangle de droite
+		if(litJoueur(l+1,c+1)==0){
+			DeplaAjout(l+1,c+1,ls_coup_d);
+			coup_dispo=1;
+		}
+		if(litJoueur(l-1,c+1)==0){
+			DeplaAjout(l-1,c+1,ls_coup_d);
+			coup_dispo=1;
+		}
+	}
+	return coup_dispo; //fin de la fonction, delivre vrai si coup dispo
 }
 
+/**
+* \fn int dispoDame(t_coordonnees coor,t_liste *ls_coup_d)
+* \brief fonction servant à lister les emplacements ou une dame peut se deplacer
+* \param coor type t_coordonnees contenant l'emplacement de la piece à tester
+* \param ls_coup_d pointeur vers la liste t_liste à remplir
+* \return entier designant s'il y a coup disponible ou non
+* \author BRINON Baptiste
+*/ 
 int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
-  int l,c,coup_dispo,fin;
-  l=coor.y;
-  c=coor.x;
+	int l,c,coup_dispo,fin;
+	l=coor.y;
+	c=coor.x;
   
-   // cas des deplacements pour Dame du joueur 
-  for(c=c+1,l=l+1;plateau[l][c].joueur==0;l++,c++){ // Traitement des differentes diagonales
-    DeplaAjout(l,c,ls_coup_d);// Ajout des cases vides de la diagonale jusqu'a la rencontre d'une piece
-    coup_dispo=1; // Piece pouvant etre jouée
-  } 
-  for(c=c-1,l=l+1;plateau[l][c].joueur==0;l++,c--){// même schéma
-    DeplaAjout(l,c,ls_coup_d);
-    coup_dispo=1; 
-  }
-  for(c=c+1,l=l-1;plateau[l][c].joueur==0;l--,c++){
-    DeplaAjout(l,c,ls_coup_d);
-    coup_dispo=1; 
-  }
-  for(c=c-1,l=l-1;plateau[l][c].joueur==0;l--,c--){
-    DeplaAjout(l,c,ls_coup_d);
-    coup_dispo=1; 
-  }
-  return coup_dispo;
-}
-//transforme le pion indiqué en dame, s'il remplis les conditions pour en devenir une
-void creerDame(t_coordonnees coor){
-  int c=coor.x;
-  int l=coor.y;
-  if(c==0 || c==16){ // si la piece est a l'un des extremité adverse
-    if(plateau[l][c].piece==1) plateau[l][c].piece=2; // elle devien une dame
-  }
+	// cas des deplacements pour Dame du joueur 
+	for(c=c+1,l=l+1;plateau[l][c].joueur==0;l++,c++){ // Traitement des differentes diagonales
+		DeplaAjout(l,c,ls_coup_d);// Ajout des cases vides de la diagonale jusqu'a la rencontre d'une piece
+	    coup_dispo=1; // Piece pouvant etre jouée
+	} 
+	for(c=c-1,l=l+1;plateau[l][c].joueur==0;l++,c--){// même schéma
+	    DeplaAjout(l,c,ls_coup_d);
+	    coup_dispo=1; 
+	}
+	for(c=c+1,l=l-1;plateau[l][c].joueur==0;l--,c++){
+	    DeplaAjout(l,c,ls_coup_d);
+	    coup_dispo=1; 
+	}
+	for(c=c-1,l=l-1;plateau[l][c].joueur==0;l--,c--){
+	    DeplaAjout(l,c,ls_coup_d);
+	    coup_dispo=1; 
+	}
+	return coup_dispo; // indique s'il y a coup disponible ou non
 }
 
-void viderContenu(t_contenu* contenu){
-   contenu->joueur=0;
-   contenu->piece=0;
-   contenu->equipe=0;
+/**
+* \fn void creerDame(t_coordonnees coor)
+* \brief transforme le pion indiqué en dame, s'il remplis les conditions pour en devenir une
+* \param coor type t_coordonnées indiquant l'emplacement à verifier
+* \author BRINON Baptiste
+*/
+void creerDame(t_coordonnees coor){
+	int c=coor.x;
+	int l=coor.y;
+	if(c==0 || c==16){ // si la piece est a l'un des extremité adverse
+		if(plateau[l][c].piece==1) plateau[l][c].piece=2; // elle devient une dame
+	}
 }
+
+/**
+* \fn void viderContenu(t_contenu* contenu)
+* \brief vide le contenu pris en parametre
+* \param contenu type t_contenu qui doit etre vidé
+* \author BRINON Baptiste
+*/
+void viderContenu(t_contenu* contenu){
+	contenu->joueur=0;
+	contenu->piece=0;
+	contenu->equipe=0;
+}
+
+/**
+* \fn void InitCase(int l,int c,t_joueur j)
+* \brief initialise la case aux coordonnées indiquées, pour un joueur donné
+* \param l entier contenant la ligne de la case
+* \param c entier contenant la colonne de la case
+* \param j type t_joueur indiquant quel joueur est sur la case initialisée
+* \author BRINON Baptiste
+*/
 void InitCase(int l,int c,t_joueur j){
-   ChangeJoueur(l,c,j);
-   plateau[l][c].piece=1;
-   if(j==1 || j==3) plateau[l][c].equipe=1;
-   if(j==2 || j==4 ) plateau[l][c].equipe=2;
+	ChangeJoueur(l,c,j);
+	plateau[l][c].piece=1; //initialisation en tant que pion
+	//attribution d'une equipe en fonction du joueur
+	if(j==1 || j==3) plateau[l][c].equipe=1;
+	if(j==2 || j==4 ) plateau[l][c].equipe=2;
 }
 /*____________________________________________________________________________________________________________________________*/
 /*--------------------------------------- FONCTIONS MAJEURES----------------------------------------------------------------- */
