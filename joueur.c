@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
+#include <unistd.h>
 #include "include/struct.h"
 #include "include/plateau.h"
 #include "include/jeu.h"
@@ -195,6 +195,8 @@ void deroulementPartie(){
 	int i=1;
 	while(!partieFinie(i)){
 		jouerTour(i);
+		afficher();
+		sleep(2);
 		tourner();
 		i++;
 		if(i == 5){
