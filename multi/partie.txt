@@ -1,0 +1,5 @@
+tour_joueur : 1
+joueur_present : 0
+joueur_present : 0
+joueur_present : 0
+joueur_present : 0
