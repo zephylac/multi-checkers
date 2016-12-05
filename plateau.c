@@ -59,7 +59,7 @@ void DeplaAjout(int l, int c,t_liste *ls_coup){
 * \author BRINON Baptiste
 */ 
 int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
-	int l,c,coup_dispo;
+	int l,c,coup_dispo = 0;
 	l=coor.y;
 	c=coor.x;
   
@@ -106,7 +106,7 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
 * \author BRINON Baptiste
 */ 
 int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
-	int l,c,coup_dispo,fin;
+	int l,c,coup_dispo = 0,fin;
 	l=coor.y;
 	c=coor.x;
   
