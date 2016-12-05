@@ -29,14 +29,12 @@ void ligneVide(){
 void margeGauche(int larg_plat){
 	int taille;
 	printf("|");
-	if ((larg_plat%2)!=0) larg_plat--;
 	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){
 		printf(" ");
 	}
 }
 void margeDroite(int larg_plat){
 	int taille;
-	if ((larg_plat%2)!=0) larg_plat++;
 	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){
 		printf(" ");
 	}
@@ -107,7 +105,7 @@ int menu(){
 	// saut de ligne
 	printf("\n");
 	ligneVide();
-	pintf("\n");
+	printf("\n");
 	
 	margeGauche(nb_carac);
 	printf("2-Nouvelle Partie Reseau");
@@ -115,7 +113,7 @@ int menu(){
 	
 	printf("\n");
 	ligneVide();
-	pintf("\n");
+	printf("\n");
 	
 	nb_carac=37;
 	margeGauche(nb_carac);
@@ -137,3 +135,4 @@ int menu(){
 	printf(" Effectuez un choix en saisissant 1,2,3 ou 4:");
 	scanf("%i",&choix);
 	return choix;
+}
