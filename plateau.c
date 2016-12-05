@@ -239,30 +239,30 @@ void deplacerPiece(t_coordonnees dep,t_coordonnees arriv){
   creerDame(arriv);
 }
 void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
-  int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
-  int c_dep=dep.x;int l_dep=dep.y;// preparation des coordonnées du depart
-  int c_supp,l_supp;
-  if(plateau[l_dep][c_dep].piece==1){ // cas si la piece jouée est un pion
-    c_supp=c_dep+(c_arr-c_dep)/2; // calcul des coordonnées de la piece supprimée
-    l_supp=l_dep+(l_arr-l_dep)/2;
-  }
-  else if(plateau[l_dep][c_dep].piece==2){
-	if(l_arr>l_dep) l_dep++;
-      else if(l_arr<l_dep) l_dep--;
-      if(c_arr>c_dep) c_dep++;
-      else if(c_arr<c_dep) l_dep--;
-    while(plateau[l_dep][c_dep].joueur==0){ // Traitement des differentes diagonales
-      if(l_arr>l_dep) l_dep++;
-      else if(l_arr<l_dep) l_dep--;
-      if(c_arr>c_dep) c_dep++;
-      else if(c_arr<c_dep) l_dep--;
-    }
-    c_supp=c_dep;// calcul des coordonnées de la piecesupprimé
-    l_supp=l_dep;
-  }
-  deplacerPiece(dep,arriv); // deplacement de la piece
-  // suppression du pion pris
-  viderContenu(&plateau[l_supp][c_supp]);
+  	int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
+  	int c_dep=dep.x;int l_dep=dep.y;// preparation des coordonnées du depart
+  	int c_supp,l_supp;
+  	if(plateau[l_dep][c_dep].piece==1){ // cas si la piece jouée est un pion
+   		c_supp=c_dep+(c_arr-c_dep)/2; // calcul des coordonnées de la piece supprimée
+    		l_supp=l_dep+(l_arr-l_dep)/2;
+  	}
+  	else if(plateau[l_dep][c_dep].piece==2){
+		if(l_arr>l_dep) l_dep++;
+      		else if(l_arr<l_dep) l_dep--;
+      		if(c_arr>c_dep) c_dep++;
+      		else if(c_arr<c_dep) c_dep--;
+    		while(plateau[l_dep][c_dep].joueur==0){ // Traitement des differentes diagonales
+      			if(l_arr>l_dep) l_dep++;
+      			else if(l_arr<l_dep) l_dep--;
+      			if(c_arr>c_dep) c_dep++;
+      			else if(c_arr<c_dep) c_dep--;
+    		}
+    		c_supp=c_dep;// calcul des coordonnées de la piecesupprimé
+    		l_supp=l_dep;
+  	}
+  	deplacerPiece(dep,arriv); // deplacement de la piece
+  	// suppression du pion pris
+  	viderContenu(&plateau[l_supp][c_supp]);
 }
 
 
