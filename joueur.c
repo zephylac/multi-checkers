@@ -108,6 +108,7 @@ t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueu
 		printf("\n-----------Joueur %i-----------\n",joueur);
 		en_tete(ls_coup_dep);
 		en_tete(ls_coup_arr);
+		i = 0;
 		while(!hors_liste(ls_coup_dep)){
 			valeur_elt(ls_coup_dep,&dep);
 			valeur_elt(ls_coup_arr,&arr);
@@ -121,7 +122,7 @@ t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueu
 		printf("Votre choix : ");
 		scanf("%i",&choix);
 	}
-	while(choix < 0 || choix > i);
+	while(choix < 0 || choix >= i);
 	en_tete(ls_coup_dep);
 	en_tete(ls_coup_arr);
 	for(i = 0; i < choix; i++){
@@ -159,17 +160,14 @@ void jouerTour(t_joueur joueur){
 
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(coup_force == 0){
-    		printf("Veuillez choisir la case où se trouve votre pion\n");
-    		printf("Entrer les coordonnées (ex:A1) : ");
-		scanf("%c%i",&c_colonne,&ligne); 
-		coord_dep = traiteEntree(c_colonne,ligne);
-
-		while(!coupDispo(coord_dep,joueur,&ls_coup_dep)){
+    		do{
 			printf("Veuillez choisir la case où se trouve votre pion\n");
     			printf("Entrer les coordonnées (ex:A1) : ");
 			scanf("%c%i",&c_colonne,&ligne); 
 			coord_dep = traiteEntree(c_colonne,ligne);
 		}
+		while(!coupDispo(coord_dep,joueur,&ls_coup_dep));
+			
 		coord_arr = choisirDep(&ls_coup_dep,joueur);
 		deplacerPiece(coord_dep,coord_arr);
 	}
