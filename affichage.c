@@ -105,7 +105,6 @@ int menu(){
 	// saut de ligne
 	printf("\n");
 	ligneVide();
-	printf("\n");
 	
 	margeGauche(nb_carac);
 	printf("2-Nouvelle Partie Reseau");
@@ -113,21 +112,19 @@ int menu(){
 	
 	printf("\n");
 	ligneVide();
-	printf("\n");
 	
 	nb_carac=37;
 	margeGauche(nb_carac);
-	printf("3-Charger la Partie Locale Précédante");
+	printf("3-Charger la Partie Locale Précédente ");
 	margeDroite(nb_carac);
 	// fin ecriture des lignes du menu
 	
 	printf("\n");
 	ligneVide();
-	printf("\n");
 	
-	nb_carac=15;
+	nb_carac=16;
 	margeGauche(nb_carac);
-	printf("4-Manuel du Jeu");
+	printf("4-Manuel du Jeu ");
 	margeDroite(nb_carac);
 	
 	margeBas();
