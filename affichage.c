@@ -29,12 +29,14 @@ void ligneVide(){
 void margeGauche(int larg_plat){
 	int taille;
 	printf("|");
+	if ((larg_plat%2)!=0) larg_plat--;
 	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){
 		printf(" ");
 	}
 }
 void margeDroite(int larg_plat){
 	int taille;
+	if ((larg_plat%2)!=0) larg_plat++;
 	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){
 		printf(" ");
 	}
@@ -91,3 +93,47 @@ void afficher(){
 	}
 	margeBas();
 }  
+int menu(){
+	int choix,nb_carac,nb_ligne=;
+	system("clear");
+	margeHaut();
+	
+	//ecriture de chaque ligne
+	nb_carac=24; // nombre de caracteres de la ligne écrite
+	margeGauche(nb_carac);
+	prinf("1-Nouvelle Partie Locale");
+	margeDroite(nb_carac);
+	
+	// saut de ligne
+	printf("\n");
+	ligneVide();
+	pintf("\n");
+	
+	margeGauche(nb_carac);
+	prinf("2-Nouvelle Partie Reseau");
+	margeDroite(nb_carac);
+	
+	printf("\n");
+	ligneVide();
+	pintf("\n");
+	
+	nb_carac=37;
+	margeGauche(nb_carac);
+	prinf("3-Charger la Partie Locale Précédante");
+	margeDroite(nb_carac);
+	// fin ecriture des lignes du menu
+	
+	printf("\n");
+	ligneVide();
+	pintf("\n");
+	
+	nb_carac=15;
+	margeGauche(nb_carac);
+	prinf("4-Manuel du Jeu");
+	margeDroite(nb_carac);
+	
+	margeBas();
+	printf("\n");
+	prinf(" Effectuez un choix en saisissant 1,2,3 ou 4:");
+	scanf("%i";&choix);
+	return choix;
