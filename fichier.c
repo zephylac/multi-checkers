@@ -11,7 +11,6 @@ void sauv(){
 	printf("\nLe nom de la sauvegard ene doit pa sdépasser 30 charactères");
 	printf("\nEntrer le nom de la sauvegarde : ");
 	scanf("%s",nom);
-	
 	fic = fopen(nom,"w");
 
 	//Seulement utile lorsque l'on sauvegarde au milieu d'un tour, lorsque l tour ne sera pas au joueur 1
