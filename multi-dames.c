@@ -16,6 +16,7 @@ int main(){
 	if (choix==3){
 	}
 	if (choix==4){
+//		manuelDuJeu();
 	}
 return 1;
 }
