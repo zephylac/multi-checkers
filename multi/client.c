@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include "../include/plateau.h"
+#include "../include/joueur.h"
+#include "../include/jeu.h"
+#include "../include/struct.h"
+#include "../include/affichage.h"
+#include "../include/liste_ptr.h"
+
 char file[30] ="partie.txt";
 
 fpos_t placerLigne(int ligne){
@@ -111,19 +118,31 @@ void joueurSuivant(){
 
 void main(){
 	int joueur;
-
+	int fin = 0;
 	joueur = placerJoueur();
 	if(joueur != 0){
 		printf("Bienvenue, vous jouez en tant que le joueur %i\n",joueur);
 	}
 	else{
-	//	while(!finPartie()){
+		init_liste(&ls_coup_dep);
+		init_liste(&ls_coup_arr);
+		while(!fin){
 			attendreTour(joueur);
-		//	jouertour(joueur);
-			joueurSuivant();
-	//	}
+			if(partieFinie(joueur)){
+				fin = 1;
+				finPartie(partieFinie(joueur));	
+			//	quitterPartie(1);
+			}
+			else{
+				lirePlateau();
+				jouerTour(joueur);
+				sleep(2);
+				tourner();
+				sauvPlateau();
+				joueurSuivant();
+			}
+		}
 	}
-//	quitterPartie(1);
 }
 	
 	
