@@ -9,5 +9,6 @@ void margeDroite(int larg_plat);
 void margeHaut();
 void margeBas();
 void afficher();
+int menu();
 
 #endif
