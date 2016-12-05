@@ -212,7 +212,7 @@ int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep /* type t_ca
 /* fonction prenant en coordonnées le pion à jouer. 
 Retourne vrai si le joueur peut jouer le pion, et fournit une liste avec les deplacement possibles*/
 int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adverse*/,t_liste* ls_coup_d){
-  int coup_dispo,l,c;
+  int coup_dispo=0,l,c;
   l=coor.y;
   c=coor.x;
   vider_liste(ls_coup_d);// on vide la liste 
