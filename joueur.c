@@ -177,10 +177,9 @@ void jouerTour(t_joueur joueur){
 		do{
 			coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
 			vider_liste(&ls_coup_dep);
-			vider_liste(&ls_coup_arr);
-		
-			afficher();
+			vider_liste(&ls_coup_arr);			
 			prendrePiece(coup.dep, coup.arr);
+			afficher();
 			coup.dep = coup.arr;
 		}	
 		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep));
