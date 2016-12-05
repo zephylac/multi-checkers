@@ -94,7 +94,7 @@ void afficher(){
 	margeBas();
 }  
 int menu(){
-	int choix,nb_carac,nb_ligne=°;
+	int choix,nb_carac,nb_ligne=0;
 	system("clear");
 	margeHaut();
 	
@@ -125,7 +125,7 @@ int menu(){
 	
 	printf("\n");
 	ligneVide();
-	pintf("\n");
+	printf("\n");
 	
 	nb_carac=15;
 	margeGauche(nb_carac);
@@ -134,6 +134,6 @@ int menu(){
 	
 	margeBas();
 	printf("\n");
-	prinf(" Effectuez un choix en saisissant 1,2,3 ou 4:");
-	scanf("%i";&choix);
+	printf(" Effectuez un choix en saisissant 1,2,3 ou 4:");
+	scanf("%i",&choix);
 	return choix;
