@@ -96,7 +96,7 @@ t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 }
 /**
 *\fn t_coordonnees choisirPrendre(t_liste * ls_coup_dep, t_liste * ls_coup_arr, t_joueur joueur)
-*\brief Fonction qui affiche les choix possibles lorsque le coup est forcé. On prend en paramètre les points de départ et d'arrivé car un pion peut avoir plusieurs points d'arrivées ainsi que l'on peut avoir plusieurs pions en coup forcé
+*\brief Fonction qui affiche les choix possibles lorsque le coup est forcé.
 */
 t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur){
 	int choix,i = 0;
@@ -174,15 +174,28 @@ void jouerTour(t_joueur joueur){
 		deplacerPiece(coord_dep,coord_arr);
 	}
 	else{
+		do{
+			coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
+			vider_liste(&ls_coup_dep);
+			vider_liste(&ls_coup_arr);
+		
+			afficher();
+			prendrePiece(coup.dep, coup.arr);
+			coup.dep = coup.arr;
+		}	
+		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep));
+				
+		/*	
 		coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
 		vider_liste(&ls_coup_dep);
 		vider_liste(&ls_coup_arr);
 		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep)){
 			afficher();
 			prendrePiece(coup.dep, coup.arr);
+			
 			vider_liste(&ls_coup_dep);
 			vider_liste(&ls_coup_arr);
-		}
+		*/
 	}
 }
 
