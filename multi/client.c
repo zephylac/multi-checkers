@@ -7,7 +7,7 @@
 #include "../include/struct.h"
 #include "../include/affichage.h"
 #include "../include/liste_ptr.h"
-
+#include "../include/fichier.h"
 char file[30] ="partie.txt";
 
 fpos_t placerLigne(int ligne){
@@ -46,6 +46,29 @@ void changerStatus(int joueur){
 	fclose(fic);
 }
 
+void recupererStatus(int joueur){
+	FILE * fic;
+	fpos_t position;
+	int present;
+	position = placerLigne(joueur);
+	fic = fopen(file,"r");
+	fsetpos(fic,&position);
+	fscanf(fic,"joueur_present : %i\n",&present);
+	fclose(fic);
+	return present;
+}
+
+int premiereConnexion(){
+	nt check = 0;
+	int nb_joueur = 0;
+	nb_joueur = recupererStatus(1) + recupererStatus(2) + recupererStatus(3) + recupererStatus(4);
+	if(nb_joueur == 0){
+		init();
+		sauvPlateau();
+		check = 1;
+	}
+	return check;
+}
 void quitterPartie(int joueur){
 	changerStatus(joueur);	
 	printf("Vous avez quittez la partie\n");
@@ -120,12 +143,15 @@ void main(){
 	int joueur;
 	int fin = 0;
 	joueur = placerJoueur();
-	if(joueur != 0){
-		printf("Bienvenue, vous jouez en tant que le joueur %i\n",joueur);
+	if(joueur == 0){
 	}
 	else{
+
 		init_liste(&ls_coup_dep);
 		init_liste(&ls_coup_arr);
+		
+		printf("Bienvenue, vous jouez en tant que le joueur %i\n",joueur);
+		sleep(2);
 		while(!fin){
 			attendreTour(joueur);
 			if(partieFinie(joueur)){
