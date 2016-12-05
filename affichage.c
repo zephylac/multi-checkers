@@ -94,14 +94,14 @@ void afficher(){
 	margeBas();
 }  
 int menu(){
-	int choix,nb_carac,nb_ligne=;
+	int choix,nb_carac,nb_ligne=°;
 	system("clear");
 	margeHaut();
 	
 	//ecriture de chaque ligne
 	nb_carac=24; // nombre de caracteres de la ligne écrite
 	margeGauche(nb_carac);
-	prinf("1-Nouvelle Partie Locale");
+	printf("1-Nouvelle Partie Locale");
 	margeDroite(nb_carac);
 	
 	// saut de ligne
@@ -110,7 +110,7 @@ int menu(){
 	pintf("\n");
 	
 	margeGauche(nb_carac);
-	prinf("2-Nouvelle Partie Reseau");
+	printf("2-Nouvelle Partie Reseau");
 	margeDroite(nb_carac);
 	
 	printf("\n");
@@ -119,7 +119,7 @@ int menu(){
 	
 	nb_carac=37;
 	margeGauche(nb_carac);
-	prinf("3-Charger la Partie Locale Précédante");
+	printf("3-Charger la Partie Locale Précédante");
 	margeDroite(nb_carac);
 	// fin ecriture des lignes du menu
 	
@@ -129,7 +129,7 @@ int menu(){
 	
 	nb_carac=15;
 	margeGauche(nb_carac);
-	prinf("4-Manuel du Jeu");
+	printf("4-Manuel du Jeu");
 	margeDroite(nb_carac);
 	
 	margeBas();
