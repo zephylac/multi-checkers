@@ -4,3 +4,5 @@
 
 void sauv()
 void lireSauv()
+void sauvPlateau();
+void lirePlateau();
