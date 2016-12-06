@@ -208,6 +208,7 @@ void init(){
 * \param j designe le joueur dont on test les pions
 * \param ls_coup_arr liste des cases d'arrivée de chaque prise
 * \param ls_coup_dep liste des cases de depart de chaque prise
+* \return entier indiquant s'il y a coup forcé ou non
 * \author BRINON Baptiste
 */
 int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
@@ -234,6 +235,7 @@ int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep /* type t_ca
 * \param coor Coordonnées du pion à tester
 * \param j joueur dont on test le pion
 * \param ls_coup_d liste à remplir des coups disponible
+* \return entier indiquant s'il y a coup disponible ou non
 * \author BRINON Baptiste
 */
 int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adverse*/,t_liste* ls_coup_d){
