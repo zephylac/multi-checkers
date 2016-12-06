@@ -1,4 +1,3 @@
-// realisé par BRINON Baptiste 
 #include <stdio.h> 
 #include <stdlib.h>
 #include "include/liste_ptr.h"
@@ -6,6 +5,15 @@
 #include "include/jeu.h"
 #include "include/joueur.h"
 #include "include/affichage.h"
+
+/**
+* \file plateau.c
+* \brief programme contenant toutes les fonctions de manoeuvres sur plateau
+* \author BRINON Baptiste
+*/
+
+/*_________________________________________________________________________________________________________________________*/
+
 /**
 * \fn void ChangeJoueur(int l, int c,t_joueur nouv)
 * \brief fonction permettant de changer la valeur "joueur" d'une cases
