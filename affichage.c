@@ -1,4 +1,3 @@
-// realisé par BRINON Baptiste 
 #include <stdio.h> 
 #include <stdlib.h>
 #include "include/liste_ptr.h"
@@ -8,24 +7,47 @@
 #include "include/plateau.h"
 
 int LARG=80;
+/**
+* \file affichage.c
+* \brief programme contenant les fonctions utilisées pour l'affichage
+* \author BRINON Baptiste
+*/
 
+/*____________________________________________________________________________________________________________________*/
+
+/**
+* \fn void lignePleine()
+* \brief trace une ligne pleine de la largeur du terminal
+* \author BRINON Baptiste
+*/
 void lignePleine(){
 	int nb_carac;
-	printf("+");
+	printf("+"); // coin gauche
 	for(nb_carac=0;nb_carac<(LARG-2);nb_carac++){
 		printf("-");
 	}               
-	printf("+\n");
+	printf("+\n");// coin droit
 }
-
+/**
+* \fn void ligneVide()
+* \brief fonction tracant une ligne vide
+* \author BRINON Baptiste
+*/
 void ligneVide(){
 	int nb_carac;
-	printf("|");
+	printf("|"); // bord gauche
 	for(nb_carac=0;nb_carac<(LARG-2);nb_carac++){
 		printf(" ");
 	}               
-	printf("|\n");
+	printf("|\n");// bord droit
 }
+
+/**
+* \fn void margeGauche(int larg_plat)
+* \brief calcule et "affiche" la marge de gauche
+* \param larg_plat entier indiquant la taille du contenu de la ligne
+* \author BRINON Baptiste
+*/
 void margeGauche(int larg_plat){
 	int taille;
 	printf("|");
@@ -33,6 +55,13 @@ void margeGauche(int larg_plat){
 		printf(" ");
 	}
 }
+
+/**
+* \fn void margeDroite(int larg_plat)
+* \brief calcule et "affiche" la marge de droite
+* \param larg_plat entier indiquant la taille du contenu de la ligne
+* \author BRINON Baptiste
+*/
 void margeDroite(int larg_plat){
 	int taille;
 	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){
