@@ -175,7 +175,11 @@ void InitCase(int l,int c,t_joueur j){
 /*--------------------------------------- FONCTIONS MAJEURES----------------------------------------------------------------- */
 /*____________________________________________________________________________________________________________________________*/
            
-        
+/**
+* \fn void init()
+* \brief initialise le plateau
+* \author BRINON Baptiste
+*/
 void init(){
   int l,c;
   for(l=0,c=0;l<Z;l++){
@@ -190,41 +194,59 @@ void init(){
   }
 }
 
-
+/**
+* \fn int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep)
+* \brief applique à toutes les pieces du joueur les fonctions remplissant  les liste de depart et d'arrivée des coups forcés
+* \param j designe le joueur dont on test les pions
+* \param ls_coup_arr liste des cases d'arrivée de chaque prise
+* \param ls_coup_dep liste des cases de depart de chaque prise
+* \author BRINON Baptiste
+*/
 int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep /* type t_case*/){ // retourne 1 si coup forcé ou 0 si pas coup forcé          
   int l,c,coup_For;
   t_coordonnees cell_pos;
   vider_liste(ls_coup_dep);
   vider_liste(ls_coup_arr);
   coup_For=0;
-  for(l=0;l<Z;l++){
+  for(l=0;l<Z;l++){ // parcours de la matrice
     for(c=0;c<Z;c++){
-      cell_pos.x=c;
+      cell_pos.x=c; // generation d'un type t_coordonnées pour la fonction peutPrendre
       cell_pos.y=l;
-      if(j==litJoueur(l,c) && peutPrendre(cell_pos,j,ls_coup_arr, ls_coup_dep) ){ //-----------------------a completer avec fonction willi--------------------
-        //DeplaAjout(l,c,ls_coup_f);
+      if(j==litJoueur(l,c) && peutPrendre(cell_pos,j,ls_coup_arr, ls_coup_dep) ){ // application de peutPrendre aux pions du joueur
+        //DeplaAjout(l,c,ls_coup_dep);----------------------------------------------------------------------------------------------------------------------------------------------------------------	
         coup_For=1;
       }
     }
   }
   return coup_For;
 }
-/* fonction prenant en coordonnées le pion à jouer. 
-Retourne vrai si le joueur peut jouer le pion, et fournit une liste avec les deplacement possibles*/
+/**
+* \fn int coupDispo(t_coordonnees coor,t_joueur j,t_liste* ls_coup_d)
+* \brief Retourne vrai si le joueur peut jouer le pion, et fournit une liste avec les deplacement possibles
+* \param coor Coordonnées du pion à tester
+* \param j joueur dont on test le pion
+* \param ls_coup_d liste à remplir des coups disponible
+* \author BRINON Baptiste
+*/
 int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adverse*/,t_liste* ls_coup_d){
-  int coup_dispo=0,l,c;
-  l=coor.y;
-  c=coor.x;
-  vider_liste(ls_coup_d);// on vide la liste 
-  en_tete(ls_coup_d); // on se place en_tete de liste
-  if(plateau[l][c].joueur==j){ // verification que la piece choisie appartien au joueur 
-    if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,ls_coup_d); // si la piece est un pion, calcul de ses deplacements
-    if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,ls_coup_d); // si la piece est une dame, calcul de ses deplacements
-  }
-  return coup_dispo; //renvoi vrai si la piece est jouable
+	int coup_dispo=0,l,c;
+	l=coor.y;
+	c=coor.x;
+	vider_liste(ls_coup_d);// on vide la liste 
+	en_tete(ls_coup_d); // on se place en_tete de liste
+	if(plateau[l][c].joueur==j){ // verification que la piece choisie appartien au joueur 
+    	if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,ls_coup_d); // si la piece est un pion, calcul de ses deplacements
+    	if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,ls_coup_d); // si la piece est une dame, calcul de ses deplacements
+  	}
+  	return coup_dispo; //renvoi vrai si la piece est jouable
 }
-
-// deplace une piece de son point de depart à son point d'arrivée, que ce soit un pion ou une dame
+/**
+* \fn void deplacerPiece(t_coordonnees dep,t_coordonnees arriv)
+* \brief deplace une piece de son point de depart à son point d'arrivée, que ce soit un pion ou une dame
+* \param dep coordonnées de de la piece à deplacer
+* \param arriv coordonnées du point d'arrivée de la piece
+* \author BRINON Baptiste
+*/
 void deplacerPiece(t_coordonnees dep,t_coordonnees arriv){
   int c_dep = dep.x;
   int l_dep = dep.y;
@@ -238,34 +260,47 @@ void deplacerPiece(t_coordonnees dep,t_coordonnees arriv){
  //verifie si elle devient une dame
   creerDame(arriv);
 }
+/**
+* \fn void prendrePiece(t_coordonnees dep,t_coordonnees arriv)
+* \brief deplace la piece selectionnée à son point d'arrivée en prenant la piece sur son parcours
+* \param dep coordonnées de de la piece à deplacer
+* \param arriv coordonnées du point d'arrivée de la piece
+* \author BRINON Baptiste
+*/
 void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
   	int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
   	int c_dep=dep.x;int l_dep=dep.y;// preparation des coordonnées du depart
   	int c_supp,l_supp;
   	if(plateau[l_dep][c_dep].piece==1){ // cas si la piece jouée est un pion
    		c_supp=c_dep+(c_arr-c_dep)/2; // calcul des coordonnées de la piece supprimée
-    		l_supp=l_dep+(l_arr-l_dep)/2;
+    	l_supp=l_dep+(l_arr-l_dep)/2;
   	}
-  	else if(plateau[l_dep][c_dep].piece==2){
-		if(l_arr>l_dep) l_dep++;
+  	else if(plateau[l_dep][c_dep].piece==2){// cas si la piece jouée est une dame
+		// premiere avancée avant d'entrer dans la boucle de test
+		if(l_arr>l_dep) l_dep++; // tests de direction axe Y
+      	else if(l_arr<l_dep) l_dep--;
+      	if(c_arr>c_dep) c_dep++;// tests de direction axe X
+      	else if(c_arr<c_dep) c_dep--;
+    	while(plateau[l_dep][c_dep].joueur==0){ // Traitement des differentes diagonales
+			// continue de progresser vers l'arrivée tant que les cases sont vides
+      		if(l_arr>l_dep) l_dep++;
       		else if(l_arr<l_dep) l_dep--;
       		if(c_arr>c_dep) c_dep++;
       		else if(c_arr<c_dep) c_dep--;
-    		while(plateau[l_dep][c_dep].joueur==0){ // Traitement des differentes diagonales
-      			if(l_arr>l_dep) l_dep++;
-      			else if(l_arr<l_dep) l_dep--;
-      			if(c_arr>c_dep) c_dep++;
-      			else if(c_arr<c_dep) c_dep--;
-    		}
-    		c_supp=c_dep;// calcul des coordonnées de la piecesupprimé
-    		l_supp=l_dep;
+    	}
+    	c_supp=c_dep;// calcul des coordonnées de la piece supprimé
+    	l_supp=l_dep;
   	}
   	deplacerPiece(dep,arriv); // deplacement de la piece
-  	// suppression du pion pris
-  	viderContenu(&plateau[l_supp][c_supp]);
+  	viderContenu(&plateau[l_supp][c_supp]);// suppression du pion pris
 }
 
-
+/**
+* \fn void switchCoord(int x, int y)
+* \brief calcul des coordonnées de l'emplacement de la piece aprés rotation de 90°
+* \param x colonne de la piece à tester
+* \param y ligne de la piece à tester
+*/
 void switchCoord(int x, int y){
   t_contenu inter;
   inter = plateau[x][y];
@@ -274,7 +309,10 @@ void switchCoord(int x, int y){
   plateau[Z-1-x][Z-1-y] = plateau[y][Z-1-x];
   plateau[y][Z-1-x] = inter;
   }
-
+/**
+* \fn void tourner()
+* \brief fait tourner la matrice de 90°
+*/
 void tourner(){
   int i,j;
   for(i = 4; i < 13 ; i++){
