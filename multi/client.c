@@ -58,8 +58,8 @@ void recupererStatus(int joueur){
 	return present;
 }
 
-int premiereConnexion(){
-	nt check = 0;
+void premiereConnexion(){
+	int check = 0;
 	int nb_joueur = 0;
 	nb_joueur = recupererStatus(1) + recupererStatus(2) + recupererStatus(3) + recupererStatus(4);
 	if(nb_joueur == 0){
@@ -67,7 +67,7 @@ int premiereConnexion(){
 		sauvPlateau();
 		check = 1;
 	}
-	return check;
+	//return check;
 }
 void quitterPartie(int joueur){
 	changerStatus(joueur);	
@@ -143,6 +143,7 @@ void main(){
 	int joueur;
 	int fin = 0;
 	joueur = placerJoueur();
+	premiereConnexion();	
 	if(joueur == 0){
 	}
 	else{
