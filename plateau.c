@@ -305,42 +305,42 @@ void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
 
 /**
 * \fn void switchCoord(int x, int y)
-* \brief calcul des coordonnées de l'emplacement de la piece aprés rotation de 90°
+* \brief deplace la case choisie lors de la rotation de 90°
 * \param x colonne de la piece à tester
 * \param y ligne de la piece à tester
 */
 void switchCoord(int x, int y){
-  t_contenu inter;
-  inter = plateau[x][y];
+  t_contenu inter=plateau[x][y]; // variable contenant les coordonnées de depart 
+	
+ // attribution des coordonnées tous les 90°
   plateau[x][y] = plateau[Z-1-y][x];
   plateau[Z-1-y][x] = plateau[Z-1-x][Z-1-y];
   plateau[Z-1-x][Z-1-y] = plateau[y][Z-1-x];
   plateau[y][Z-1-x] = inter;
-  }
+}
+
 /**
 * \fn void tourner()
-* \brief fait tourner la matrice de 90°
+* \brief fait tourner toute la matrice de 90°
 */
 void tourner(){
-  int i,j;
-  for(i = 4; i < 13 ; i++){
-    for(j = 13; j < Z; j++){
-      switchCoord( i, j);
+  int c,l,marge;
+	int bord_Gauche=Z-13;
+	int bord_droit=Z-4;
+	int bord_haut=Z-4
+	int bord_bas=Z-1
+	int l_pointe=9;
+	int c_pointe=8;
+	//application sur rectangle de base du coté du joueur
+  for(c=bord_gauche; c < bord_droit ; c++){
+    for(l=bord_haut; l <= bord_bas; l++){
+      switchCoord( c, l);
     }
   }
-  j = 12;
-  for( i = 5; i < 12; i++){
-    switchCoord( i, j);
-  }
-  j = 11;
-  for(i = 6; i < 11; i++){
-    switchCoord( i, j);
-  }
-  j = 10;
-  for(i = 7; i < 10; i++){
-    switchCoord( i , j);
-  }
-  i = 8;
-  j = 9;
-  switchCoord( i, j);
-}
+	for(l=bord_haut+1;l<=l_pointe;l++){ // application ligne par ligne sur le reste du terrain coté du joueur
+  	for(marge=1;c<=c_pointe;marge++){ // a chaque ligne, la marge augmente ( formation du triangle du terrain )
+			for(c=bord_gauche+marge;c<=bord_droit-marge;c++){ // application sur toute la ligne, marge excluse
+				switchCoord(c,l);
+			}
+		}
+	}
