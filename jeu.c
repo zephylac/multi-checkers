@@ -183,7 +183,7 @@ int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_lis
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
 	t_coordonnees nouvcoord;
-	en_tete(ls_coup_arr);
+	en_tete(ls_coup_dep);
 	en_tete(ls_coup_arr);
 	int i = coord.y;
 	int j = coord.x;
