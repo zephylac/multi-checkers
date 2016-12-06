@@ -50,7 +50,8 @@ void ligneVide(){
 */
 void margeGauche(int larg_plat){
 	int taille;
-	printf("|");
+	printf("|"); // bord gauche
+	// calcul et affichage de la marge
 	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){
 		printf(" ");
 	}
@@ -64,10 +65,11 @@ void margeGauche(int larg_plat){
 */
 void margeDroite(int larg_plat){
 	int taille;
-	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){
+	// calcul et affichage de la marge
+	for(taille=0;taille<(LARG-larg_plat-2)/2;taille++){  
 		printf(" ");
 	}
-	printf("|");
+	printf("|"); // bord droit
 }
 void margeHaut(){
 	lignePleine();
