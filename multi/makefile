@@ -8,7 +8,7 @@ all : ${fichiers}
 	gcc -o multi_exe ${fichiers} ${CFLAGS}
 
 client.o : client.c ${proto}
-	gcc -c client.o ${CFLAGS}
+	gcc -c client.c ${CFLAGS}
 
 liste_ptr.o : liste_ptr.c $(inc)liste_ptr.h
 	gcc -c liste_ptr.c ${CFLAGS}
