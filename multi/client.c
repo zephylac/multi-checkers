@@ -59,13 +59,18 @@ int recupererStatus(int joueur){
 }
 
 void premiereConnexion(){
+	FILE * fic;
 	int check = 0;
 	int nb_joueur = 0;
 	nb_joueur = recupererStatus(1) + recupererStatus(2) + recupererStatus(3) + recupererStatus(4);
-	if(nb_joueur == 0){
+	
+	if(nb_joueur == 1){
 		init();
 		sauvPlateau();
 		check = 1;
+		fic = fopen(file,"w");
+		fprintf(fic,"tour_joueur : 1\n");
+		fclose(fic);
 	}
 	//return check;
 }
@@ -155,13 +160,13 @@ void main(){
 		sleep(2);
 		while(!fin){
 			attendreTour(joueur);
+			lirePlateau();
 			if(partieFinie(joueur)){
 				fin = 1;
 				finPartie(partieFinie(joueur));	
 			//	quitterPartie(1);
 			}
 			else{
-				lirePlateau();
 				jouerTour(joueur);
 				tourner();
 				sauvPlateau();
