@@ -326,7 +326,7 @@ void switchCoord(int x, int y){
 * \brief fait tourner toute la matrice de 90°
 */
 void tourner(){
-  int c,l,marge;
+	int c,l,marge;
 	int bord_gauche=Z-13;
 	int bord_droit=Z-4;
 	int bord_haut=Z-4;
@@ -339,11 +339,9 @@ void tourner(){
       switchCoord( c, l);
     }
   }
-	for(l=bord_haut+1;l<=l_pointe;l++){ // application ligne par ligne sur le reste du terrain coté du joueur
-  	for(marge=1;c<=c_pointe;marge++){ // a chaque ligne, la marge augmente ( formation du triangle du terrain )
-			for(c=bord_gauche+marge;c<=bord_droit-marge;c++){ // application sur toute la ligne, marge excluse
-				switchCoord(c,l);
-			}
+	for(l=bord_haut-1,marge=1;l>=l_pointe || c<=c_pointe;l--,marge++){ // application ligne par ligne sur le reste du terrain coté du joueur et a chaque ligne, la marge augmente ( formation du triangle du terrain )
+		for(c=bord_gauche+marge;c<=bord_droit-marge;c++){ // application sur toute la ligne, marge excluse
+			switchCoord(c,l);
 		}
 	}
 }
