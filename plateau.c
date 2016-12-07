@@ -327,10 +327,10 @@ void switchCoord(int x, int y){
 */
 void tourner(){
   int c,l,marge;
-	int bord_Gauche=Z-13;
+	int bord_gauche=Z-13;
 	int bord_droit=Z-4;
-	int bord_haut=Z-4
-	int bord_bas=Z-1
+	int bord_haut=Z-4;
+	int bord_bas=Z-1;
 	int l_pointe=9;
 	int c_pointe=8;
 	//application sur rectangle de base du coté du joueur
@@ -346,3 +346,4 @@ void tourner(){
 			}
 		}
 	}
+}
