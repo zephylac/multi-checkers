@@ -68,7 +68,7 @@ void premiereConnexion(){
 		init();
 		sauvPlateau();
 		check = 1;
-		fic = fopen(file,"w");
+		fic = fopen(file,"r+");
 		fprintf(fic,"tour_joueur : 1\n");
 		fclose(fic);
 	}
@@ -126,8 +126,10 @@ void attendreTour(int joueur){
 	fic = fopen(file,"r");
 	fscanf(fic,"tour_joueur : %i",&tour);
 	while(tour != joueur){
+		afficherPlateau();
 		rewind(fic);
 		fscanf(fic,"tour_joueur : %i",&tour);
+	
 	}
 	fclose(fic);
 }
@@ -142,6 +144,12 @@ void joueurSuivant(){
 	rewind(fic);
 	fprintf(fic,"tour_joueur : %i\n",joueur);
 	fclose(fic);
+}
+
+afficherPlateau(){
+	lirePlateau();
+	afficher();
+	sleep(3);
 }
 
 void main(){
