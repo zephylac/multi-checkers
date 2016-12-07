@@ -46,7 +46,7 @@ void changerStatus(int joueur){
 	fclose(fic);
 }
 
-void recupererStatus(int joueur){
+int recupererStatus(int joueur){
 	FILE * fic;
 	fpos_t position;
 	int present;
@@ -163,7 +163,6 @@ void main(){
 			else{
 				lirePlateau();
 				jouerTour(joueur);
-				sleep(2);
 				tourner();
 				sauvPlateau();
 				joueurSuivant();
