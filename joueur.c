@@ -1,3 +1,10 @@
+/**
+ * \author Thibault Brocherieux
+ * \date 06/12/2016
+ * \file joueur.c
+ * \brief Programme contenant les fonctions liées au joueur
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -8,18 +15,25 @@
 #include "include/liste_ptr.h"
 #include "include/affichage.h"
 
-/*
- *\fn int carac_valeur(char carac)
- *\brief fonction qui permet de convertir un caractère en chiffre, qu'il soit majuscule ou minuscule
+
+/**
+ * \fn int carac_valeur(char carac)
+ * \brief fonction qui permet de convertir un caractère en chiffre, qu'il soit majuscule ou minuscule
+ * \param[in] carac charactère
+ * \return Retourne un int qui a pour valeur la lettre entrée
  */
 int carac_valeur(char carac){
 	if(carac >= 'a' && carac <= 'z') return carac - 'a';
 	else if ( carac >= 'A' && carac <= 'Z') return carac - 'A';
 }
 
-/*
- *\fn t_coordonnees traiteEntree(char c_colonne, int ligne)
- *\brief fonction qui prend en paramatre la colonne en lettre et la ligne en chiffre, puis qui la retourne sous le type "coordonnées" 
+
+/**
+ * \fn t_coordonnees traiteEntree(char c_colonne, int ligne)
+ * \brief Fonction qui traite l'entrée.
+ * \param[in] c_colonne Charactère indiquant la colonnne
+ * \param[in] ligne Nombre indiquant la ligne
+ * \return coord De type t_coordonnees contenant les valeurs d'entrées 
  */
 t_coordonnees traiteEntree(char c_colonne, int ligne){
 	int colonne;
@@ -35,9 +49,13 @@ t_coordonnees traiteEntree(char c_colonne, int ligne){
 	}
 	return coord;
 }
-/*
- *\fn char afficherLettre(int lettre)
- *\brief fonction qui permet de convertir un chiffre en lettre, utile pour l'affichage
+
+
+/**
+ * \fn char afficherLettre(int lettre)
+ * \brief fonction qui permet de convertir un chiffre en lettre, utile pour l'affichage
+ * \param[in] lettre Nombre compris entre 0 et 16
+ * \return C de type charn, la lettre associé au nombre entré
  */
 char afficherLettre (int lettre){
   char c; 	
@@ -62,9 +80,14 @@ char afficherLettre (int lettre){
   }
   return c;
 }
+
+
 /**
-*\fn t_coordonnees choisirDep(t_liste * ls_coup, t_joueur joueur)
-*\brief Fonction qui affiche les choix possibles de déplacement d'un pion. Cette fonction n'est appelé seulement lorsqu'il n'y a pas de coup forcé
+* \fn t_coordonnees choisirDep(t_liste * ls_coup, t_joueur joueur)
+* \brief Fonction qui affiche les choix possibles de déplacement d'un pion. Cette fonction n'est appelé seulement lorsqu'il n'y a pas de coup forcé
+* \param[in] ls_coup Liste contenant les déplacements possibles
+* \param[in] joueur Le numéro du joueur qui joue
+* \return coord de type t_cooordonnees, qui contient les coordonnées du pion choisit
 */
 t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 	int choix,i = 0;
@@ -94,9 +117,15 @@ t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 		coord.y = cellule.coordonnees.y;
 	return coord;
 }
+
+
 /**
-*\fn t_coordonnees choisirPrendre(t_liste * ls_coup_dep, t_liste * ls_coup_arr, t_joueur joueur)
-*\brief Fonction qui affiche les choix possibles lorsque le coup est forcé.
+* \fn t_coordonnees choisirPrendre(t_liste * ls_coup_dep, t_liste * ls_coup_arr, t_joueur joueur)
+* \brief Fonction qui affiche les choix possibles lorsque le coup est forcé.
+* \param[in] ls_coup_dep Liste qui contient les coordonnées de départs des pions qui peuvent prendre un pion
+* \param[in] ls_coup_arr Liste qui contient les coordonnées d'arrivées des pions qui peuvent prendre un pion
+* \param[in] joueur Le numéro du joueur qui joue
+* \return coup de type choix qui contient les coordonnées de départ et d'arrivée
 */
 t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur){
 	int choix,i = 0;
@@ -141,8 +170,9 @@ t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueu
 
 
 /**
-*\fn void jouerTour(t_joueur joueur)
-*\brief Fonction qui exécute le tour d'un joueur entré en paramètre
+* \fn void jouerTour(t_joueur joueur)
+* \brief Fonction qui exécute le tour d'un joueur entré en paramètre
+* \param[in] joueur qui le numéro du joueur à qui c'est le tour
 */
 void jouerTour(t_joueur joueur){
 	//Déclaration dec s variables
@@ -198,7 +228,7 @@ void jouerTour(t_joueur joueur){
 
 /**
  * \fn void deroulementPartie(void)
- * brief Fonction qui s'occupe de la gestion des tours entre différents joueur
+ * \brief Fonction qui s'occupe de la gestion des tours entre différents joueur
  */
 
 void deroulementPartie(){
