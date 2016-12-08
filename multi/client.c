@@ -120,18 +120,28 @@ int placerJoueur(){
 	fclose(fic);
 	return joueur;
 }
+
+void afficherPlateau(){
+	lirePlateau();
+	afficher();
+	sleep(3);
+}
+
+
 void attendreTour(int joueur){
 	FILE * fic;
 	int tour;
 	fic = fopen(file,"r");
 	fscanf(fic,"tour_joueur : %i",&tour);
+	fclose(fic);
 	while(tour != joueur){
 		afficherPlateau();
-		rewind(fic);
+		//rewind(fic);
+		fic = fopen(file,"r");
 		fscanf(fic,"tour_joueur : %i",&tour);
-	
+		fclose(fic);
 	}
-	fclose(fic);
+	//fclose(fic);
 }
 
 void joueurSuivant(){
@@ -140,17 +150,15 @@ void joueurSuivant(){
 	fic = fopen(file,"r+");
 	fscanf(fic,"tour_joueur : %i\n",&joueur);
 	joueur++;
-	if(joueur >= 5) joueur = 1;
+	if(joueur >= 5){
+		joueur = 1;
+	}
 	rewind(fic);
 	fprintf(fic,"tour_joueur : %i\n",joueur);
 	fclose(fic);
 }
 
-afficherPlateau(){
-	lirePlateau();
-	afficher();
-	sleep(3);
-}
+
 
 void main(){
 	int joueur;
