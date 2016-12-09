@@ -61,38 +61,73 @@ void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* li
 * \fn int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
 * \brief renvoyant 1 si le pion aux coordonnées en paramètre peut prendre une pièce, et ajoute les coordonnées de départ et d'arrivées possibles de la pièce prenante. renvoie 0 sinon
 */
-int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep){
+int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep; int eq){
         int prise = 0;
         t_coordonnees coord_arr;
         int i = coord_dep.y;
         int j = coord_dep.x;
-		if((plateau[i-1][j-1].joueur != joueur)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(!hors_plateau(i-2,j-2) && plateau[i-2][j-2].joueur == vide)){
-			coord_arr.x = j-2;
-			coord_arr.y = i-2;
-			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
-			prise = 1;
+	int equipe;
+	if(joueur==1 || joueur ==3) equipe=1;
+	if(joueur==2 || joueur ==4) equipe=2;
+		if(eq==1){ // cas de la prise non-obligatoire d'une piece de l'equipe du joueur
+			if((plateau[i-1][j-1].equipe==equipe)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(!hors_plateau(i-2,j-2) && plateau[i-2][j-2].joueur == vide)){
+				coord_arr.x = j-2;
+				coord_arr.y = i-2;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+				prise = 1;
+			}
+			if((plateau[i-1][j+1].equipe==equipe)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(!hors_plateau(i-2,j+2) && plateau[i-2][j+2].joueur == vide)){
+				coord_arr.x = j+2;
+				coord_arr.y = i-2;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);	
+				prise = 1;
+			}
+			if((plateau[i+1][j-1].equipe==equipe) &&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(!hors_plateau(i+2,j-2) && plateau[i+2][j-2].joueur == vide)){
+				coord_arr.x = j-2;
+				coord_arr.y = i+2;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+				prise = 1;
+			}
+			if((plateau[i+1][j+1].equipe==equipe)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(!hors_plateau(i+2,j+2) && plateau[i+2][j+2].joueur == vide)){
+				coord_arr.x = j+2;
+				coord_arr.y = i+2;	
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+				prise = 1;
+			}
 		}
-		if((plateau[i-1][j+1].joueur != joueur)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(!hors_plateau(i-2,j+2) && plateau[i-2][j+2].joueur == vide)){
-			coord_arr.x = j+2;
-			coord_arr.y = i-2;
-			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);	
-			prise = 1;
-		}
-		if((plateau[i+1][j-1].joueur != joueur)&&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(!hors_plateau(i+2,j-2) && plateau[i+2][j-2].joueur == vide)){
-			coord_arr.x = j-2;
-			coord_arr.y = i+2;
-			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
-			prise = 1;
-		}
-		if((plateau[i+1][j+1].joueur != joueur)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(!hors_plateau(i+2,j+2) && plateau[i+2][j+2].joueur == vide)){
-			coord_arr.x = j+2;
-			coord_arr.y = i+2;	
-			ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
-			prise = 1;
+		else{ // verification pour prise obligatoire d'une piece de l'equipe adverse
+			if((plateau[i-1][j-1].equipe!=equipe)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(!hors_plateau(i-2,j-2) && plateau[i-2][j-2].joueur == vide)){
+				coord_arr.x = j-2;
+				coord_arr.y = i-2;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+				prise = 1;
+			}
+			if((plateau[i-1][j+1].equipe!=equipe)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(!hors_plateau(i-2,j+2) && plateau[i-2][j+2].joueur == vide)){
+				coord_arr.x = j+2;
+				coord_arr.y = i-2;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);	
+				prise = 1;
+			}
+			if((plateau[i+1][j-1].equipe!=equipe) &&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(!hors_plateau(i+2,j-2) && plateau[i+2][j-2].joueur == vide)){
+				coord_arr.x = j-2;
+				coord_arr.y = i+2;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+				prise = 1;
+			}
+			if((plateau[i+1][j+1].equipe!=equipe)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(!hors_plateau(i+2,j+2) && plateau[i+2][j+2].joueur == vide)){
+				coord_arr.x = j+2;
+				coord_arr.y = i+2;	
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+				prise = 1;
+			}
 		}
 		return prise;
 
@@ -102,73 +137,141 @@ int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_ar
 * \fn int peutPrendredame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
 * \brief renvoyant 1 si la dame aux coordonnées en paramètre peut prendre une pièce, et ajoute les coordonnées de départ et d'arrivées possibles de la pièce prenante. renvoie 0 sinon
 */
-int peutPrendredame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep){
+int peutPrendredame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep, int eq){
         int priseg = 0;
         int prise = 0;
         t_coordonnees coord_arr;
         int i;
         int j;
-        for(prise = 0, i = coord_dep.y-1, j = coord_dep.x+1; !hors_plateau(i,j); i--, j++){ // en haut à droite
-        	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
-        	if(plateau[i][j].joueur == vide && prise == 1){
-        		coord_arr.x = j;
-        		coord_arr.y = i;
-        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
-        	}
-        	else if(prise == 1) break;
-        	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && !hors_plateau(i,j) && prise == 0){
-        		if(plateau[i-1][j+1].joueur == vide) prise = 1;
-        		else break;
-        	}
-        } 
-        if(prise) priseg = 1;
-        for(prise = 0, i = coord_dep.y+1, j = coord_dep.x-1; !hors_plateau(i,j); i++, j--){ // en bas à gauche
-        	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
-        	if(plateau[i][j].joueur == vide && prise == 1){
-        		coord_arr.x = j;
-        		coord_arr.y = i;
-        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+	int equipe;
+	if(joueur==1 || joueur ==3) equipe=1;
+	if(joueur==2 || joueur ==4) equipe=2;
+	if (eq==1){ // cas de la prise non-obligatoire d'une piece de l'equipe du joueur
+		for(prise = 0, i = coord_dep.y-1, j = coord_dep.x+1; !hors_plateau(i,j); i--, j++){ // en haut à droite
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe==equipe && plateau[i][j].joueur != vide && !hors_plateau(i,j) && prise == 0){
+				if(plateau[i-1][j+1].joueur == vide) prise = 1;
+				else break;
+			}
+		} 
+		if(prise) priseg = 1;
+		for(prise = 0, i = coord_dep.y+1, j = coord_dep.x-1; !hors_plateau(i,j); i++, j--){ // en bas à gauche
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 
-        	}
-        	else if(prise == 1) break;
-        	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
-        		if(plateau[i+1][j-1].joueur == vide) prise = 1;
-        		else break;
-        	}
-        }
-        if(prise) priseg = 1;
-        for(prise = 0, i = coord_dep.y+1, j = coord_dep.x+1; !hors_plateau(i,j); i++, j++){ // en bas à droite
-        	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
-        	if(plateau[i][j].joueur == vide && prise == 1){
-        		coord_arr.x = j;
-        		coord_arr.y = i;
-        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe==equipe && plateau[i][j].joueur != vide && prise == 0){
+				if(plateau[i+1][j-1].joueur == vide) prise = 1;
+				else break;
+			}
+		}
+		if(prise) priseg = 1;
+		for(prise = 0, i = coord_dep.y+1, j = coord_dep.x+1; !hors_plateau(i,j); i++, j++){ // en bas à droite
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 
-        	}
-        	else if(prise == 1) break;
-        	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
-        		if(plateau[i+1][j+1].joueur == vide) prise = 1;
-        		else break;
-        	}
-        }
-        if(prise) priseg = 1;
-        for(prise = 0, i = coord_dep.y-1, j = coord_dep.x-1; !hors_plateau(i,j); i--, j--){ // en haut à gauche
-        	if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
-        	if(plateau[i][j].joueur == vide && prise == 1){
-        		coord_arr.x = j;
-        		coord_arr.y = i;
-        		ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
-			ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
-        	}
-        	else if(prise == 1) break;
-        	if(plateau[i][j].joueur != joueur && plateau[i][j].joueur != vide && prise == 0){
-        		if(plateau[i-1][j-1].joueur == vide) prise = 1;
-        		else break;
-        	}
-        }
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe==equipe && plateau[i][j].joueur != vide && prise == 0){
+				if(plateau[i+1][j+1].joueur == vide) prise = 1;
+				else break;
+			}
+		}
+		if(prise) priseg = 1;
+		for(prise = 0, i = coord_dep.y-1, j = coord_dep.x-1; !hors_plateau(i,j); i--, j--){ // en haut à gauche
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe==equipe && plateau[i][j].joueur != vide && prise == 0){
+				if(plateau[i-1][j-1].joueur == vide) prise = 1;
+				else break;
+			}
+		}
+	}
+	else { // verification pour prise obligatoire d'une piece de l'equipe adverse
+		for(prise = 0, i = coord_dep.y-1, j = coord_dep.x+1; !hors_plateau(i,j); i--, j++){ // en haut à droite
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe!=equipe && plateau[i][j].joueur != vide && !hors_plateau(i,j) && prise == 0){
+				if(plateau[i-1][j+1].joueur == vide) prise = 1;
+				else break;
+			}
+		} 
+		if(prise) priseg = 1;
+		for(prise = 0, i = coord_dep.y+1, j = coord_dep.x-1; !hors_plateau(i,j); i++, j--){ // en bas à gauche
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe!=equipe && plateau[i][j].joueur != vide && prise == 0){
+				if(plateau[i+1][j-1].joueur == vide) prise = 1;
+				else break;
+			}
+		}
+		if(prise) priseg = 1;
+		for(prise = 0, i = coord_dep.y+1, j = coord_dep.x+1; !hors_plateau(i,j); i++, j++){ // en bas à droite
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe!=equipe && plateau[i][j].joueur != vide && prise == 0){
+				if(plateau[i+1][j+1].joueur == vide) prise = 1;
+				else break;
+			}
+		}
+		if(prise) priseg = 1;
+		for(prise = 0, i = coord_dep.y-1, j = coord_dep.x-1; !hors_plateau(i,j); i--, j--){ // en haut à gauche
+			if(plateau[i][j].joueur == joueur) break; // le joueur ne peut faire passer sa dame par dessus un de ses pions
+			if(plateau[i][j].joueur == vide && prise == 1){
+				coord_arr.x = j;
+				coord_arr.y = i;
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
+			}
+			else if(prise == 1) break;
+			if(plateau[i][j].equipe!=equipe && plateau[i][j].joueur != vide && prise == 0){
+				if(plateau[i-1][j-1].joueur == vide) prise = 1;
+				else break;
+			}
+		}
+	}
         if(prise) priseg = 1;
         
 	return priseg;
