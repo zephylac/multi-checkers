@@ -120,14 +120,15 @@ t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 
 
 /**
-* \fn t_coordonnees choisirPrendre(t_liste * ls_coup_dep, t_liste * ls_coup_arr, t_joueur joueur)
+* \fn t_coordonnees choisirPrendre(t_liste * ls_coup_dep, t_liste * ls_coup_arr, t_joueur joueur, int mode)
 * \brief Fonction qui affiche les choix possibles lorsque le coup est forcé.
 * \param[in] ls_coup_dep Liste qui contient les coordonnées de départs des pions qui peuvent prendre un pion
 * \param[in] ls_coup_arr Liste qui contient les coordonnées d'arrivées des pions qui peuvent prendre un pion
 * \param[in] joueur Le numéro du joueur qui joue
+* \param[in] mode Permet de savoir si les pions à prendre sont allié ou enemi
 * \return coup de type choix qui contient les coordonnées de départ et d'arrivée
 */
-t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur){
+t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur, int mode){
 	int choix,i = 0;
 	t_case dep;
 	t_case arr;
@@ -203,14 +204,24 @@ void jouerTour(t_joueur joueur){
 	}
 	else{
 		do{
-			coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
 			vider_liste(&ls_coup_dep);
 			vider_liste(&ls_coup_arr);			
-			prendrePiece(coup.dep, coup.arr);
-			afficher();
-			coup.dep = coup.arr;
+			if(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,0)){
+				coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,0);
+				prendrePiece(coup.dep, coup.arr);
+				afficher();
+				coup.dep = coup.arr;
+			}
+			vider_liste(&ls_coup_dep);
+			vider_liste(&ls_coup_arr);			
+			else if(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,1)){
+				coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,1);
+				prendrePiece(coup.dep, coup.arr);
+				afficher();
+				coup.dep = coup.arr;
+			}
 		}	
-		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep));
+		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,2));
 				
 		/*	
 		coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
