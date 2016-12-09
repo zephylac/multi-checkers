@@ -46,7 +46,7 @@ void changerStatus(int joueur){
 	fclose(fic);
 }
 
-void recupererStatus(int joueur){
+int recupererStatus(int joueur){
 	FILE * fic;
 	fpos_t position;
 	int present;
@@ -59,13 +59,18 @@ void recupererStatus(int joueur){
 }
 
 void premiereConnexion(){
+	FILE * fic;
 	int check = 0;
 	int nb_joueur = 0;
 	nb_joueur = recupererStatus(1) + recupererStatus(2) + recupererStatus(3) + recupererStatus(4);
-	if(nb_joueur == 0){
+	
+	if(nb_joueur == 1){
 		init();
 		sauvPlateau();
 		check = 1;
+		fic = fopen(file,"r+");
+		fprintf(fic,"tour_joueur : 1\n");
+		fclose(fic);
 	}
 	//return check;
 }
@@ -115,16 +120,28 @@ int placerJoueur(){
 	fclose(fic);
 	return joueur;
 }
+
+void afficherPlateau(){
+	lirePlateau();
+	afficher();
+	sleep(3);
+}
+
+
 void attendreTour(int joueur){
 	FILE * fic;
 	int tour;
 	fic = fopen(file,"r");
 	fscanf(fic,"tour_joueur : %i",&tour);
-	while(tour != joueur){
-		rewind(fic);
-		fscanf(fic,"tour_joueur : %i",&tour);
-	}
 	fclose(fic);
+	while(tour != joueur){
+		afficherPlateau();
+		//rewind(fic);
+		fic = fopen(file,"r");
+		fscanf(fic,"tour_joueur : %i",&tour);
+		fclose(fic);
+	}
+	//fclose(fic);
 }
 
 void joueurSuivant(){
@@ -133,11 +150,15 @@ void joueurSuivant(){
 	fic = fopen(file,"r+");
 	fscanf(fic,"tour_joueur : %i\n",&joueur);
 	joueur++;
-	if(joueur >= 5) joueur = 1;
+	if(joueur >= 5){
+		joueur = 1;
+	}
 	rewind(fic);
 	fprintf(fic,"tour_joueur : %i\n",joueur);
 	fclose(fic);
 }
+
+
 
 void main(){
 	int joueur;
@@ -155,15 +176,14 @@ void main(){
 		sleep(2);
 		while(!fin){
 			attendreTour(joueur);
+			lirePlateau();
 			if(partieFinie(joueur)){
 				fin = 1;
 				finPartie(partieFinie(joueur));	
 			//	quitterPartie(1);
 			}
 			else{
-				lirePlateau();
 				jouerTour(joueur);
-				sleep(2);
 				tourner();
 				sauvPlateau();
 				joueurSuivant();
