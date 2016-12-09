@@ -3,14 +3,10 @@
 #include <string.h>
 #include "include/struct.h"
 
-void sauv(){
+void sauv(char nom[30]){
 	FILE * fic;
 	int i, j;
-	char nom[30];
 	
-	printf("\nLe nom de la sauvegard ene doit pa sdépasser 30 charactères");
-	printf("\nEntrer le nom de la sauvegarde : ");
-	scanf("%s",nom);
 	fic = fopen(nom,"w");
 
 	//Seulement utile lorsque l'on sauvegarde au milieu d'un tour, lorsque l tour ne sera pas au joueur 1
@@ -38,8 +34,7 @@ void lireSauv(){
 		printf("\nEntrer le nom de la sauvegarde à lire");
 		scanf("%s",nom);
 		fic = fopen(nom,"r");
-	}	
-	
+	}
 	//Seulement utile lorsque l'on sauvegarde au milieu d'un tour, lorsque l tour ne sera pas au joueur 1
 	//Il faudra init la variable tour joueur 
 	//fscanf(fic,"%i ",&joueur);	
@@ -56,7 +51,7 @@ void sauvPlateau(){
 	FILE * fic;
 	int i, j;
 	
-	fic = fopen("plateau.txt","w");
+	fic = fopen("/home/dame/multi-checkers/multi/plateau.txt","w");
 	
 	for(i = 0; i < Z; i++){
 		for( j = 0; j < Z; j++){
@@ -70,7 +65,7 @@ void lirePlateau(){
 	FILE * fic;
 	int i, j;
 
-	fic = fopen("plateau.txt","r");
+	fic = fopen("/home/dame/multi-checkers/multi/plateau.txt","r");
 	for(i = 0; i < Z; i++){
 		for( j = 0; j < Z; j++){
 			fscanf(fic,"%i %i %i ",&plateau[i][j].joueur, &plateau[i][j].piece, &plateau[i][j].equipe);
