@@ -58,10 +58,10 @@ void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* li
 }
 
 /**
-* \fn int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
+* \fn int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
 * \brief renvoyant 1 si le pion aux coordonnées en paramètre peut prendre une pièce, et ajoute les coordonnées de départ et d'arrivées possibles de la pièce prenante. renvoie 0 sinon
 */
-int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep; int eq){
+int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep; int eq){
         int prise = 0;
         t_coordonnees coord_arr;
         int i = coord_dep.y;
@@ -134,10 +134,10 @@ int peutPrendrepion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_ar
 }
 
 /**
-* \fn int peutPrendredame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
+* \fn int peutPrendreDame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
 * \brief renvoyant 1 si la dame aux coordonnées en paramètre peut prendre une pièce, et ajoute les coordonnées de départ et d'arrivées possibles de la pièce prenante. renvoie 0 sinon
 */
-int peutPrendredame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep, int eq){
+int peutPrendreDame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep, int eq){
         int priseg = 0;
         int prise = 0;
         t_coordonnees coord_arr;
@@ -293,10 +293,10 @@ int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_lis
 	int x = 0;
 	int y = 0;
 	if(plateau[i][j].piece == pion){
-        	prise = peutPrendrepion(coord, joueur, ls_coup_arr, ls_coup_dep,eq);
+        	prise = peutPrendrePion(coord, joueur, ls_coup_arr, ls_coup_dep,eq);
 	}
 	if(plateau[i][j].piece == dame){
-        	prise = peutPrendredame(coord, joueur, ls_coup_arr, ls_coup_dep,eq);
+        	prise = peutPrendreDame(coord, joueur, ls_coup_arr, ls_coup_dep,eq);
 	}
 	return prise;
 }
