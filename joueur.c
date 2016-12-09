@@ -14,7 +14,7 @@
 #include "include/jeu.h"
 #include "include/liste_ptr.h"
 #include "include/affichage.h"
-
+#include "include/fichier.h"
 
 /**
  * \fn int carac_valeur(char carac)
@@ -231,7 +231,7 @@ void jouerTour(t_joueur joueur){
  * \brief Fonction qui s'occupe de la gestion des tours entre différents joueur
  */
 
-void deroulementPartie(){
+void deroulementPartie(char nom[30]){
 	//Déclaration des variables
 	int i=1;
 	while(!partieFinie(i)){
@@ -242,6 +242,7 @@ void deroulementPartie(){
 		i++;
 		if(i == 5){
 			i = 1;
+			sauv(nom);
 		}
 	}
 	finPartie(partieFinie(i));
