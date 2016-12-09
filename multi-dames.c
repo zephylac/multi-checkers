@@ -6,6 +6,7 @@
 #include "include/fichier.h"
 #include "include/affichage.h"
 int main(){
+	FILE * fic;
 	char nom[30];
 	int choix=menu();
 	init_liste(&ls_coup_dep);
@@ -32,6 +33,7 @@ int main(){
 			scanf("%s",nom);
 			fic = fopen(nom,"r");
 		}
+		fclose(fic);
 		lireSauv(nom);
 		deroulementPartie(nom);
 	}
