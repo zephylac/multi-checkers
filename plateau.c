@@ -70,7 +70,7 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
 	int l,c,coup_dispo = 0;
 	l=coor.y;
 	c=coor.x;
-  
+  	int j=plateau[l][c].joueur;
 	// cas des deplacements pour Pion du joueur 
 	if(l+c>16 && (c<=l)){ // si la reference est le triangle de depart du joueur
 		if(litJoueur(l-1,c-1)==0){ 
@@ -111,13 +111,14 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
 * \param coor type t_coordonnees contenant l'emplacement de la piece à tester
 * \param ls_coup_d pointeur vers la liste t_liste à remplir
 * \return entier designant s'il y a coup disponible ou non
-* \author BRINON Baptiste
+* \author BRINON Baptiste 
 */ 
 int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
 	int l,c,coup_dispo = 0,fin;
 	l=coor.y;
 	c=coor.x;
-  
+  	int j=plateau[l][c].joueur;
+	DeplaAjout(l,c,ls_coup_dep);
 	// cas des deplacements pour Dame du joueur 
 	for(c=c+1,l=l+1;plateau[l][c].joueur==0;l++,c++){ // Traitement des differentes diagonales
 		DeplaAjout(l,c,ls_coup_d);// Ajout des cases vides de la diagonale jusqu'a la rencontre d'une piece
@@ -221,8 +222,7 @@ int coupForce(t_joueur j,t_liste *ls_coup_arr, t_liste* ls_coup_dep /* type t_ca
     for(c=0;c<Z;c++){
       cell_pos.x=c; // generation d'un type t_coordonnées pour la fonction peutPrendre
       cell_pos.y=l;
-      if(j==litJoueur(l,c) && peutPrendre(cell_pos,j,ls_coup_arr, ls_coup_dep) ){ // application de peutPrendre aux pions du joueur
-        //DeplaAjout(l,c,ls_coup_dep);----------------------------------------------------------------------------------------------------------------------------------------------------------------	
+      if(j==litJoueur(l,c) && peutPrendre(cell_pos,j,ls_coup_arr, ls_coup_dep,0) ){ // application de peutPrendre aux pions du joueur
         coup_For=1;
       }
     }
@@ -248,6 +248,8 @@ int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adv
     	if(plateau[l][c].piece==1) coup_dispo=dispoPion(coor,ls_coup_d); // si la piece est un pion, calcul de ses deplacements
     	if(plateau[l][c].piece==2) coup_dispo=dispoDame(coor,ls_coup_d); // si la piece est une dame, calcul de ses deplacements
   	}
+	
+	
   	return coup_dispo; //renvoi vrai si la piece est jouable
 }
 /**
