@@ -10,7 +10,7 @@
 #include "include/disp.h"
 
 
-int main(int argc, char** argv)
+int test_sdl()
 {
 
     /* Initialisation simple */
