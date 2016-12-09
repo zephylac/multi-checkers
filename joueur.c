@@ -107,7 +107,7 @@ t_coordonnees choisirDep(t_liste* ls_coup,t_joueur joueur){
 		printf("Votre choix : ");
 		scanf("%i",&choix);
 	}
-	while(choix < 0 || choix > i);
+	while(choix < 0 || choix >= i);
 		en_tete(ls_coup);
 		for(i = 0; i < choix; i++){
 			suivant(ls_coup);
@@ -149,23 +149,35 @@ t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueu
 			suivant(ls_coup_dep);
 			suivant(ls_coup_arr);
 		}
+		if (mode == 1){
+			// Si ce sont des pions alliés alors il n'est pas obligé de prendre
+			printf("%i) Ne pas prendre de pion\n",i);
+			i++;
+		}
 		printf("Votre choix : ");
 		scanf("%i",&choix);
 	}
 	while(choix < 0 || choix >= i);
-	en_tete(ls_coup_dep);
-	en_tete(ls_coup_arr);
-	for(i = 0; i < choix; i++){
-		suivant(ls_coup_arr);
-		suivant(ls_coup_dep);
-	}	
-	valeur_elt(ls_coup_dep,&dep);
-	valeur_elt(ls_coup_arr,&arr);
-	coup.dep.x = dep.coordonnees.x;
-	coup.dep.y = dep.coordonnees.y;
-	coup.arr.x = arr.coordonnees.x;
-	coup.arr.y = arr.coordonnees.y;
-
+	if (choix == i-1){	
+		coup.dep.x = 99;
+		coup.dep.y = 99;
+		coup.arr.x = 99;
+		coup.arr.y = 99;
+	}
+	else{
+		en_tete(ls_coup_dep);
+		en_tete(ls_coup_arr);
+		for(i = 0; i < choix; i++){
+			suivant(ls_coup_arr);
+			suivant(ls_coup_dep);
+		}	
+		valeur_elt(ls_coup_dep,&dep);
+		valeur_elt(ls_coup_arr,&arr);
+		coup.dep.x = dep.coordonnees.x;
+		coup.dep.y = dep.coordonnees.y;
+		coup.arr.x = arr.coordonnees.x;
+		coup.arr.y = arr.coordonnees.y;
+	}
 	return coup;
 }
 
@@ -191,55 +203,94 @@ void jouerTour(t_joueur joueur){
 
 	/* Si le joueur n'a pas de coup obligatoire */
 	if(coup_force == 0){
-    		do{
-			printf("Veuillez choisir la case où se trouve votre pion\n");
-    			printf("Entrer les coordonnées (ex:A1) : ");
-			scanf("%c%i",&c_colonne,&ligne); 
-			coord_dep = traiteEntree(c_colonne,ligne);
-		}
-		while(!coupDispo(coord_dep,joueur,&ls_coup_dep));
+		choix = 1;
+    		vider_liste(&ls_coup_dep);
+		vider_liste(&ls_coup_arr);			
+		if(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,1)){
+			do{	
+				printf("1) Deplacer un pion\n");
+				printf("2) Prendre un pion allié\n");
+				printf("Votre choix : ");
+				scanf("%i",&choix);
+			}
+			while(choix < 1 || choix > 2);
 			
+			if (choix == 1){
+				do{
+					printf("Veuillez choisir la case où se trouve votre pion\n");
+    					printf("Entrer les coordonnées (ex:A1) : ");
+					scanf("%c%i",&c_colonne,&ligne); 
+					coord_dep = traiteEntree(c_colonne,ligne);
+				}
+				while(!coupDispo(coord_dep,joueur,&ls_coup_dep));
+				coord_arr = choisirDep(&ls_coup_dep,joueur);
+				deplacerPiece(coord_dep,coord_arr);
+			}
+			if(choix = 2){
+				coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,1);
+				prendrePiece(coup.dep, coup.arr);
+				afficher();
+				coup.dep = coup.arr;
+
+				vider_liste(&ls_coup_dep);
+				vider_liste(&ls_coup_arr);			
+
+				while(peutPrendre(coup.dep, joueur, &ls_coup_arr, &ls_coup_dep,2) && coup.dep.x != 99){
+					vider_liste(&ls_coup_dep);
+					vider_liste(&ls_coup_arr);			
+					if(peutPrendre(coup.dep, joueur, &ls_coup_arr, &ls_coup_dep,0)){
+						coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,0);
+						prendrePiece(coup.dep, coup.arr);
+						afficher();
+						coup.dep = coup.arr;
+					}
+					else if(peutPrendre(coup.dep, joueur, &ls_coup_arr, &ls_coup_dep,1)){
+						coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,1);
+						prendrePiece(coup.dep, coup.arr);
+						afficher();
+						coup.dep = coup.arr;
+					}
+				}
+
+			}
+		}
+		else{
+			do{
+				printf("Veuillez choisir la case où se trouve votre pion\n");
+    				printf("Entrer les coordonnées (ex:A1) : ");
+				scanf("%c%i",&c_colonne,&ligne); 
+				coord_dep = traiteEntree(c_colonne,ligne);
+			}
+		while(!coupDispo(coord_dep,joueur,&ls_coup_dep));	
 		coord_arr = choisirDep(&ls_coup_dep,joueur);
-		deplacerPiece(coord_dep,coord_arr);
-	}
+		deplacerPiece(coord_dep,coord_arr);	
+		}
 	else{
-		do{
+		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,2) && coup.dep.x != 99){
 			vider_liste(&ls_coup_dep);
 			vider_liste(&ls_coup_arr);			
-			if(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,0)){
+			if(peutPrendre(coup.dep, joueur, &ls_coup_arr, &ls_coup_dep,0)){
 				coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,0);
 				prendrePiece(coup.dep, coup.arr);
 				afficher();
 				coup.dep = coup.arr;
 			}
-			vider_liste(&ls_coup_dep);
-			vider_liste(&ls_coup_arr);			
-			else if(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,1)){
+			else if(peutPrendre(coup.dep, joueur, &ls_coup_arr, &ls_coup_dep,1)){
 				coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,1);
 				prendrePiece(coup.dep, coup.arr);
 				afficher();
 				coup.dep = coup.arr;
 			}
 		}	
-		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,2));
-				
-		/*	
-		coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur);
-		vider_liste(&ls_coup_dep);
-		vider_liste(&ls_coup_arr);
-		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep)){
-			afficher();
-			prendrePiece(coup.dep, coup.arr);
-			
-			vider_liste(&ls_coup_dep);
-			vider_liste(&ls_coup_arr);
-		*/
+		
+		
 	}
 }
 
 /**
  * \fn void deroulementPartie(void)
  * \brief Fonction qui s'occupe de la gestion des tours entre différents joueur
+ * \param[in] nom Le nom du fichier de sauvegarde
  */
 
 void deroulementPartie(char nom[30]){
