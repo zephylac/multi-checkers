@@ -265,6 +265,7 @@ void jouerTour(t_joueur joueur){
 		coord_arr = choisirDep(&ls_coup_dep,joueur);
 		deplacerPiece(coord_dep,coord_arr);	
 		}
+	}
 	else{
 		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,2) && coup.dep.x != 99){
 			vider_liste(&ls_coup_dep);
