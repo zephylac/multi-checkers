@@ -15,7 +15,7 @@ int main(){
 		printf("Veuillez choisir le nom de la sauvegarde");
 		scanf("%s",nom);
 		sauv(nom);
-		deroulementPartie();
+		deroulementPartie(nom);
 	}
 	if (choix==2){
 		printf("Le mot de passe est \"dame\"");
@@ -23,8 +23,17 @@ int main(){
 		//multi
 	}
 	if (choix==3){
-		lireSauv();
-		deroulementPartie();
+		printf("\nEntrer le nom de la sauvegarde à lire");
+		scanf("%s",nom);
+		fic = fopen(nom,"r");
+		while(fic == NULL){
+			printf("Erreur, le nom entré n'est pas valide\n");
+			printf("\nEntrer le nom de la sauvegarde à lire");
+			scanf("%s",nom);
+			fic = fopen(nom,"r");
+		}
+		lireSauv(nom);
+		deroulementPartie(nom);
 	}
 	if (choix==4){
 //		manuelDuJeu();
