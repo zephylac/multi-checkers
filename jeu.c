@@ -282,7 +282,7 @@ int peutPrendredame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_ar
 * \fn int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
 * \brief renvoyant 1 si la pièce aux coordonnées en paramètre peut prendre une autre pièce
 */
-int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep){
+int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep, int eq){
 	int prise = 0;
 	t_case nouv;	//nouvel élément à insérer dans la liste
 	t_coordonnees nouvcoord;
@@ -293,10 +293,10 @@ int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_lis
 	int x = 0;
 	int y = 0;
 	if(plateau[i][j].piece == pion){
-        	prise = peutPrendrepion(coord, joueur, ls_coup_arr, ls_coup_dep);
+        	prise = peutPrendrepion(coord, joueur, ls_coup_arr, ls_coup_dep,eq);
 	}
 	if(plateau[i][j].piece == dame){
-        	prise = peutPrendredame(coord, joueur, ls_coup_arr, ls_coup_dep);
+        	prise = peutPrendredame(coord, joueur, ls_coup_arr, ls_coup_dep,eq);
 	}
 	return prise;
 }
