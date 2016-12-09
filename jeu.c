@@ -66,7 +66,7 @@ int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_ar
         t_coordonnees coord_arr;
         int i = coord_dep.y;
         int j = coord_dep.x;
-	int equipe;
+	t_equipe equipe;
 	if(joueur==1 || joueur ==3) equipe=1;
 	if(joueur==2 || joueur ==4) equipe=2;
 		if(eq==1 || eq==2){ // cas de la prise non-obligatoire d'une piece de l'equipe du joueur
@@ -143,7 +143,7 @@ int peutPrendreDame(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_ar
         t_coordonnees coord_arr;
         int i;
         int j;
-	int equipe;
+	t_equipe  equipe;
 	if(joueur==1 || joueur ==3) equipe=1;
 	if(joueur==2 || joueur ==4) equipe=2;
 	if (eq==1 || eq==2){ // cas de la prise non-obligatoire d'une piece de l'equipe du joueur
