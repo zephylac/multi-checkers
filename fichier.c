@@ -21,16 +21,14 @@ void sauv(char nom[30]){
 	fclose(fic);
 }
 
-void lireSauv(){
+void lireSauv(char nom[30]){
 	FILE * fic;
 	int i, j;
-	char nom[30];
-
 	
 	//Seulement utile lorsque l'on sauvegarde au milieu d'un tour, lorsque l tour ne sera pas au joueur 1
 	//Il faudra init la variable tour joueur 
 	//fscanf(fic,"%i ",&joueur);	
-
+	fic = fopen(nom,"r");
 	for(i = 0; i < Z; i++){
 		for( j = 0; j < Z; j++){
 			fscanf(fic,"%i %i %i ",&plateau[i][j].joueur, &plateau[i][j].piece, &plateau[i][j].equipe);
