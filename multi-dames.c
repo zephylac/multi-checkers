@@ -4,7 +4,7 @@
 #include "include/joueur.h"
 #include "include/liste_ptr.h"
 #include "include/fichier.h"
-
+#include "include/affichage.h"
 int main(){
 	char nom[30];
 	int choix=menu();
@@ -18,6 +18,8 @@ int main(){
 		deroulementPartie();
 	}
 	if (choix==2){
+		printf("Le mot de passe est \"dame\"");
+		system("ssh dame@52.28.201.112");
 		//multi
 	}
 	if (choix==3){
