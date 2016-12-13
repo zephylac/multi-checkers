@@ -61,7 +61,7 @@ void ajoutListe(t_coordonnees coord, t_joueur joueur, t_piece piece, t_liste* li
 * \fn int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep)
 * \brief renvoyant 1 si le pion aux coordonnées en paramètre peut prendre une pièce, et ajoute les coordonnées de départ et d'arrivées possibles de la pièce prenante. renvoie 0 sinon
 */
-int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep; int eq){
+int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_arr, t_liste* ls_coup_dep, int eq){
         int prise = 0;
         t_coordonnees coord_arr;
         int i = coord_dep.y;
@@ -73,29 +73,29 @@ int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_ar
 			if((plateau[i-1][j-1].equipe==equipe)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(!hors_plateau(i-2,j-2) && plateau[i-2][j-2].joueur == vide)){
 				coord_arr.x = j-2;
 				coord_arr.y = i-2;
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 				prise = 1;
 			}
 			if((plateau[i-1][j+1].equipe==equipe)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(!hors_plateau(i-2,j+2) && plateau[i-2][j+2].joueur == vide)){
 				coord_arr.x = j+2;
 				coord_arr.y = i-2;
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);	
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);	
 				prise = 1;
 			}
 			if((plateau[i+1][j-1].equipe==equipe) &&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(!hors_plateau(i+2,j-2) && plateau[i+2][j-2].joueur == vide)){
 				coord_arr.x = j-2;
 				coord_arr.y = i+2;
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 				prise = 1;
 			}
 			if((plateau[i+1][j+1].equipe==equipe)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(!hors_plateau(i+2,j+2) && plateau[i+2][j+2].joueur == vide)){
 				coord_arr.x = j+2;
 				coord_arr.y = i+2;	
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 				prise = 1;
 			}
 		}
@@ -103,29 +103,29 @@ int peutPrendrePion(t_coordonnees coord_dep, t_joueur joueur,t_liste* ls_coup_ar
 			if((plateau[i-1][j-1].equipe!=equipe)&&(plateau[i-1][j-1].joueur != invalide)&&(plateau[i-1][j-1].joueur != vide)&&(!hors_plateau(i-2,j-2) && plateau[i-2][j-2].joueur == vide)){
 				coord_arr.x = j-2;
 				coord_arr.y = i-2;
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 				prise = 1;
 			}
 			if((plateau[i-1][j+1].equipe!=equipe)&&(plateau[i-1][j+1].joueur != invalide)&&(plateau[i-1][j+1].joueur != vide)&&(!hors_plateau(i-2,j+2) && plateau[i-2][j+2].joueur == vide)){
 				coord_arr.x = j+2;
 				coord_arr.y = i-2;
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);	
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);	
 				prise = 1;
 			}
 			if((plateau[i+1][j-1].equipe!=equipe) &&(plateau[i+1][j-1].joueur != invalide)&&(plateau[i+1][j-1].joueur != vide)&&(!hors_plateau(i+2,j-2) && plateau[i+2][j-2].joueur == vide)){
 				coord_arr.x = j-2;
 				coord_arr.y = i+2;
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 				prise = 1;
 			}
 			if((plateau[i+1][j+1].equipe!=equipe)&&(plateau[i+1][j+1].joueur != invalide)&&(plateau[i+1][j+1].joueur != vide)&&(!hors_plateau(i+2,j+2) && plateau[i+2][j+2].joueur == vide)){
 				coord_arr.x = j+2;
 				coord_arr.y = i+2;	
-				ajoutListe(coord_arr, joueur, pion, &ls_coup_arr);
-				ajoutListe(coord_dep, joueur, pion, &ls_coup_dep);
+				ajoutListe(coord_arr, joueur, pion, ls_coup_arr);
+				ajoutListe(coord_dep, joueur, pion, ls_coup_dep);
 				prise = 1;
 			}
 		}

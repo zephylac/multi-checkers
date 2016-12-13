@@ -198,6 +198,8 @@ void jouerTour(t_joueur joueur){
   	t_coordonnees coord_dep;
 	t_coordonnees coord_arr;
 	t_choix coup;
+	coup.dep.x = 0;
+    	coup.dep.y = 0;
 	//Cette fonction nous retourne des valeurs utiles pour le début de tour d'un joueur
         afficher();
 	coup_force = coupForce(joueur,&ls_coup_arr, &ls_coup_dep);
