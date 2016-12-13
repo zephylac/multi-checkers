@@ -77,6 +77,7 @@ char afficherLettre (int lettre){
     case 14 : c = 'O';break;
     case 15 : c = 'P';break;
     case 16 : c = 'Q';break;
+    default : c = 'Z';break;
   }
   return c;
 }
