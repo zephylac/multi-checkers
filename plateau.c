@@ -118,7 +118,7 @@ int dispoDame(t_coordonnees coor,t_liste *ls_coup_d){
 	l=coor.y;
 	c=coor.x;
   	int j=plateau[l][c].joueur;
-	DeplaAjout(l,c,ls_coup_dep);
+	DeplaAjout(l,c,&ls_coup_dep);
 	// cas des deplacements pour Dame du joueur 
 	for(c=c+1,l=l+1;plateau[l][c].joueur==0;l++,c++){ // Traitement des differentes diagonales
 		DeplaAjout(l,c,ls_coup_d);// Ajout des cases vides de la diagonale jusqu'a la rencontre d'une piece
