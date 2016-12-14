@@ -41,7 +41,7 @@ void sauvPlateau(){
 	FILE * fic;
 	int i, j;
 	
-	fic = fopen("/home/dame/multi-checkers/multi/plateau.txt","w");
+	fic = fopen("~/multi-checkers/multi/plateau.txt","w");
 	
 	for(i = 0; i < Z; i++){
 		for( j = 0; j < Z; j++){
@@ -55,7 +55,7 @@ void lirePlateau(){
 	FILE * fic;
 	int i, j;
 
-	fic = fopen("/home/dame/multi-checkers/multi/plateau.txt","r");
+	fic = fopen("~/multi-checkers/multi/plateau.txt","r");
 	for(i = 0; i < Z; i++){
 		for( j = 0; j < Z; j++){
 			fscanf(fic,"%i %i %i ",&plateau[i][j].joueur, &plateau[i][j].piece, &plateau[i][j].equipe);

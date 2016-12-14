@@ -8,7 +8,7 @@
 #include "../include/affichage.h"
 #include "../include/liste_ptr.h"
 #include "../include/fichier.h"
-char file[30] ="/home/dame/multi-checkers/multi/partie.txt";
+char file[30] ="~/multi-checkers/multi/partie.txt";
 
 fpos_t placerLigne(int ligne){
 	FILE * fic;
