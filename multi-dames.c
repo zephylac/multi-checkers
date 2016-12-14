@@ -13,7 +13,7 @@ int main(){
 	init_liste(&ls_coup_arr);
 	if(choix==1){
 		init();
-		printf("Veuillez choisir le nom de la sauvegarde");
+		printf("Veuillez choisir le nom de la sauvegarde: ");
 		scanf("%s",nom);
 		sauv(nom);
 		deroulementPartie(nom);
