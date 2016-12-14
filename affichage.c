@@ -71,37 +71,54 @@ void margeDroite(int larg_plat){
 	}
 	printf("|"); // bord droit
 }
+/**
+* \fn void margeHaut()
+* \brief calcule et "affiche" la marge du haut
+* \author BRINON Baptiste
+*/
 void margeHaut(){
 	lignePleine();
 	ligneVide();
 	ligneVide();
 }
+/**
+* \fn void margeBas()
+* \brief calcule et "affiche" la marge du bas
+* \author BRINON Baptiste
+*/
 void margeBas(){
 	ligneVide();
 	ligneVide();
 	lignePleine();
 }
+/**
+* \fn void afficher()
+* \brief Gere l'affichage du damier tout au long de la partie
+* \author BRINON Baptiste
+*/
 void afficher(){
 	system("clear");
 	char carac='A';
 	int i=0,l,c,joueur,larg_plat=53;
 	margeHaut();
 	margeGauche(larg_plat);
-	printf("   "); // decallage dut à l'absence de marge chiffrée
+	printf("   "); // decallage dut à l'absence de marge chiffrée pour la 1ere ligne
+	// affichage des en-tete de colonnes
 	for(l=0,c=0;l<Z;l++){
 		printf(" %c ",carac);
 		carac++;
 	}
 	margeDroite(larg_plat);
 	printf("\n");
+	// affichage du plateau
 	for(l=0,c=0;l<Z;l++){
 		if(i <10){
 			margeGauche(larg_plat);
-			printf(" %i|",i);
+			printf(" %i|",i); // nombre à 1 chiffre, donc espace 
 		}
 		else{
 			margeGauche(larg_plat);
-			printf("%i|",i);
+			printf("%i|",i); // nombre à 2 chiffres , donc pas d'espace
 		}
 		i++;
 		for(c=0;c<Z;c++){ // parcours une seule fois la matrice
@@ -122,6 +139,12 @@ void afficher(){
 	}
 	margeBas();
 }  
+/**
+* \fn int menu()
+* \brief Gere l'affichage du  menu au demarrage
+* \return choix de l'utilisateur sur le type de partie 
+* \author BRINON Baptiste
+*/
 int menu(){
 	int choix,nb_carac,nb_ligne=0;
 	system("clear");
