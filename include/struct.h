@@ -100,7 +100,6 @@ t_case;
  * \brief Structure contenant les statistique d'un joueur
  */
 typedef struct {
-	char nom[20];		/*< Nom du joueur */
        	int pions_pris;		/*< Le nombre de pion pris */
        	int pions_perdus;	/*< Le nombre de pion perdu */
        	int nb_coup;		/*< Le nombre de coup effectué */
