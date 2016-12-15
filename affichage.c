@@ -190,14 +190,24 @@ int menu(){
 	printf("4-Manuel du Jeu ");
 	margeDroite(nb_carac);
 	
+	printf("\n");
+	ligneVide();
+	
+	nb_carac=9;
+	margeGauche(nb_carac);
+	printf("5-Quitter");
+	margeDroite(nb_carac);
+
 	margeBas();
 	printf("\n");
-	printf(" Effectuez un choix en saisissant 1,2,3 ou 4:");
+	printf(" Effectuez un choix en saisissant 1,2,3,4 ou 5:");
 	scanf("%i",&choix);
 	return choix;
 }
 
 void manuelDuJeu(){
+	char fin;
+	fin='o';
 	margeHaut();
 	int str_long=56;
 	margeGauche(str_long);printf("                     REGLES DU JEUX                     ");margeDroite(str_long);
@@ -214,7 +224,7 @@ void manuelDuJeu(){
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("II-Affichage                                            ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
-	margeGauche(str_long);printf("      Les pions sont indiqués ainsi ⯄ et colorés       ");margeDroite(str_long);
+	margeGauche(str_long);printf("      Les pions sont indiqués ainsi ⯄ et colorés      ");margeDroite(str_long);
 	margeGauche(str_long);printf("      Les dames sont indiquées ainsi 〇 et colorés      ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("     Chaque tour, le joueur en bas de l'ecran joue      ");margeDroite(str_long);
@@ -238,6 +248,10 @@ void manuelDuJeu(){
 	margeGauche(str_long);printf("         prioritaires sur les deplacements.             ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf(" ! une sauvegarde automatique à lieu tous les 4 tours ! ");margeDroite(str_long);	
+	margeGauche(str_long);printf("   Le mdp pour acceder au mode multijoueur est 'dame'   ");margeDroite(str_long);
 	margeBas();
+	printf("entre q pour quitter \n");
+	scanf("%c",&fin);
+	while(fin!='q') scanf("%c",&fin);
 }
 	
