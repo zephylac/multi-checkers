@@ -10,5 +10,5 @@ void margeHaut();
 void margeBas();
 void afficher();
 int menu();
-
+void manuelDuJeu();
 #endif
