@@ -176,7 +176,7 @@ void main(){
 		sleep(2);
 		while(!fin){
 			attendreTour(joueur);
-			lirePlateau();
+			lireSauv("~/multi-checkers/multi/plateau.txt");
 			if(partieFinie(joueur)){
 				fin = 1;
 				finPartie(partieFinie(joueur));	
@@ -185,7 +185,7 @@ void main(){
 			else{
 				jouerTour(joueur);
 				tourner();
-				sauvPlateau();
+				sauv("~/multi-checkers/multi/plateau.txt");
 				joueurSuivant();
 			}
 		}
