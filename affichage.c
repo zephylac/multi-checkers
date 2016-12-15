@@ -5,6 +5,7 @@
 #include "include/jeu.h"
 #include "include/joueur.h"
 #include "include/plateau.h"
+#define couleur(param) printf("\033[%sm",param)
 
 int LARG=80;
 /**
@@ -123,16 +124,24 @@ void afficher(){
 		i++;
 		for(c=0;c<Z;c++){ // parcours une seule fois la matrice
 			joueur=litJoueur(l,c);
+
 			if(joueur==5) printf("   ");
-			else if(joueur==0) printf(" . ");
-			else if(joueur==4 && plateau[l][c].piece == pion) printf(" 4 ");
-			else if(joueur==4 && plateau[l][c].piece == dame) printf("[4]");
-			else if(joueur==3 && plateau[l][c].piece == pion) printf(" 3 ");
-			else if(joueur==3 && plateau[l][c].piece == dame) printf("[3]");
-			else if(joueur==2 && plateau[l][c].piece == pion) printf(" 2 ");
-			else if(joueur==2 && plateau[l][c].piece == dame) printf("[2]");
-			else if(joueur==1 && plateau[l][c].piece == pion) printf(" 1 ");
-			else if(joueur==1 && plateau[l][c].piece == dame) printf("[1]");
+
+			couleur("1"); // correspond à " mettre en gras "
+			if(joueur==0) printf(" . ");
+
+			couleur("0"); // reinitialise les modifications sur la police	
+			couleur("1");
+			//determination de la couleur en fonction du joueur
+			if(joueur==1) couleur("35"); // couleur rose
+			else if(joueur==3) couleur("31"); //orange
+			else if (joueur==4) couleur("34"); // bleu
+			else if(joueur==2) couleur("36"); // cyan
+
+			//affichage en fonction du type de piece
+			if(plateau[l][c].piece == pion) printf(" ⯄ ");
+			if(plateau[l][c].piece == dame) printf(" 〇 ");
+			couleur("0");
 		}
 		margeDroite(larg_plat);
 		printf("\n"); 
