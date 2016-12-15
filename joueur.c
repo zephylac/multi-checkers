@@ -302,7 +302,7 @@ void jouerTour(t_joueur joueur){
 			}
 			vider_liste(&ls_coup_dep);
 			vider_liste(&ls_coup_arr);			
-		}*/
+		*/}
 }
 
 /**
