@@ -159,7 +159,7 @@ t_choix choisirPrendre(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueu
 		scanf("%i",&choix);
 	}
 	while(choix < 0 || choix >= i);
-	if (choix == i-1){	
+	if (choix == i-1 && mode == 1){	
 		coup.dep.x = 99;
 		coup.dep.y = 99;
 		coup.arr.x = 99;
@@ -272,10 +272,13 @@ void jouerTour(t_joueur joueur){
 	else{
 		coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,0);
 		prendrePiece(coup.dep, coup.arr);
+		afficher();
 		coup.dep = coup.arr;
 		vider_liste(&ls_coup_dep);
 		vider_liste(&ls_coup_arr);			
 		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,2) && coup.dep.x != 99){	
+			vider_liste(&ls_coup_dep);
+			vider_liste(&ls_coup_arr);			
 			if(peutPrendre(coup.dep, joueur, &ls_coup_arr, &ls_coup_dep,0)){
 				coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,0);
 				prendrePiece(coup.dep, coup.arr);
