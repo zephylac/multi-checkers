@@ -201,6 +201,7 @@ void init(){
       else if(c<=4 && l>=4 && l<Z-4 && (l+c)%2==1) InitCase(l,c,joueur4);//place les pions du joueur 4  
     }
   }
+  
 }
 
 /**
@@ -262,6 +263,7 @@ int coupDispo(t_coordonnees coor,t_joueur j/*pour eviter de deplacer un pion adv
 void deplacerPiece(t_coordonnees dep,t_coordonnees arriv){
   int c_dep = dep.x;
   int l_dep = dep.y;
+  statDeps(litJoueur(l_dep, c_dep));
   int l_arriv = arriv.y;
   int c_arriv = arriv.x;
   //place la piece à son point d'arrivée
@@ -280,9 +282,11 @@ void deplacerPiece(t_coordonnees dep,t_coordonnees arriv){
 * \author BRINON Baptiste
 */
 void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
+	
   	int c_arr=arriv.x; int l_arr=arriv.y; // preparation des coordonnées de l'arrivée
   	int c_dep=dep.x;int l_dep=dep.y;// preparation des coordonnées du depart
   	int c_supp,l_supp;
+  	statPionsPris(litJoueur(l_dep, c_dep));
   	if(plateau[l_dep][c_dep].piece==1){ // cas si la piece jouée est un pion
    		c_supp=c_dep+(c_arr-c_dep)/2; // calcul des coordonnées de la piece supprimée
     	l_supp=l_dep+(l_arr-l_dep)/2;
@@ -304,7 +308,9 @@ void prendrePiece(t_coordonnees dep,t_coordonnees arriv){
     	l_supp=l_dep;
   	}
   	deplacerPiece(dep,arriv); // deplacement de la piece
+  	statPionsPerdus(litJoueur(l_supp, c_supp));
   	viderContenu(&plateau[l_supp][c_supp]);// suppression du pion pris
+  	
 }
 
 /**
