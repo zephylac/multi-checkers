@@ -43,7 +43,7 @@ int main(){
 			manuelDuJeu();
 		}
 		if (choix==5){
-		printf("\n merci d'avoir joué! ");
+		printf("\n merci d'avoir joué! \n ");
 		return 1;
 		}
 	}
