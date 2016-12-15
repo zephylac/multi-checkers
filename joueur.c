@@ -192,7 +192,7 @@ void jouerTour(t_joueur joueur){
 	//Déclaration dec s variables
 	char c_colonne;
     	int coup_force;
-	int ligne;
+	int ligne=0;
 	int choix;
 	t_case cellule;
   	t_coordonnees coord_dep;

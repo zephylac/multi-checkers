@@ -290,8 +290,6 @@ int peutPrendre(t_coordonnees coord, t_joueur joueur,t_liste* ls_coup_arr, t_lis
 	en_tete(ls_coup_arr);
 	int i = coord.y;
 	int j = coord.x;
-	int x = 0;
-	int y = 0;
 	if(plateau[i][j].piece == pion){
         	prise = peutPrendrePion(coord, joueur, ls_coup_arr, ls_coup_dep,eq);
 	}
@@ -344,10 +342,10 @@ int partieFinie(int joueur){
 * \brief affiches les stats de tous les joueurs
 */
 void afficherStats(){
-	printf("%s: %i pions pris, %i pions perdus\n", statsj1.nom, statsj1.pions_pris, statsj1.pions_perdus);
-	printf("%s: %i pions pris, %i pions perdus\n", statsj2.nom, statsj2.pions_pris, statsj2.pions_perdus);
-	printf("%s: %i pions pris, %i pions perdus\n", statsj3.nom, statsj3.pions_pris, statsj3.pions_perdus);
-	printf("%s: %i pions pris, %i pions perdus\n", statsj4.nom, statsj4.pions_pris, statsj4.pions_perdus);
+	printf("Joueur 1: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj1.pions_pris, statsj1.pions_perdus ,statsj1.nb_coup);
+	printf("Joueur 2: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj2.pions_pris, statsj2.pions_perdus, statsj2.nb_coup);
+	printf("Joueur 3: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj3.pions_pris, statsj3.pions_perdus, statsj3.nb_coup);
+	printf("Joueur 4: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj4.pions_pris, statsj4.pions_perdus, statsj4.nb_coup);
 }
 
 /**
@@ -375,10 +373,10 @@ void finPartie(int joueur){
 */
 void reinitStatsJoueur(t_joueur joueur){
 	switch(joueur){
-		case joueur1: strcpy(statsj1.nom, "j1"); statsj1.pions_pris = 0; statsj1.pions_perdus = 0; statsj1.nb_coup = 0; break;
-		case joueur2: strcpy(statsj2.nom, "j2"); statsj2.pions_pris = 0; statsj2.pions_perdus = 0; statsj2.nb_coup = 0; break;
-		case joueur3: strcpy(statsj3.nom, "j3"); statsj3.pions_pris = 0; statsj3.pions_perdus = 0; statsj3.nb_coup = 0; break;
-		case joueur4: strcpy(statsj4.nom, "j4"); statsj4.pions_pris = 0; statsj4.pions_perdus = 0; statsj4.nb_coup = 0; break;
+		case joueur1: statsj1.pions_pris = 0; statsj1.pions_perdus = 0; statsj1.nb_coup = 0; break;
+		case joueur2: statsj2.pions_pris = 0; statsj2.pions_perdus = 0; statsj2.nb_coup = 0; break;
+		case joueur3: statsj3.pions_pris = 0; statsj3.pions_perdus = 0; statsj3.nb_coup = 0; break;
+		case joueur4: statsj4.pions_pris = 0; statsj4.pions_perdus = 0; statsj4.nb_coup = 0; break;
 		default: printf("erreur switch reinitStatsJoueur");
 	}
 }
@@ -398,7 +396,7 @@ void reinitStats(){
 * \fn void statPionpris(t_joueur joueur)
 * \brief incrémente le nombre de pions pris par le joueur en paramètre
 */
-void statPionpris(t_joueur joueur){
+void statPionsPris(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.pions_pris++; break;
 		case joueur2: statsj2.pions_pris++; break;
@@ -412,7 +410,7 @@ void statPionpris(t_joueur joueur){
 * \fn void statPionperdu(t_joueur joueur)
 * \brief incrémente le nombre de pions perdus par le joueur en paramètre
 */
-void statPionperdu(t_joueur joueur){
+void statPionsPerdus(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.pions_perdus++; break;
 		case joueur2: statsj2.pions_perdus++; break;
@@ -426,7 +424,7 @@ void statPionperdu(t_joueur joueur){
 * \fn void statDep(t_joueur joueur)
 * \brief incrémente le nombre de déplacements par le joueur en paramètre
 */
-void statDep(t_joueur joueur){
+void statDeps(t_joueur joueur){
 	switch(joueur){
 		case joueur1: statsj1.nb_coup++; break;
 		case joueur2: statsj2.nb_coup++; break;
