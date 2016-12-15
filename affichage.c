@@ -204,7 +204,11 @@ int menu(){
 	scanf("%i",&choix);
 	return choix;
 }
-
+/**
+*\ fn void manuelDuJeu()
+*\ brief affiche le manuel du jeu
+*\ author BRINON Baptiste 
+*/
 void manuelDuJeu(){
 	char fin;
 	fin='o';
