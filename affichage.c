@@ -208,6 +208,7 @@ int menu(){
 void manuelDuJeu(){
 	char fin;
 	fin='o';
+	system("clear");
 	margeHaut();
 	int str_long=56;
 	margeGauche(str_long);printf("                     REGLES DU JEUX                     ");margeDroite(str_long);
