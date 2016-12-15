@@ -39,7 +39,7 @@ int main(){
 		deroulementPartie(nom);
 	}
 	if (choix==4){
-//		manuelDuJeu();
+		manuelDuJeu();
 	}
 return 1;
 }
