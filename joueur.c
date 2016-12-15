@@ -270,9 +270,12 @@ void jouerTour(t_joueur joueur){
 		}
 	}
 	else{
-		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,2) && coup.dep.x != 99){
-			vider_liste(&ls_coup_dep);
-			vider_liste(&ls_coup_arr);			
+		coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,0);
+		prendrePiece(coup.dep, coup.arr);
+		coup.dep = coup.arr;
+		vider_liste(&ls_coup_dep);
+		vider_liste(&ls_coup_arr);			
+		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,2) && coup.dep.x != 99){	
 			if(peutPrendre(coup.dep, joueur, &ls_coup_arr, &ls_coup_dep,0)){
 				coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur,0);
 				prendrePiece(coup.dep, coup.arr);
@@ -285,9 +288,9 @@ void jouerTour(t_joueur joueur){
 				afficher();
 				coup.dep = coup.arr;
 			}
-		}	
-		
-		
+			vider_liste(&ls_coup_dep);
+			vider_liste(&ls_coup_arr);			
+		}
 	}
 }
 
