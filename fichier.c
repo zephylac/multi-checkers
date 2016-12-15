@@ -11,10 +11,9 @@
 #include "include/struct.h"
 
 /**
- * \fn void sauv(char nom[30])
- * \brief 
- * \param[in] carac charactère
- * \return Retourne un int qui a pour valeur la lettre entrée
+ * \fn void sauv(char nom[60])
+ * \brief Sauvegarde le plateau dans un fichier 
+ * \param[in] nom Le nom du fichier dans lequel la sauvegarde sera effectué
  */
 void sauv(char nom[60]){
 	FILE * fic;
@@ -33,6 +32,12 @@ void sauv(char nom[60]){
 	}
 	fclose(fic);
 }
+
+/**
+ * \fn void sauv(char nom[30])
+ * \brief Permet de lire une sauvegarde
+ * \param[in] nom Le nom du fichier à ouvrir
+ */
 
 void lireSauv(char nom[60]){
 	FILE * fic;

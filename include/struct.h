@@ -137,7 +137,7 @@ t_stats statsj3;
 t_stats statsj4;
 
 
-t_contenu plateau[Z][Z];
+t_contenu plateau[Z][Z];//! Definition du plateau
 t_liste ls_coup_dep;
 t_liste ls_coup_arr;
 
