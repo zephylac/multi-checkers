@@ -1,7 +1,7 @@
 CFLAGS = -g -Wextra 
 
 inc = include/
-proto = $(inc)joueur.h $(inc)jeu.h $(inc)plateau.h $(inc)liste_ptr.h $(inc)affichage.h $(inc)fichier
+proto = $(inc)joueur.h $(inc)jeu.h $(inc)plateau.h $(inc)liste_ptr.h $(inc)affichage.h $(inc)fichier.h
 fichiers = multi-dames.o joueur.o jeu.o plateau.o liste_ptr.o affichage.o fichier.o 
 INCLUDE = -I $(HOME)/SDL/include#
 
@@ -25,6 +25,9 @@ joueur.o : joueur.c $(inc)joueur.h
 
 affichage.o: affichage.c $(inc)affichage.h
 	gcc -c affichage.c ${CFLAGS}
+	
+fichier.o: fichier.c $(inc)fichier.h
+	gcc -c fichier.c ${CFLAGS}
 	
 clean :
 	rm -rf *.o
