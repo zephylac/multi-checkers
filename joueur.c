@@ -17,12 +17,12 @@
 #include "include/fichier.h"
 
 /**
- * \fn int carac_valeur(char carac)
+ * \fn int caracValeur(char carac)
  * \brief fonction qui permet de convertir un caractère en chiffre, qu'il soit majuscule ou minuscule
  * \param[in] carac charactère
  * \return Retourne un int qui a pour valeur la lettre entrée
  */
-int carac_valeur(char carac){
+int caracValeur(char carac){
 	if(carac >= 'a' && carac <= 'z') return carac - 'a';
 	else if ( carac >= 'A' && carac <= 'Z') return carac - 'A';
 }
@@ -43,7 +43,7 @@ t_coordonnees traiteEntree(char c_colonne, int ligne){
 		coord.y = 0;
 	}
 	else{
-		colonne = carac_valeur(c_colonne);
+		colonne = caracValeur(c_colonne);
 		coord.y = ligne;
 		coord.x = colonne;
 	}

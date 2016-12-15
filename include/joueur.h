@@ -2,7 +2,7 @@
 #define H_GL_JOUEUR
 #include "struct.h"
 
-int carac_valeur(char carac);
+int caracValeur(char carac);
 t_coordonnees traiteEntree(char c_colonne, int ligne);
 char afficherLettre(int lettre);
 t_coordonnees choisir(t_liste * ls_coup, t_joueur joueur);
