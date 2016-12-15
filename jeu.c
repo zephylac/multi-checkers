@@ -342,10 +342,10 @@ int partieFinie(int joueur){
 * \brief affiches les stats de tous les joueurs
 */
 void afficherStats(){
-	printf("%s: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj1.nom, statsj1.pions_pris, statsj1.pions_perdus ,statsj1.nb_coup);
-	printf("%s: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj2.nom, statsj2.pions_pris, statsj2.pions_perdus, statsj2.nb_coup);
-	printf("%s: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj3.nom, statsj3.pions_pris, statsj3.pions_perdus, statsj3.nb_coup);
-	printf("%s: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj4.nom, statsj4.pions_pris, statsj4.pions_perdus, statsj4.nb_coup);
+	printf("Joueur 1: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj1.pions_pris, statsj1.pions_perdus ,statsj1.nb_coup);
+	printf("Joueur 2: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj2.pions_pris, statsj2.pions_perdus, statsj2.nb_coup);
+	printf("Joueur 3: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj3.pions_pris, statsj3.pions_perdus, statsj3.nb_coup);
+	printf("Joueur 4: %i pions pris, %i pions perdus, %i déplacements effecutés\n", statsj4.pions_pris, statsj4.pions_perdus, statsj4.nb_coup);
 }
 
 /**
