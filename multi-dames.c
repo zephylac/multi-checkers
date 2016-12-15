@@ -20,11 +20,12 @@ int main(){
 	}
 	if (choix==2){
 		printf("Le mot de passe est \"dame\"");
+		sleep(1);
 		system("ssh dame@52.28.201.112");
 		//multi
 	}
 	if (choix==3){
-		printf("\nEntrer le nom de la sauvegarde à lire");
+		printf("\nEntrer le nom de la sauvegarde à lire: ");
 		scanf("%s",nom);
 		fic = fopen(nom,"r");
 		while(fic == NULL){
