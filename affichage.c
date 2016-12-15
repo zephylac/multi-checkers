@@ -208,7 +208,7 @@ void manuelDuJeu(){
 	margeGauche(str_long);printf("rouge. la derniere equipe pouvant jouer gagne la partie.");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf(" Un joueur joue en entrant les coordonnées de la piece  ");margeDroite(str_long);
-	margeGauche(str_long);printf("  à jouer, puis en selectionnant un des coups proposés  ");margeDroite(str_long);
+	margeGauche(str_long);printf("  à jouer, puis en selectionnant un des coups proposés. ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("    Deux joueurs face à face sont de la même équipe.    ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
@@ -218,12 +218,12 @@ void manuelDuJeu(){
 	margeGauche(str_long);printf("      Les dames sont indiquées ainsi 〇 et colorés       ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("     Chaque tour, le joueur en bas de l'ecran joue      ");margeDroite(str_long);
-	margeGauche(str_long);printf(" à la fin d'un tour, le damier tourne pour le prochain  ");margeDroite(str_long);
+	margeGauche(str_long);printf(" à la fin d'un tour, le damier tourne pour le prochain. ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("III-Règles                                              ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("  Un pion ne peut pas reculer en fonction du coté ou il ");margeDroite(str_long);
-	margeGauche(str_long);printf("       se trouve. Au contraire, une dame le peut        ");margeDroite(str_long);
+	margeGauche(str_long);printf("       se trouve. Au contraire, une dame le peut.       ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf(" Un pion devient une dame quand il atteind la derniere  ");margeDroite(str_long);
 	margeGauche(str_long);printf("      rangée d'un des joueurs de l'equipe adverse.      ");margeDroite(str_long);
@@ -232,12 +232,12 @@ void manuelDuJeu(){
 	margeGauche(str_long);printf("  ou un pion ne peut se deplacer que d'une seule case.  ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf(" Il est possible de prendre une piece de son partenaire ");margeDroite(str_long);
-	margeGauche(str_long);printf("    De façon à effectuer plusieurs prises d'affilée     ");margeDroite(str_long);
+	margeGauche(str_long);printf("    De façon à effectuer plusieurs prises d'affilée.    ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("     Les prises ainsi que les prises multiples sont     ");margeDroite(str_long);
-	margeGauche(str_long);printf("         prioritaires sur les deplacements              ");margeDroite(str_long);
+	margeGauche(str_long);printf("         prioritaires sur les deplacements.             ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
-	margeGauche(str_long);printf(" /!\ une sauvegarde automatique à lieu tous les 4 tours ");margeDroite(str_long);	
+	margeGauche(str_long);printf(" ! une sauvegarde automatique à lieu tous les 4 tours ! ");margeDroite(str_long);	
 	margeBas();
 }
 	
