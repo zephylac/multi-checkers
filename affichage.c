@@ -229,7 +229,7 @@ void manuelDuJeu(){
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("II-Affichage                                            ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
-	margeGauche(str_long);printf("      Les pions sont indiqués ainsi ⯄ et colorés      ");margeDroite(str_long);
+	margeGauche(str_long);printf("      Les pions sont indiqués ainsi ⯄ et colorés       ");margeDroite(str_long);
 	margeGauche(str_long);printf("      Les dames sont indiquées ainsi 〇 et colorés      ");margeDroite(str_long);
 	margeGauche(str_long);printf("                                                        ");margeDroite(str_long);
 	margeGauche(str_long);printf("     Chaque tour, le joueur en bas de l'ecran joue      ");margeDroite(str_long);
