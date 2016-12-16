@@ -14,8 +14,8 @@ void afficherStats();
 void finPartie(int joueur);
 void reinitStatsJoueur(t_joueur joueur);
 void reinitStats();
-void statPionpris(t_joueur joueur);
-void statPionperdu(t_joueur joueur);
+void statPionsPris(t_joueur joueur);
+void statPionsPerdu(t_joueur joueur);
 void statDep(t_joueur joueur);
 
 #endif
