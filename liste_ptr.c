@@ -52,16 +52,15 @@ void modif_elt(t_liste * liste, t_case v){
 }
 
 void oter_elt(t_liste * liste){
-	if(!liste_vide(liste)){
-		t_element * inter;
-		inter = malloc(sizeof(t_element));
-		inter = liste -> ec;
-		suivant(liste);
-		liste -> ec -> pred = inter -> pred;
-		precedent(liste);
-		liste -> ec -> succ = inter -> succ;
-		free(inter);
-	}
+	
+	if(!liste_vide(liste)) {
+		t_element * temp;
+		(liste -> ec -> succ) -> pred = liste -> ec -> pred;
+		(liste -> ec -> pred) ->succ = liste -> ec -> succ;
+		temp = liste -> ec;
+		liste -> ec = liste -> ec-> pred;
+		free(temp);
+	}		
 }
 
 void ajout_droit(t_liste * liste, t_case v){

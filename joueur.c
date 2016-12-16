@@ -96,7 +96,9 @@ char afficherLettre (int lettre){
 * \param[in] ls_coup_dep Liste qui contient les coordonnées de départs des pions qui peuvent prendre un pion
 * \param[in] ls_coup_arr Liste qui contient les coordonnées d'arrivées des pions qui peuvent prendre un pion
 * \param[in] joueur Le numéro du joueur qui joue
+* \param[in] type Permet de différencier un déplacement et une prise
 * \param[in] mode Permet de savoir si les pions à prendre sont allié ou enemi
+* \param[in] depcoord Coordonnées du pion déplacé lors d'un simple déplacement
 * \return coup de type choix qui contient les coordonnées de départ et d'arrivée
 */
 t_choix choisir(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur, int type, int mode, t_coordonnees depcoor){
@@ -110,13 +112,15 @@ t_choix choisir(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur, int 
 		en_tete(ls_coup_dep);
 		en_tete(ls_coup_arr);
 		i = 0;
+		
 		//affichage des possibilitées
 		while(!hors_liste(ls_coup_arr)){
 			if(type == 0){
 				valeur_elt(ls_coup_arr,&arr);
-				c1 = afficherLettre(arr.coordonnees.x);
+				c1 = afficherLettre(depcoor.x);
+				c2 = afficherLettre(arr.coordonnees.x);
 				i++;
-				printf("%i) Déplacer le pion aux coordonnées %c%i\n",i,c1,arr.coordonnees.y);
+				printf("%i) Déplacer la pièce %c%i aux coordonnées %c%i\n",i,c1,depcoor.y,c2,arr.coordonnees.y);
 				suivant(ls_coup_arr);
 			}
 			if(type == 1){
@@ -125,7 +129,7 @@ t_choix choisir(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur, int 
 				c1 = afficherLettre(dep.coordonnees.x);
 				c2 = afficherLettre(arr.coordonnees.x);
 				i++;
-				printf("%i) Déplacer la pièce %c%i aux coordonnées %c%i\n",i,c1,dep.coordonnees.y,c2,arr.coordonnees.y);
+				printf("%i) Déplacer la pièce %c%i aux coordonnées %c%i\n",i,c1,dep.coordonnees.y,c2,arr.coordonnees.y);					
 				suivant(ls_coup_dep);
 				suivant(ls_coup_arr);
 			}
@@ -133,7 +137,7 @@ t_choix choisir(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur, int 
 		//Si le c'est une prise qu'il est possible de refuser
 		if (mode == 1 && type == 1){
 			i++;
-			printf("%i) Ne pas prendre de pion\n",i);
+			printf("%i) Ne pas prendre le pion allié\n",i);
 			
 		}
 		//Choix de l'utilisateur
@@ -141,7 +145,7 @@ t_choix choisir(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur, int 
 		scanf("%i",&choix);
 	}
 	while(choix <= 0 || choix > i);
-	if (choix == i-1 && mode == 1 && type == 1){	
+	if (choix == i && mode == 1 && type == 1){	
 		coup.dep.x = 99;
 		coup.dep.y = 99;
 		coup.arr.x = 99;
@@ -163,9 +167,10 @@ t_choix choisir(t_liste* ls_coup_dep, t_liste* ls_coup_arr,t_joueur joueur, int 
 		if(type == 1){
 			en_tete(ls_coup_dep);
 			en_tete(ls_coup_arr);
+		
 			for(i = 1; i < choix; i++){
-				suivant(ls_coup_arr);
 				suivant(ls_coup_dep);
+				suivant(ls_coup_arr);
 			}	
 			valeur_elt(ls_coup_dep,&dep);
 			valeur_elt(ls_coup_arr,&arr);
@@ -204,6 +209,16 @@ void jouerTour(t_joueur joueur){
 		choix = 1;
     		vider_liste(&ls_coup_dep);
 		vider_liste(&ls_coup_arr);			
+		
+		do{
+			printf("Veuillez choisir la case où se trouve votre pion\n");
+    			printf("Entrer les coordonnées (ex:A1) : ");
+			scanf("%c%i",&c_colonne,&ligne); 
+			coup.dep = traiteEntree(c_colonne,ligne);
+		}
+		while(!coupDispo(coup.dep,joueur,&ls_coup_arr) && !peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,1));
+		vider_liste(&ls_coup_dep);
+		vider_liste(&ls_coup_arr);
 		if(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep,1)){
 			do{	
 				printf("1) Deplacer un pion\n");
@@ -214,19 +229,13 @@ void jouerTour(t_joueur joueur){
 			while(choix < 1 || choix > 2);
 			
 			if (choix == 1){
-				do{
-					printf("Veuillez choisir la case où se trouve votre pion\n");
-    					printf("Entrer les coordonnées (ex:A1) : ");
-					scanf("%c%i",&c_colonne,&ligne); 
-					coup.dep = traiteEntree(c_colonne,ligne);
-				}
-				while(!coupDispo(coord_dep,joueur,&ls_coup_arr));
+				coupDispo(coup.dep,joueur,&ls_coup_arr); 
 				coup = choisir(&ls_coup_dep, &ls_coup_arr, joueur, 0, 0, coup.dep);
 				deplacerPiece(coup.dep,coup.arr);
 			
 			}
-			if(choix = 2){
-				coup = choisir(&ls_coup_dep, &ls_coup_arr,joueur,1,1,coup.dep);
+			if(choix == 2){
+				coup = choisir(&ls_coup_dep, &ls_coup_arr,joueur,1,0,coup.dep);
 				prendrePiece(coup.dep, coup.arr);
 				afficher();
 				coup.dep = coup.arr;
@@ -256,28 +265,12 @@ void jouerTour(t_joueur joueur){
 			}
 		}
 		else{
-			do{
-				printf("Veuillez choisir la case où se trouve votre pion\n");
-    				printf("Entrer les coordonnées (ex:A1) : ");
-				scanf("%c%i",&c_colonne,&ligne); 
-				coup.dep = traiteEntree(c_colonne,ligne);
-			}
-		while(!coupDispo(coup.dep,joueur,&ls_coup_arr));	
-		coup = choisir(&ls_coup_dep,&ls_coup_arr,joueur,0,0,coup.dep);
-		deplacerPiece(coup.dep,coup.arr);	
+			coupDispo(coup.dep,joueur,&ls_coup_arr);
+			coup = choisir(&ls_coup_dep,&ls_coup_arr,joueur,0,0,coup.dep);
+			deplacerPiece(coup.dep,coup.arr);	
 		}
 	}
-	else{/*
-		do{
-			coup = choisirPrendre(&ls_coup_dep, &ls_coup_arr,joueur, 0);
-			vider_liste(&ls_coup_dep);
-			vider_liste(&ls_coup_arr);			
-			prendrePiece(coup.dep, coup.arr);
-			afficher();
-			coup.dep = coup.arr;
-		}	
-		while(peutPrendre(coup.dep,joueur, &ls_coup_arr, &ls_coup_dep, 0));
-		*/
+	else{
 		coup = choisir(&ls_coup_dep, &ls_coup_arr,joueur,1,0,coup.dep);
 		prendrePiece(coup.dep, coup.arr);
 		coup.dep = coup.arr;
