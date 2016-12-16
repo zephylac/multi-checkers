@@ -102,6 +102,24 @@ int dispoPion(t_coordonnees coor,t_liste *ls_coup_d){
 			coup_dispo=1;
 		}
 	}
+	else if((l+c<16) && (c>=l)){// si la reference est le triangle du haut
+		if(litJoueur(l+1,c+1)==0){
+			DeplaAjout(l+1,c+1,ls_coup_d);
+			coup_dispo=1;
+		}
+		if(litJoueur(l-1,c+1)==0){
+			DeplaAjout(l-1,c+1,ls_coup_d);
+			coup_dispo=1;
+		}
+		if(litJoueur(l-1,c-1)==0){
+			DeplaAjout(l-1,c-1,ls_coup_d); 
+			coup_dispo=1;
+		}
+		if(litJoueur(l+1,c-1)==0){
+			DeplaAjout(l+1,c-1,ls_coup_d);
+			coup_dispo=1;
+		}
+	}	
 	return coup_dispo; //fin de la fonction, delivre vrai si coup dispo
 }
 
