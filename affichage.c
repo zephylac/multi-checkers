@@ -195,8 +195,8 @@ int menu(){
 	
 	nb_carac=9;
 	margeGauche(nb_carac);
-	printf("5-Quitter");
-	margeDroite(nb_carac);
+	printf("5-Quitter ");
+	margeDroite(nb_carac);printf("\n");
 
 	margeBas();
 	printf("\n");
