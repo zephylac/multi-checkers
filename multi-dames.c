@@ -5,12 +5,15 @@
 #include "include/liste_ptr.h"
 #include "include/fichier.h"
 #include "include/affichage.h"
-int menu_choix(int choix){
+#include "include/disp.h"
+int /*menu_choix*/ main(/*int choix*/){
 	FILE * fic;
 	init_liste(&ls_coup_dep);
 	init_liste(&ls_coup_arr);
 	char nom[30];
+	int choix = 0;//
 	while(choix!=5){
+		choix = menu();//
 		if(choix==1){
 			init();
 			printf("Veuillez choisir le nom de la sauvegarde: ");
