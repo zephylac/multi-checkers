@@ -5,7 +5,6 @@
 #include "include/liste_ptr.h"
 #include "include/fichier.h"
 #include "include/affichage.h"
-#include "include/disp.h"
 int /*menu_choix*/ main(/*int choix*/){
 	FILE * fic;
 	init_liste(&ls_coup_dep);
