@@ -217,7 +217,7 @@ void detruire_image(){
     SDL_DestroyWindow(pWindow);
 }
 
-int main(int argc, char** argv)
+int /*main*/ mainSDL(int argc, char** argv)
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0 )
     {
